@@ -39,43 +39,44 @@ package Flaschenzug
     Flaschenzug.Masse masse1 annotation(
       Placement(visible = true, transformation(origin = {-20, -70}, extent = {{-42, -42}, {42, 42}}, rotation = 0)));
     Flaschenzug.Motor motor1 annotation(
-      Placement(visible = true, transformation(origin = {-168, -2}, extent = {{-54, -54}, {54, 54}}, rotation = 0)));
-  Deckenrolle_4c deckenrolle_4c1(n = 4)  annotation(
-      Placement(visible = true, transformation(origin = {-20, 68}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+      Placement(visible = true, transformation(origin = {-132, -66}, extent = {{-54, -54}, {54, 54}}, rotation = 0)));
+  Flaschenzug.Deckenrolle_4c deckenrolle_4c1(n = 4)  annotation(
+      Placement(visible = true, transformation(origin = {-18, 68}, extent = {{-14, -14}, {14, 14}}, rotation = 0)));
   Flaschenzug.Massenrolle_4c massenrolle_4c1(n = 4)  annotation(
-      Placement(visible = true, transformation(origin = {-20, -46}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+      Placement(visible = true, transformation(origin = {-18, -48}, extent = {{-14, -14}, {14, 14}}, rotation = 0)));
   Flaschenzug.Rolle_Mitte_oben_4c rolle_Mitte_oben_4c1 annotation(
-      Placement(visible = true, transformation(origin = {-20, 48}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+      Placement(visible = true, transformation(origin = {-18, 48}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   Flaschenzug.Rolle_Mitte_unten_3c rolle_Mitte_unten_3c1 annotation(
-      Placement(visible = true, transformation(origin = {-20, -18}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+      Placement(visible = true, transformation(origin = { -18,-20}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   equation
-    connect(rolle_Mitte_unten_3c1.connector1, rolle_Mitte_oben_4c1.connector4) annotation(
-      Line(points = {{-24, -18}, {-20, -18}, {-20, 44}, {-20, 44}}));
-    connect(rolle_Mitte_oben_4c1.connector2, rolle_Mitte_unten_3c1.connector2) annotation(
-      Line(points = {{-16, 48}, {-16, 48}, {-16, -18}, {-16, -18}}));
-    connect(massenrolle_4c1.connector1, rolle_Mitte_oben_4c1.connector1) annotation(
-      Line(points = {{-24, -46}, {-24, -46}, {-24, 48}, {-24, 48}, {-24, 48}}));
-  connect(rolle_Mitte_unten_3c1.connector3, massenrolle_4c1.connector4) annotation(
-      Line(points = {{-20, -28}, {-20, -42}}));
-  connect(massenrolle_4c1.connector2, deckenrolle_4c1.connector2) annotation(
-      Line(points = {{-16, -46}, {-16, 68}}));
-  connect(massenrolle_4c1.connector3, masse1.connector1) annotation(
-      Line(points = {{-20, -56}, {70, -56}, {70, -69}, {-19, -69}}));
-    connect(deckenrolle_4c1.connector1, motor1.connector1) annotation(
-      Line(points = {{-24, 68}, {-170, 68}, {-170, 30}, {-168, 30}}));
+  connect(deckenrolle_4c1.connector1, motor1.connector1) annotation(
+      Line(points = {{-24, 68}, {-132, 68}, {-132, -35}}));
     connect(rolle_Mitte_oben_4c1.connector3, deckenrolle_4c1.connector4) annotation(
-      Line(points = {{-20, 58}, {-20, 58}, {-20, 64}, {-20, 64}}));
-    connect(fixpunkt1.connector1, deckenrolle_4c1.connector3) annotation(
-      Line(points = {{-20, 84}, {-20, 84}, {-20, 78}, {-20, 78}}));
+      Line(points = {{-18, 58}, {-18, 62}}));
+    connect(massenrolle_4c1.connector1, rolle_Mitte_oben_4c1.connector1) annotation(
+      Line(points = {{-24, -48}, {-24, 0}, {-22, 0}, {-22, 48}}));
+    connect(rolle_Mitte_oben_4c1.connector2, rolle_Mitte_unten_3c1.connector2) annotation(
+      Line(points = {{-14, 48}, {-14, -20}}));
+    connect(rolle_Mitte_unten_3c1.connector1, rolle_Mitte_oben_4c1.connector4) annotation(
+      Line(points = {{-22, -20}, {-18, -20}, {-18, 44}}));
+    connect(rolle_Mitte_unten_3c1.connector3, massenrolle_4c1.connector4) annotation(
+      Line(points = {{-18, -30}, {-18, -42}}));
+  connect(massenrolle_4c1.connector3, masse1.connector1) annotation(
+      Line(points = {{-18, -62}, {70, -62}, {70, -69}, {-19, -69}}));
+  connect(massenrolle_4c1.connector2, deckenrolle_4c1.connector2) annotation(
+      Line(points = {{-12, -48}, {-12, 68}}));
+  connect(fixpunkt1.connector1, deckenrolle_4c1.connector3) annotation(
+      Line(points = {{-20, 84}, {-19, 84}, {-19, 82}, {-18, 82}}));
   end Bsp;
 
   model Motor
     Connector connector1 annotation(
       Placement(visible = true, transformation(origin = {0, 58}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {0, 58}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
     Real P(unit="W");
+    parameter Real v(unit = "m/s") = 10;
   equation
     P = connector1.F * der(connector1.s);
-    connector1.s = 20;
+    der(connector1.s) = v;
 //connector1. F/P = 1/der(connector1.s);
     annotation(
       Icon(graphics = {Rectangle(origin = {1, -1}, extent = {{-59, 61}, {59, -61}})}));
