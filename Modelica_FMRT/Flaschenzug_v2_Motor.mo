@@ -4,11 +4,12 @@ package Flaschenzug
       Placement(visible = true, transformation(origin = {2, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {2, 2}, extent = {{-26, -26}, {26, 26}}, rotation = 0)));
     constant Real g (unit ="m/s^2")=  9.81;
     parameter Real m (unit = "kg")= 10;
-   
+    Real Fg(unit = "N");//Gewichtskraft
     Real v(unit = "m/s"), a(unit = "m/s^2");
     
   equation
-    connector1.F = m * g;
+    Fg = m*g;
+    connector1.F = -Fg;
     der(connector1.s) = v;
     der(v) = a;
     
@@ -18,7 +19,7 @@ package Flaschenzug
   end Masse;
 
   connector Connector
-    Real F(unit = "N");
+    flow Real F(unit = "N");
     Real s(unit = "m");
     annotation(
       Icon(graphics = {Ellipse(origin = {0, -1}, fillColor = {37, 164, 175}, fillPattern = FillPattern.Solid, extent = {{40, 41}, {-40, -39}}, endAngle = 360), Text(origin = {-4, 8}, extent = {{-32, 4}, {42, -12}}, textString = "Kraft und Weg")}));
@@ -34,49 +35,73 @@ package Flaschenzug
   end Fixpunkt;
 
   model Bsp
-    Flaschenzug.Fixpunkt fixpunkt1 annotation(
-      Placement(visible = true, transformation(origin = {-20, 50}, extent = {{-60, -60}, {60, 60}}, rotation = 0)));
-    Flaschenzug.Masse masse1 annotation(
-      Placement(visible = true, transformation(origin = {-20, -70}, extent = {{-42, -42}, {42, 42}}, rotation = 0)));
     Flaschenzug.Motor motor1 annotation(
-      Placement(visible = true, transformation(origin = {-132, -66}, extent = {{-54, -54}, {54, 54}}, rotation = 0)));
-  Flaschenzug.Deckenrolle_4c deckenrolle_4c1(n = 4)  annotation(
-      Placement(visible = true, transformation(origin = {-18, 68}, extent = {{-14, -14}, {14, 14}}, rotation = 0)));
-  Flaschenzug.Massenrolle_4c massenrolle_4c1(n = 4)  annotation(
-      Placement(visible = true, transformation(origin = {-18, -48}, extent = {{-14, -14}, {14, 14}}, rotation = 0)));
+      Placement(visible = true, transformation(origin = {-168, -2}, extent = {{-54, -54}, {54, 54}}, rotation = 0)));
+  Flaschenzug.Masse masse1 annotation(
+      Placement(visible = true, transformation(origin = {-21, -75}, extent = {{-27, -27}, {27, 27}}, rotation = 0)));
+  Flaschenzug.Fixpunkt fixpunkt1 annotation(
+      Placement(visible = true, transformation(origin = {-5, 65}, extent = {{-43, -43}, {43, 43}}, rotation = 0)));
+  Flaschenzug.Deckenrolle_4c deckenrolle_4c1(n = 5)  annotation(
+      Placement(visible = true, transformation(origin = {-91, 57}, extent = {{-33, -33}, {33, 33}}, rotation = 0)));
+  Flaschenzug.Massenrolle_4c massenrolle_4c1(n = 5)  annotation(
+      Placement(visible = true, transformation(origin = {59, -45}, extent = {{-31, -31}, {31, 31}}, rotation = 0)));
+  Flaschenzug.Rolle_Mitte_unten_4c rolle_Mitte_unten_4c1 annotation(
+      Placement(visible = true, transformation(origin = {60, -14}, extent = {{-20, -20}, {20, 20}}, rotation = 0)));
   Flaschenzug.Rolle_Mitte_oben_4c rolle_Mitte_oben_4c1 annotation(
-      Placement(visible = true, transformation(origin = {-18, 48}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  Flaschenzug.Rolle_Mitte_unten_3c rolle_Mitte_unten_3c1 annotation(
-      Placement(visible = true, transformation(origin = { -18,-20}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+      Placement(visible = true, transformation(origin = {-90, 24}, extent = {{-20, -20}, {20, 20}}, rotation = 0)));
+  Flaschenzug.Rolle_Mitte_oben_3c rolle_Mitte_oben_3c1 annotation(
+      Placement(visible = true, transformation(origin = {-87, -1}, extent = {{-17, -17}, {17, 17}}, rotation = 0)));
   equation
-  connect(deckenrolle_4c1.connector1, motor1.connector1) annotation(
-      Line(points = {{-24, 68}, {-132, 68}, {-132, -35}}));
-    connect(rolle_Mitte_oben_4c1.connector3, deckenrolle_4c1.connector4) annotation(
-      Line(points = {{-18, 58}, {-18, 62}}));
-    connect(massenrolle_4c1.connector1, rolle_Mitte_oben_4c1.connector1) annotation(
-      Line(points = {{-24, -48}, {-24, 0}, {-22, 0}, {-22, 48}}));
-    connect(rolle_Mitte_oben_4c1.connector2, rolle_Mitte_unten_3c1.connector2) annotation(
-      Line(points = {{-14, 48}, {-14, -20}}));
-    connect(rolle_Mitte_unten_3c1.connector1, rolle_Mitte_oben_4c1.connector4) annotation(
-      Line(points = {{-22, -20}, {-18, -20}, {-18, 44}}));
-    connect(rolle_Mitte_unten_3c1.connector3, massenrolle_4c1.connector4) annotation(
-      Line(points = {{-18, -30}, {-18, -42}}));
-  connect(massenrolle_4c1.connector3, masse1.connector1) annotation(
-      Line(points = {{-18, -62}, {70, -62}, {70, -69}, {-19, -69}}));
-  connect(massenrolle_4c1.connector2, deckenrolle_4c1.connector2) annotation(
-      Line(points = {{-12, -48}, {-12, 68}}));
-  connect(fixpunkt1.connector1, deckenrolle_4c1.connector3) annotation(
-      Line(points = {{-20, 84}, {-19, 84}, {-19, 82}, {-18, 82}}));
+    connect(rolle_Mitte_oben_3c1.connector2, rolle_Mitte_unten_4c1.connector4) annotation(
+      Line(points = {{-80, 0}, {60, 0}, {60, -6}, {60, -6}}));
+    connect(rolle_Mitte_unten_4c1.connector1, rolle_Mitte_oben_3c1.connector1) annotation(
+      Line(points = {{52, -14}, {-94, -14}, {-94, 0}, {-94, 0}}));
+  connect(rolle_Mitte_oben_3c1.connector3, rolle_Mitte_oben_4c1.connector4) annotation(
+      Line(points = {{-87, 16}, {-90, 16}}));
+  connect(rolle_Mitte_oben_4c1.connector2, rolle_Mitte_unten_4c1.connector2) annotation(
+      Line(points = {{-82, 24}, {68, 24}, {68, -14}}));
+  connect(massenrolle_4c1.connector1, rolle_Mitte_oben_4c1.connector1) annotation(
+      Line(points = {{46, -44}, {-98, -44}, {-98, 24}}));
+  connect(rolle_Mitte_oben_4c1.connector3, deckenrolle_4c1.connector4) annotation(
+      Line(points = {{-90, 44}, {-91, 44}}));
+    connect(deckenrolle_4c1.connector2, massenrolle_4c1.connector2) annotation(
+      Line(points = {{-78, 57}, {72, 57}, {72, -44}}));
+    connect(deckenrolle_4c1.connector3, fixpunkt1.connector1) annotation(
+      Line(points = {{-91, 89}, {-4, 89}, {-4, 90}}));
+    connect(motor1.connector1, deckenrolle_4c1.connector1) annotation(
+      Line(points = {{-168, 30}, {-104, 30}, {-104, 57}}));
+  connect(rolle_Mitte_unten_4c1.connector3, massenrolle_4c1.connector4) annotation(
+      Line(points = {{60, -34}, {59, -34}, {59, -32}, {60, -32}}));
+    connect(massenrolle_4c1.connector3, masse1.connector1) annotation(
+      Line(points = {{60, -76}, {-20, -76}, {-20, -74}, {-20, -74}}));
   end Bsp;
 
   model Motor
     Connector connector1 annotation(
       Placement(visible = true, transformation(origin = {0, 58}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {0, 58}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
     Real P(unit="W");
-    parameter Real v(unit = "m/s") = 10;
+    Real v(unit="m/s");
+    Real F(unit="N");//benötigte Kraft
+      parameter Boolean Richtung = true;
+    //true=forward; false = backward
+    parameter Boolean Modus = true;
+    //true = on ; false; off
   equation
-    P = connector1.F * der(connector1.s);
-    der(connector1.s) = v;
+    v = if Modus then 10 else 0;
+    der(connector1.s) = if Richtung then v else -v;
+    F = -connector1.F ;
+    P = F * v;
+    //der(connector1.s) = v;
+    //Pel = U*I//U = 230
+    //M = k * phi * I  //M Drehmoment
+                       //k Anker Motorkonstante
+                       //phi Erregerfeldstärke (proportional zum Strom
+                       //I effektivwert des Stroms
+    //M = Mb+Mv       //Mb Belastungsmoment, Mv Verlustmoment
+    //50Hz und 230V
+    //P = P*0.89;
+    //n wirkungsgrad 89%
+    //Pel/n/wurzel3*cosphi*uU
 //connector1. F/P = 1/der(connector1.s);
     annotation(
       Icon(graphics = {Rectangle(origin = {1, -1}, extent = {{-59, 61}, {59, -61}})}));
@@ -95,7 +120,7 @@ package Flaschenzug
     connector1.s = connector2.s * n;
    connector3.s = 0;
     connector1.F = connector2.F;
-    connector3.F = connector1.F+connector2.F;
+    -connector3.F = connector1.F+connector2.F;
     annotation(
       Icon(graphics = {Ellipse(fillColor = {116, 79, 65}, fillPattern = FillPattern.Solid, extent = {{40, 40}, {-40, -40}}, endAngle = 360), Ellipse(origin = {1, 0}, fillColor = {127, 111, 53}, fillPattern = FillPattern.Solid, extent = {{33, 34}, {-35, -34}}, endAngle = 360), Rectangle(origin = {-1, 50}, fillPattern = FillPattern.VerticalCylinder, extent = {{-1, 50}, {3, -50}})}));
   end Deckenrolle_3c;
@@ -115,7 +140,8 @@ package Flaschenzug
     connector1.s = connector2.s * n;
     connector3.s= 0;
     connector1.F = connector2.F;
-    connector3.F = connector1.F + connector2.F+connector4.F;
+    
+    connector3.F = -(n+1)*connector1.F;// + connector2.F+connector4.F =0;
     annotation(
       Icon(graphics = {Ellipse(fillColor = {116, 79, 65}, fillPattern = FillPattern.Solid, extent = {{40, 40}, {-40, -40}}, endAngle = 360), Ellipse(origin = {1, 0}, fillColor = {127, 111, 53}, fillPattern = FillPattern.Solid, extent = {{33, 34}, {-35, -34}}, endAngle = 360), Rectangle(origin = {-1, 50}, fillPattern = FillPattern.VerticalCylinder, extent = {{-1, 50}, {3, -50}})}));
   end Deckenrolle_4c;
@@ -133,7 +159,7 @@ package Flaschenzug
    connector1.s = connector2.s;
    connector3.s = connector1.s;
     connector1.F = connector2.F;
-    connector3.F/n = connector1.F;
+    connector3.F/n = -connector1.F;
     annotation(
       Icon(graphics = {Ellipse(fillColor = {116, 79, 65}, fillPattern = FillPattern.Solid, extent = {{40, 40}, {-40, -40}}, endAngle = 360), Ellipse(origin = {1, 0}, fillColor = {127, 111, 53}, fillPattern = FillPattern.Solid, extent = {{33, 34}, {-35, -34}}, endAngle = 360), Rectangle(origin = {-1, -50}, fillPattern = FillPattern.VerticalCylinder, extent = {{-1, 50}, {3, -50}})}, coordinateSystem(initialScale = 0.1)));
   end Massenrolle_3c;
@@ -152,7 +178,7 @@ package Flaschenzug
     connector1.s = connector2.s;
     connector3.s = connector1.s;
     connector1.F = connector2.F;
-    connector3.F / n = connector1.F;
+    -connector3.F / n = connector1.F;
     annotation(
       Icon(graphics = {Ellipse(fillColor = {116, 79, 65}, fillPattern = FillPattern.Solid, extent = {{40, 40}, {-40, -40}}, endAngle = 360), Ellipse(origin = {1, 0}, fillColor = {127, 111, 53}, fillPattern = FillPattern.Solid, extent = {{33, 34}, {-35, -34}}, endAngle = 360), Rectangle(origin = {-1, -50}, fillPattern = FillPattern.VerticalCylinder, extent = {{-1, 50}, {3, -50}})}, coordinateSystem(initialScale = 0.1)));
   end Massenrolle_4c;
@@ -169,7 +195,7 @@ package Flaschenzug
     connector1.s = connector2.s;
     connector3.s =0;
     connector1.F = connector2.F;
-    connector3.F  = connector1.F+connector2.F;
+    -connector3.F  = (connector1.F+connector2.F);
     annotation(
       Icon(graphics = {Ellipse(fillColor = {116, 79, 65}, fillPattern = FillPattern.Solid, extent = {{40, 40}, {-40, -40}}, endAngle = 360), Ellipse(origin = {1, 0}, fillColor = {127, 111, 53}, fillPattern = FillPattern.Solid, extent = {{33, 34}, {-35, -34}}, endAngle = 360), Rectangle(origin = {-1, -50}, fillPattern = FillPattern.VerticalCylinder, extent = {{-1, 50}, {3, -50}})}, coordinateSystem(initialScale = 0.1)));
   end Rolle_Mitte_unten_3c;
@@ -188,7 +214,7 @@ package Flaschenzug
     connector1.s = connector2.s;
     connector3.s = 0;
     connector1.F = connector2.F;
-    connector3.F = connector1.F + connector2.F+connector4.F;
+    -connector3.F = 2*connector1.F + connector4.F;
     annotation(
       Icon(graphics = {Ellipse(fillColor = {116, 79, 65}, fillPattern = FillPattern.Solid, extent = {{40, 40}, {-40, -40}}, endAngle = 360), Ellipse(origin = {1, 0}, fillColor = {127, 111, 53}, fillPattern = FillPattern.Solid, extent = {{33, 34}, {-35, -34}}, endAngle = 360), Rectangle(origin = {-1, -50}, fillPattern = FillPattern.VerticalCylinder, extent = {{-1, 50}, {3, -50}})}, coordinateSystem(initialScale = 0.1)));
   end Rolle_Mitte_unten_4c;
@@ -205,7 +231,7 @@ package Flaschenzug
     connector1.s = connector2.s;
     connector1.F = connector2.F;
     connector3.s = 0;
-    connector3.F = connector1.F + connector2.F;
+    -connector3.F = connector1.F + connector2.F;
     annotation(
       Icon(graphics = {Ellipse(fillColor = {116, 79, 65}, fillPattern = FillPattern.Solid, extent = {{40, 40}, {-40, -40}}, endAngle = 360), Ellipse(origin = {1, 0}, fillColor = {127, 111, 53}, fillPattern = FillPattern.Solid, extent = {{33, 34}, {-35, -34}}, endAngle = 360), Rectangle(origin = {-1, 50}, fillPattern = FillPattern.VerticalCylinder, extent = {{-1, 50}, {3, -50}})}));
   end Rolle_Mitte_oben_3c;
@@ -225,7 +251,7 @@ package Flaschenzug
     connector1.s = connector2.s;
     connector1.F = connector2.F;
     connector3.s = 0;
-    connector3.F = connector1.F + connector2.F+connector4.F;
+    -connector3.F = 2*connector1.F+connector4.F;
     annotation(
       Icon(graphics = {Ellipse(fillColor = {116, 79, 65}, fillPattern = FillPattern.Solid, extent = {{40, 40}, {-40, -40}}, endAngle = 360), Ellipse(origin = {1, 0}, fillColor = {127, 111, 53}, fillPattern = FillPattern.Solid, extent = {{33, 34}, {-35, -34}}, endAngle = 360), Rectangle(origin = {-1, 50}, fillPattern = FillPattern.VerticalCylinder, extent = {{-1, 50}, {3, -50}})}));
   end Rolle_Mitte_oben_4c;
