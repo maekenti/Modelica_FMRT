@@ -1,12 +1,13 @@
 package Flaschenzug
   model Masse
+    import SI = Modelica.SIunits ;
     Flaschenzug.Connector connector1 annotation(
       Placement(visible = true, transformation(origin = {2, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {2, 2}, extent = {{-26, -26}, {26, 26}}, rotation = 0)));
-    constant Real g (unit ="m/s^2")=  9.81;
-    parameter Real m (unit = "kg")= 10;
-    Real Fg(unit = "N");
-  //Gewichtskraft
-    Real v(unit = "m/s"), a(unit = "m/s^2");
+    constant Real g = Modelica.Constants.g_n;
+    parameter SI.Mass m = 10;
+     SI.Force Fg;//Gewichtskraft
+    SI.Velocity v;//Geschwindigkeit;
+   SI.Acceleration a;//Beschleunigung;
     
   equation
     Fg = m*g;
@@ -16,14 +17,17 @@ package Flaschenzug
     
     annotation(
       Diagram,
-      Icon(graphics = {Polygon(origin = {0, -30}, fillColor = {75, 75, 75}, fillPattern = FillPattern.CrossDiag, points = {{0, 30}, {-40, 10}, {-20, -30}, {20, -30}, {40, 10}, {40, 10}, {0, 30}})}));
+      Icon(graphics = {Polygon(origin = {0, -30}, fillColor = {75, 75, 75}, fillPattern = FillPattern.CrossDiag, points = {{0, 30}, {-40, 10}, {-20, -30}, {20, -30}, {40, 10}, {40, 10}, {0, 30}})}),
+  Documentation(info = "<html><head></head><body>Fg ist die Gewichtskraft, anhängig von der Masse<div><br><div>Die Kraft am Konnektor ist gegenläufig (Kräfteausgleich)</div></div><div><br></div><div>Fg = - connector1.F</div></body></html>"));
   end Masse;
 
   connector Connector
-    flow Real F(unit = "N");
-    Real s(unit = "m");
+    import SI = Modelica.SIunits;
+    flow SI.Force F;//Kraft;
+    SI.Length s;//Streck;
     annotation(
-      Icon(graphics = {Ellipse(origin = {0, -1}, fillColor = {37, 164, 175}, fillPattern = FillPattern.Solid, extent = {{40, 41}, {-40, -39}}, endAngle = 360), Text(origin = {-4, 8}, extent = {{-32, 4}, {42, -12}}, textString = "Kraft und Weg")}));
+      Icon(graphics = {Ellipse(origin = {0, -1}, fillColor = {37, 164, 175}, fillPattern = FillPattern.Solid, extent = {{40, 41}, {-40, -39}}, endAngle = 360), Text(origin = {-4, 8}, extent = {{-32, 4}, {42, -12}}, textString = "Kraft und Weg")}),
+      Documentation(info = "<html><head></head><body>Kraft als Flussgröße<div>Strecke als Potenzialgröße</div></body></html>"));
   end Connector;
 
   model Fixpunkt
@@ -75,23 +79,29 @@ package Flaschenzug
       Line(points = {{60, -34}, {59, -34}, {59, -32}, {60, -32}}));
     connect(massenrolle_4c1.connector3, masse1.connector1) annotation(
       Line(points = {{60, -76}, {-20, -76}, {-20, -74}, {-20, -74}}));
-  end Bsp;
+  annotation(
+      Documentation(info = "<html><head></head><body>Deckenrolle und falls vorhanden Massenrolle parametrieren (Rollenanzahl insgesammt)<div><br></div><div>Masse parametrieren</div><div><br></div><div><br></div><div>Motor parametrieren <span class=\"Apple-tab-span\" style=\"white-space:pre\">	</span>(An/Aus -&gt; True/False)&nbsp;</div><div><span class=\"Apple-tab-span\" style=\"white-space:pre\">				</span>(Vorwärts/Rückwärst -&gt; True/False)</div><div><br></div><div><span class=\"Apple-tab-span\" style=\"white-space:pre\">				</span>Gescheindigkeit des Aufzugs</div><div><span class=\"Apple-tab-span\" style=\"white-space:pre\">				</span></div></body></html>"));end Bsp;
 
   model Motor
     Flaschenzug.Connector connector1 annotation(
       Placement(visible = true, transformation(origin = {0, 58}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {2, 54}, extent = {{-16, -16}, {16, 16}}, rotation = 0)));
-    Real P(unit="W");
-    Real v(unit="m/s");
-    Real F(unit="N");
-  //benötigte Kraft
-      parameter Boolean Richtung = true;
+    import SI = Modelica.SIunits;
+    
+    SI.Power P;//Leistung
+    SI.Velocity v;//Geschwindigkeit
+    parameter SI.Velocity Geschwindigkeit =10;
+    SI.Force F;//Kraft die vom Motor aufgewendet werden muss;
+    SI.Efficiency nue = 0.89; //Wirkungsgrad
+    parameter Boolean Richtung = true;
     //true=forward; false = backward
     parameter Boolean Modus = true;
     //true = on ; false; off
+    
+    
   equation
-    v = if Modus then 10 else 0;
+    v = if Modus then Geschwindigkeit else 0;
     der(connector1.s) = if Richtung then v else -v;
-    F = -connector1.F ;
+    F*nue = -connector1.F ;
     P = F * v;
 //der(connector1.s) = v;
 //Pel = U*I//U = 230
@@ -116,15 +126,16 @@ package Flaschenzug
       Placement(visible = true, transformation(origin = {0, 98}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {40, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
     Flaschenzug.Connector connector3 annotation(
       Placement(visible = true, transformation(origin = {40, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {0, 96}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-    parameter Real n = 1;
-    //Real h;
+    parameter Real n = 1;//Anzahl der Rollen
+    
   equation
     connector1.s = connector2.s * n;
    connector3.s = 0;
     connector1.F = connector2.F;
     -connector3.F = connector1.F+connector2.F;
     annotation(
-      Icon(graphics = {Ellipse(fillColor = {116, 79, 65}, fillPattern = FillPattern.Solid, extent = {{40, 40}, {-40, -40}}, endAngle = 360), Ellipse(origin = {1, 0}, fillColor = {127, 111, 53}, fillPattern = FillPattern.Solid, extent = {{33, 34}, {-35, -34}}, endAngle = 360), Rectangle(origin = {-1, 48}, fillPattern = FillPattern.VerticalCylinder, extent = {{-1, 50}, {3, -50}})}, coordinateSystem(initialScale = 0.1)));
+      Icon(graphics = {Ellipse(fillColor = {116, 79, 65}, fillPattern = FillPattern.Solid, extent = {{40, 40}, {-40, -40}}, endAngle = 360), Ellipse(origin = {1, 0}, fillColor = {127, 111, 53}, fillPattern = FillPattern.Solid, extent = {{33, 34}, {-35, -34}}, endAngle = 360), Rectangle(origin = {-1, 48}, fillPattern = FillPattern.VerticalCylinder, extent = {{-1, 50}, {3, -50}})}, coordinateSystem(initialScale = 0.1)),
+      Documentation(info = "<html><head></head><body>Zu verwenden wenn eine Rolle benuzt wird.<div><br></div><div>Connector 3 mit Fix punkt verbinden</div><div>Connector 1 mit dem Motor</div><div>Connector 2 mit der Masse</div><div><br></div><div>Bei verwendung Parameter für die Rollenanzahl festlegen.</div></body></html>"));
   end Deckenrolle_3c;
 
   model Deckenrolle_4c
@@ -134,8 +145,8 @@ package Flaschenzug
       Placement(visible = true, transformation(origin = {0, 98}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {40, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
     Flaschenzug.Connector connector3 annotation(
       Placement(visible = true, transformation(origin = {40, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {0, 96}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-    parameter Real n = 1;
-    //Real h;
+    parameter Real n = 1;//Parameter für Rollenanzahl
+  
   Connector connector4 annotation(
       Placement(visible = true, transformation(origin = {0, -40}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {0, -40}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   equation
@@ -144,9 +155,10 @@ package Flaschenzug
     connector1.F = connector2.F;
     
     connector3.F = -(n+1)*connector1.F;
-// + connector2.F+connector4.F =0;
+
     annotation(
-      Icon(graphics = {Ellipse(fillColor = {116, 79, 65}, fillPattern = FillPattern.Solid, extent = {{40, 40}, {-40, -40}}, endAngle = 360), Ellipse(origin = {1, 0}, fillColor = {127, 111, 53}, fillPattern = FillPattern.Solid, extent = {{33, 34}, {-35, -34}}, endAngle = 360), Rectangle(origin = {-1, 48}, fillPattern = FillPattern.VerticalCylinder, extent = {{-1, 50}, {3, -50}})}, coordinateSystem(initialScale = 0.1)));
+      Icon(graphics = {Ellipse(fillColor = {116, 79, 65}, fillPattern = FillPattern.Solid, extent = {{40, 40}, {-40, -40}}, endAngle = 360), Ellipse(origin = {1, 0}, fillColor = {127, 111, 53}, fillPattern = FillPattern.Solid, extent = {{33, 34}, {-35, -34}}, endAngle = 360), Rectangle(origin = {-1, 48}, fillPattern = FillPattern.VerticalCylinder, extent = {{-1, 50}, {3, -50}})}, coordinateSystem(initialScale = 0.1)),
+      Documentation(info = "<html><head></head><body><span style=\"font-size: 12px;\">Zu verwenden wenn zwei oder mehrere Rollen benuzt werden.</span><div style=\"font-size: 12px;\"><br></div><div style=\"font-size: 12px;\">Connector 3 mit Fix punkt verbinden</div><div style=\"font-size: 12px;\">Connector 1 mit dem Motor</div><div style=\"font-size: 12px;\">Connector 2 mit der Masse</div><div style=\"font-size: 12px;\">Connector 4 mit der Massen_Rolle oder einer Rolle_mitte_unten verbinden (von Rollen Anzhal abhängig)</div><div style=\"font-size: 12px;\"><br></div><div style=\"font-size: 12px;\">Bei verwendung Parameter für die Rollenanzahl festlegen.</div></body></html>"));
   end Deckenrolle_4c;
 
   model Massenrolle_3c
@@ -156,7 +168,7 @@ package Flaschenzug
       Placement(visible = true, transformation(origin = {0, 98}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {40, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
     Flaschenzug.Connector connector3 annotation(
       Placement(visible = true, transformation(origin = {40, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {0, -96}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-    parameter Real n = 1;
+    parameter Real n = 1;//Parameter für Rollenanzahl
     
   equation
    connector1.s = connector2.s;
@@ -164,7 +176,8 @@ package Flaschenzug
     connector1.F = connector2.F;
     connector3.F/n = -connector1.F;
     annotation(
-      Icon(graphics = {Ellipse(fillColor = {116, 79, 65}, fillPattern = FillPattern.Solid, extent = {{40, 40}, {-40, -40}}, endAngle = 360), Ellipse(origin = {1, 0}, fillColor = {127, 111, 53}, fillPattern = FillPattern.Solid, extent = {{33, 34}, {-35, -34}}, endAngle = 360), Rectangle(origin = {-1, -48}, fillPattern = FillPattern.VerticalCylinder, extent = {{-1, 50}, {3, -50}})}, coordinateSystem(initialScale = 0.1)));
+      Icon(graphics = {Ellipse(fillColor = {116, 79, 65}, fillPattern = FillPattern.Solid, extent = {{40, 40}, {-40, -40}}, endAngle = 360), Ellipse(origin = {1, 0}, fillColor = {127, 111, 53}, fillPattern = FillPattern.Solid, extent = {{33, 34}, {-35, -34}}, endAngle = 360), Rectangle(origin = {-1, -48}, fillPattern = FillPattern.VerticalCylinder, extent = {{-1, 50}, {3, -50}})}, coordinateSystem(initialScale = 0.1)),
+      Documentation(info = "<html><head></head><body>Massen_Rolle ist immer zur Verwenung zur Konnektion an der Masse zu verwenden.<div>Kommt ab 2 Rollen zum einsatz.<br><div><br></div><div>Connector 3 ist mit der Masse zu verbinden.</div><div>Connector2 ist mit Connector 2 der Decken_Rolle zu verbinden.</div><div>Connector 1 ist mit Connector 4 der Decken_Rolle zu verbinden.</div><div><br></div></div></body></html>"));
   end Massenrolle_3c;
 
   model Massenrolle_4c
@@ -174,7 +187,7 @@ package Flaschenzug
       Placement(visible = true, transformation(origin = {0, 98}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {40, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
     Flaschenzug.Connector connector3 annotation(
       Placement(visible = true, transformation(origin = {40, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {0, -96}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-    parameter Real n = 1;
+    parameter Real n = 1;//Parameter für Rollenanzahl
   Flaschenzug.Connector connector4 annotation(
       Placement(visible = true, transformation(origin = {0, 38}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {0, 40}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   equation
@@ -183,7 +196,8 @@ package Flaschenzug
     connector1.F = connector2.F;
     -connector3.F / n = connector1.F;
     annotation(
-      Icon(graphics = {Ellipse(fillColor = {116, 79, 65}, fillPattern = FillPattern.Solid, extent = {{40, 40}, {-40, -40}}, endAngle = 360), Ellipse(origin = {1, 0}, fillColor = {127, 111, 53}, fillPattern = FillPattern.Solid, extent = {{33, 34}, {-35, -34}}, endAngle = 360), Rectangle(origin = {-1, -48}, fillPattern = FillPattern.VerticalCylinder, extent = {{-1, 50}, {3, -50}})}, coordinateSystem(initialScale = 0.1)));
+      Icon(graphics = {Ellipse(fillColor = {116, 79, 65}, fillPattern = FillPattern.Solid, extent = {{40, 40}, {-40, -40}}, endAngle = 360), Ellipse(origin = {1, 0}, fillColor = {127, 111, 53}, fillPattern = FillPattern.Solid, extent = {{33, 34}, {-35, -34}}, endAngle = 360), Rectangle(origin = {-1, -48}, fillPattern = FillPattern.VerticalCylinder, extent = {{-1, 50}, {3, -50}})}, coordinateSystem(initialScale = 0.1)),
+      Documentation(info = "<html><head></head><body><span style=\"font-size: 12px;\">Massen_Rolle ist immer zur Verwenung zur Konnektion an der Masse zu verwenden.</span><div style=\"font-size: 12px;\">Kommt ab 3 Rollen zum einsatz.<br><div><br></div><div>Connector 3 ist mit der Masse zu verbinden.</div><div>Connector2 ist mit Connector 2 der Decken_Rolle zu verbinden.</div><div>Connector 1 ist mit Connector 1 einer Rolle_Mitte _Oben zu verbinden.</div><div>Connector 4 wir mit einem connector 4 der Rolle Rolle_Mitte_unten verbunden oder mit Connector 2 der Rolle_Rolle_Mitte_oben.</div></div></body></html>"));
   end Massenrolle_4c;
 
   model Rolle_Mitte_unten_3c
@@ -200,7 +214,8 @@ package Flaschenzug
     connector1.F = connector2.F;
     -connector3.F  = (connector1.F+connector2.F);
     annotation(
-      Icon(graphics = {Ellipse(fillColor = {116, 79, 65}, fillPattern = FillPattern.Solid, extent = {{40, 40}, {-40, -40}}, endAngle = 360), Ellipse(origin = {1, 0}, fillColor = {127, 111, 53}, fillPattern = FillPattern.Solid, extent = {{33, 34}, {-35, -34}}, endAngle = 360), Rectangle(origin = {-1, -48}, fillPattern = FillPattern.VerticalCylinder, extent = {{-1, 50}, {3, -50}})}, coordinateSystem(initialScale = 0.1)));
+      Icon(graphics = {Ellipse(fillColor = {116, 79, 65}, fillPattern = FillPattern.Solid, extent = {{40, 40}, {-40, -40}}, endAngle = 360), Ellipse(origin = {1, 0}, fillColor = {127, 111, 53}, fillPattern = FillPattern.Solid, extent = {{33, 34}, {-35, -34}}, endAngle = 360), Rectangle(origin = {-1, -48}, fillPattern = FillPattern.VerticalCylinder, extent = {{-1, 50}, {3, -50}})}, coordinateSystem(initialScale = 0.1)),
+      Documentation(info = "<html><head></head><body>Kommt zum einsatz ab 4 Rollen.<div>Nur für den unteren Bereich des System (\"der Massenseite\") zu verwenden.</div><div><br></div><div><br></div></body></html>"));
   end Rolle_Mitte_unten_3c;
 
   model Rolle_Mitte_unten_4c
@@ -219,7 +234,8 @@ package Flaschenzug
     connector1.F = connector2.F;
     -connector3.F = 2*connector1.F + connector4.F;
     annotation(
-      Icon(graphics = {Ellipse(fillColor = {116, 79, 65}, fillPattern = FillPattern.Solid, extent = {{40, 40}, {-40, -40}}, endAngle = 360), Ellipse(origin = {1, 0}, fillColor = {127, 111, 53}, fillPattern = FillPattern.Solid, extent = {{33, 34}, {-35, -34}}, endAngle = 360), Rectangle(origin = {-1, -48}, fillPattern = FillPattern.VerticalCylinder, extent = {{-1, 50}, {3, -50}})}, coordinateSystem(initialScale = 0.1)));
+      Icon(graphics = {Ellipse(fillColor = {116, 79, 65}, fillPattern = FillPattern.Solid, extent = {{40, 40}, {-40, -40}}, endAngle = 360), Ellipse(origin = {1, 0}, fillColor = {127, 111, 53}, fillPattern = FillPattern.Solid, extent = {{33, 34}, {-35, -34}}, endAngle = 360), Rectangle(origin = {-1, -48}, fillPattern = FillPattern.VerticalCylinder, extent = {{-1, 50}, {3, -50}})}, coordinateSystem(initialScale = 0.1)),
+      Documentation(info = "<html><head></head><body>Kommt zum einsatz ab 5 Rollen.<div>Nur für den unteren Bereich des System (\"der Massenseite\") zu verwenden.</div></body></html>"));
   end Rolle_Mitte_unten_4c;
 
   model Rolle_Mitte_oben_3c
@@ -236,7 +252,8 @@ package Flaschenzug
     connector3.s = 0;
     -connector3.F = connector1.F + connector2.F;
     annotation(
-      Icon(graphics = {Ellipse(fillColor = {116, 79, 65}, fillPattern = FillPattern.Solid, extent = {{40, 40}, {-40, -40}}, endAngle = 360), Ellipse(origin = {1, 0}, fillColor = {127, 111, 53}, fillPattern = FillPattern.Solid, extent = {{33, 34}, {-35, -34}}, endAngle = 360), Rectangle(origin = {-1, 48}, fillPattern = FillPattern.VerticalCylinder, extent = {{-1, 50}, {3, -50}})}, coordinateSystem(initialScale = 0.1)));
+      Icon(graphics = {Ellipse(fillColor = {116, 79, 65}, fillPattern = FillPattern.Solid, extent = {{40, 40}, {-40, -40}}, endAngle = 360), Ellipse(origin = {1, 0}, fillColor = {127, 111, 53}, fillPattern = FillPattern.Solid, extent = {{33, 34}, {-35, -34}}, endAngle = 360), Rectangle(origin = {-1, 48}, fillPattern = FillPattern.VerticalCylinder, extent = {{-1, 50}, {3, -50}})}, coordinateSystem(initialScale = 0.1)),
+      Documentation(info = "<html><head></head><body>Kommt zum einsatz ab 3 Rollen.<div>Nur für den oberen Bereich des System (\"der Deckenseite\") zu verwenden.</div></body></html>"));
   end Rolle_Mitte_oben_3c;
 
   model Rolle_Mitte_oben_4c
@@ -256,6 +273,7 @@ package Flaschenzug
     connector3.s = 0;
     -connector3.F = 2*connector1.F+connector4.F;
     annotation(
-      Icon(graphics = {Ellipse(fillColor = {116, 79, 65}, fillPattern = FillPattern.Solid, extent = {{40, 40}, {-40, -40}}, endAngle = 360), Ellipse(origin = {1, 0}, fillColor = {127, 111, 53}, fillPattern = FillPattern.Solid, extent = {{33, 34}, {-35, -34}}, endAngle = 360), Rectangle(origin = {-1, 48}, fillPattern = FillPattern.VerticalCylinder, extent = {{-1, 50}, {3, -50}})}, coordinateSystem(initialScale = 0.1)));
+      Icon(graphics = {Ellipse(fillColor = {116, 79, 65}, fillPattern = FillPattern.Solid, extent = {{40, 40}, {-40, -40}}, endAngle = 360), Ellipse(origin = {1, 0}, fillColor = {127, 111, 53}, fillPattern = FillPattern.Solid, extent = {{33, 34}, {-35, -34}}, endAngle = 360), Rectangle(origin = {-1, 48}, fillPattern = FillPattern.VerticalCylinder, extent = {{-1, 50}, {3, -50}})}, coordinateSystem(initialScale = 0.1)),
+      Documentation(info = "<html><head></head><body><span style=\"font-size: 12px;\">Kommt zum einsatz ab 4 Rollen.</span><div style=\"font-size: 12px;\">Nur für den oberen Bereich des System (\"der Deckenseite\") zu verwenden.</div></body></html>"));
   end Rolle_Mitte_oben_4c;
 end Flaschenzug;
