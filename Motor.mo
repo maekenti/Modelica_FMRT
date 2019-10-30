@@ -14,8 +14,8 @@ package Motor
   end Weg_Kraft_Connector;
 
   connector Winkel_Moment_Connector
-    Real phi(unit = "m");
-    flow Real M(unit = "N");
+    Real phi(unit = "rad");
+    flow Real M(unit = "N.m");
     annotation(
       Icon(graphics = {Ellipse(origin = {40, 39}, fillColor = {37, 164, 175}, fillPattern = FillPattern.Solid, extent = {{40, 41}, {-120, -119}}, endAngle = 360), Text(origin = {-54, 46}, extent = {{-22, 10}, {130, -102}}, textString = "phi/M")}, coordinateSystem(initialScale = 0.1)));
   end Winkel_Moment_Connector;
@@ -97,16 +97,31 @@ package Motor
   Real Mv(unit = "N.m");  // Ventilationsmoment
   Real Ml(unit = "N.m");  // Lastmoment
   
+  parameter Boolean Modus = true;
+  
   equation
   
-  spannung_Strom_Connector1.U = Ua + Ufw; // Reihenschluss
+  if Modus then
+  
+    spannung_Strom_Connector1.U = Ua + Ufw; // Reihenschluss
+    
+    Ua = 2*Ub + Ra*Ia + La*der(Ia) + kt*om;
+    Ufw = Rfw*Ifw + Lfw*der(Ifw);
+    
+    kt*Ia = Jtot*der(om) + Mf + Mv + Ml;
+    
+  else
+  
+    Ua = 0;
+    Ufw = 0;
+    om = 0;
+    Ia = 0;
+    
+  end if;
+  
   Ifw = Ia; // Reihenschluss
   Ia = spannung_Strom_Connector1.I;
   
-  Ua = 2*Ub + Ra*Ia + La*der(Ia) + kt*om;
-  Ufw = Rfw*Ifw + Lfw*der(Ifw);
-  
-  kt*Ia = Jtot*der(om) + Mf + Mv + Ml;
   Mf = cf*n;
   Mv = sign(n)*cv*n^2;
   Ml = winkel_Moment_Connector1.M;
@@ -121,7 +136,7 @@ package Motor
       experiment(StartTime = 0, StopTime = 10, Tolerance = 1e-6, Interval = 0.02));end Universalmotor;
 
   model Test
-    Motor.Universalmotor universalmotor1 annotation(
+    Motor.Universalmotor universalmotor1(Modus = false)  annotation(
       Placement(visible = true, transformation(origin = {-48, 20}, extent = {{-20, -20}, {20, 20}}, rotation = 0)));
     Motor.Seilrolle seilrolle1 annotation(
       Placement(visible = true, transformation(origin = {0, 20}, extent = {{-20, -20}, {20, 20}}, rotation = 0)));

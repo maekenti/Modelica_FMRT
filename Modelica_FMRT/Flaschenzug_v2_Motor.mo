@@ -4,9 +4,9 @@ package Flaschenzug
     SI.Angle phi;
     flow SI.Torque M;
     annotation(
-      Icon(graphics = {Ellipse(origin = {0, -1}, fillColor = {60, 188, 207}, fillPattern = FillPattern.Solid, extent = {{80, 79}, {-80, -79}}, endAngle = 360), Text(origin = {3, 3}, extent = {{-61, 35}, {61, -35}}, textString = "Winkel und Moment")}));
-    annotation(
       Icon(graphics = {Ellipse(origin = {-1, 4}, fillColor = {37, 150, 225}, fillPattern = FillPattern.Solid, extent = {{83, 76}, {-81, -82}}, endAngle = 360), Text(origin = {0, 3}, extent = {{-70, 27}, {70, -27}}, textString = "Winkel und Moment")}));
+    annotation(
+      Icon(graphics = {Ellipse(origin = {0, -1}, fillColor = {60, 188, 207}, fillPattern = FillPattern.Solid, extent = {{80, 79}, {-80, -79}}, endAngle = 360), Text(origin = {3, 3}, extent = {{-61, 35}, {61, -35}}, textString = "Winkel und Moment")}));
   end Winkel_Moment_Connector;
 
   connector Spannung_Strom_Connector
@@ -248,63 +248,70 @@ end Seilrolle;
   end Spannungsquelle;
 
   model Universalmotor
+  
     Flaschenzug.Winkel_Moment_Connector winkel_Moment_Connector1 annotation(
       Placement(visible = true, transformation(origin = {42, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {31, 3}, extent = {{-7, -7}, {7, 7}}, rotation = 0)));
     Flaschenzug.Spannung_Strom_Connector spannung_Strom_Connector1 annotation(
       Placement(visible = true, transformation(origin = {-40, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {-56, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    
     import SI = Modelica.SIunits;
     constant Real pi = Modelica.Constants.pi;
+    
     // Werte aus Heidrich Skript "Seiten aus AAeA 2011-W Musterklausur fuer Studenten.pdf"
-    constant SI.Voltage Ub = 1.4;
-    // Buerstenabfallspannung
-    constant SI.Resistance Ra = 0.2;
-    // Ankerwiderstand
-    constant SI.Inductance La = 0;
-    // Ankerinduktivitaet (kein Wert bekannt)
-    constant SI.ElectricalTorqueConstant kt = 0.1;
-    // Drehmomentkonstante
-    constant SI.Resistance Rfw = 0;
-    // Feldwicklungswiderstand (kein Wert bekannt)
-    constant SI.Inductance Lfw = 0;
-    // Feldwicklungsinduktion (kein Wert bekannt)
-    constant Real cf(unit = "N.m.s") = 0.0025;
-    // Reibungsverlustkonstante
-    constant Real cv(unit = "N.m.s2") = 0.000104;
-    // Ventilationsverlustkonstante
-    constant SI.MomentOfInertia Jtot = 0.005;
-    // Massentraegheit gesamt (geschaetzter Wert, Vollzylinder mit Masse 1 kg und r = 0.1 m) http://www.hv-engineering.de/pdf/pdf_anleitungen/TechnischeAnleitungNr7.pdf
-    SI.Voltage Ua;
-    // Ankerspannung
-    SI.ElectricCurrent Ia;
-    // Ankerstrom
-    SI.Voltage Ufw;
-    // Felwicklungsspannung
-     SI.ElectricCurrent Ifw;
-    // Felwicklungsstrom
-    SI.AngularFrequency om;
-    // Winkelgeschwindigkeit
-    SI.Frequency n;
-    // Drehzahl
-    SI.Torque Mf;
-    // Reibungsmoment
-    SI.Torque Mv;
-    // Ventilationsmoment
-    SI.Torque Ml;
-    // Lastmoment
+    constant SI.Voltage Ub = 1.4; // Buerstenabfallspannung
+    constant SI.Resistance Ra = 0.2;  // Ankerwiderstand
+    constant SI.Inductance La = 0;  // Ankerinduktivitaet (kein Wert bekannt)
+    constant SI.ElectricalTorqueConstant kt = 0.1;  // Drehmomentkonstante
+    constant SI.Resistance Rfw = 0; // Feldwicklungswiderstand (kein Wert bekannt)
+    constant SI.Inductance Lfw = 0; // Feldwicklungsinduktion (kein Wert bekannt)
+    constant Real cf(unit = "N.m.s") = 0.0025;  // Reibungsverlustkonstante
+    constant Real cv(unit = "N.m.s2") = 0.000104; // Ventilationsverlustkonstante
+    constant SI.MomentOfInertia Jtot = 0.005; // Massentraegheit gesamt (geschaetzter Wert, Vollzylinder mit Masse 1 kg und r = 0.1 m) http://www.hv-engineering.de/pdf/pdf_anleitungen/TechnischeAnleitungNr7.pdf
+    
+    SI.Voltage Ua;  // Ankerspannung
+    SI.ElectricCurrent Ia;  // Ankerstrom
+    SI.Voltage Ufw; // Felwicklungsspannung
+    SI.ElectricCurrent Ifw; // Felwicklungsstrom
+    SI.AngularFrequency om; // Winkelgeschwindigkeit
+    SI.Frequency n; // Drehzahl
+    
+    SI.Torque Mf; // Reibungsmoment
+    SI.Torque Mv; // Ventilationsmoment
+    SI.Torque Ml; // Lastmoment
+    
+    parameter Boolean Modus = true;
+    
   equation
-    spannung_Strom_Connector1.U = (Ua + Ufw);
-// Reihenschluss
-    Ifw = Ia;
-// Reihenschluss
+    
+    if Modus then
+    
+      spannung_Strom_Connector1.U = Ua + Ufw; // Reihenschluss
+      
+      Ua = 2*Ub + Ra*Ia + La*der(Ia) + kt*om;
+      Ufw = Rfw*Ifw + Lfw*der(Ifw);
+      
+      kt*Ia = Jtot*der(om) + Mf + Mv + Ml;
+      
+    else
+    
+      Ua = 0;
+      Ufw = 0;
+      om = 0;
+      Ia = 0;
+      
+    end if;
+    
+    Ifw = Ia; // Reihenschluss
     Ia = spannung_Strom_Connector1.I;
-    Ua = 2 * Ub + Ra * Ia + La * der(Ia) + kt * om;
-    Ufw = Rfw * Ifw + Lfw * der(Ifw);
-    kt * Ia = Jtot * der(om) + Mf + Mv + Ml;
-    Mf = cf * n;
-    Mv = sign(n) * cv * n ^ 2;
+    
+    Mf = cf*n;
+    Mv = sign(n)*cv*n^2;
     Ml = winkel_Moment_Connector1.M;
-    om = 2 * pi * n;
+    
+    om = 2*pi*n;
+    
     der(winkel_Moment_Connector1.phi) = om;
+    
     annotation(
       Icon(graphics = {Rectangle(origin = {20, 3}, lineColor = {145, 145, 145}, fillColor = {253, 253, 253}, fillPattern = FillPattern.HorizontalCylinder, extent = {{-6, 3}, {10, -5}}), Rectangle(origin = {-14, 39}, fillPattern = FillPattern.Solid, extent = {{-20, 21}, {14, -87}}), Ellipse(origin = {12, 8}, rotation = 270, lineColor = {179, 179, 179}, fillColor = {147, 147, 147}, fillPattern = FillPattern.HorizontalCylinder, extent = {{-52, 4}, {56, -32}}, endAngle = 180), Ellipse(origin = {-50, -10}, rotation = 90, lineColor = {179, 179, 179}, fillColor = {147, 147, 147}, fillPattern = FillPattern.HorizontalCylinder, extent = {{-38, 2}, {70, -38}}, endAngle = 180)}, coordinateSystem(initialScale = 0.1)));
   end Universalmotor;
