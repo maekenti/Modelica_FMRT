@@ -10,7 +10,7 @@ package Flaschenzug
   connector Spannung_Strom_Connector
     import SI = Modelica.SIunits;
     SI.Power U;
-    SI.Current I;
+    flow SI.Current I;
     annotation(
       Icon(coordinateSystem(initialScale = 0.1), graphics = {Rectangle(fillColor = {121, 193, 66}, fillPattern = FillPattern.Solid, extent = {{-100, 100}, {100, -100}}), Text(origin = {-3, 11}, extent = {{-189, 63}, {189, -63}}, textString = "U&I")}));
   end Spannung_Strom_Connector;
@@ -53,13 +53,12 @@ package Flaschenzug
     Flaschenzug.Connector connector1 annotation(
       Placement(visible = true, transformation(origin = {0, 60}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {2, 56}, extent = {{-16, -16}, {16, 16}}, rotation = 0)));
   equation
-
+//connector1.s = 0;
     annotation(
       Icon(graphics = {Rectangle(origin = {0, 70}, fillPattern = FillPattern.Solid, extent = {{-100, 30}, {100, -10}})}, coordinateSystem(initialScale = 0.1)));
   end Fixpunkt;
 
   model Deckenrolle_3c
-  
     Connector connector1 annotation(
       Placement(visible = true, transformation(origin = {-40, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {-40, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
     Flaschenzug.Connector connector2 annotation(
@@ -67,7 +66,6 @@ package Flaschenzug
     Flaschenzug.Connector connector3 annotation(
       Placement(visible = true, transformation(origin = {40, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {0, 96}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
     parameter Real n = 1;
-    
     //Anzahl der Rollen
   equation
     connector1.s = connector2.s * n;
@@ -212,78 +210,92 @@ package Flaschenzug
       Documentation(info = "<html><head></head><body><span style=\"font-size: 12px;\">Kommt zum einsatz ab 4 Rollen.</span><div style=\"font-size: 12px;\">Nur für den oberen Bereich des System (\"der Deckenseite\") zu verwenden.</div></body></html>"));
   end Rolle_Mitte_oben_4c;
 
-model Seilrolle
-  Flaschenzug.Connector connector1 annotation(
-    Placement(visible = true, transformation(origin = {2, 42}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {2, 58}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  Flaschenzug.Winkel_Moment_Connector Winkel_Moment_Connector1 annotation(
-    Placement(visible = true, transformation(origin = {66, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {88, 20}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  import SI = Modelica.SIunits;
-  parameter SI.Length r = 0.5;
-  // Rollenradius
-  SI.AngularVelocity om;
-  // Winkelgeschwindigkeit Rolle
-  SI.Velocity v;
-  parameter Boolean Richtung = true;
-  // Geschwingkeit Seil
+  model Seilrolle
+    Flaschenzug.Connector connector1 annotation(
+      Placement(visible = true, transformation(origin = {2, 42}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {2, 58}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Flaschenzug.Winkel_Moment_Connector Winkel_Moment_Connector1 annotation(
+      Placement(visible = true, transformation(origin = {66, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {88, 20}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    import SI = Modelica.SIunits;
+    parameter SI.Length r = 0.5;
+    // Rollenradius
+    SI.AngularVelocity om;
+    // Winkelgeschwindigkeit Rolle
+    SI.Velocity v;
+    parameter Boolean Richtung = true;
+    // Geschwingkeit Seil
   initial equation
-  Winkel_Moment_Connector1.phi = 0;
-equation
-  Winkel_Moment_Connector1.M = connector1.F * r;
-  v =om *r ;
-  der(Winkel_Moment_Connector1.phi) =om;
-  der(connector1.s)= v;
-  annotation(
-    Icon(graphics = {Ellipse(origin = {-44, -36}, rotation = 180, lineColor = {255, 244, 221}, fillColor = {207, 170, 124}, fillPattern = FillPattern.VerticalCylinder, extent = {{-70, -96}, {-132, -16}}, startAngle = 270, endAngle = 90), Ellipse(origin = {-54, 21}, lineColor = {97, 97, 97}, fillColor = {135, 135, 135}, fillPattern = FillPattern.VerticalCylinder, extent = {{-12, 39}, {12, -41}}, startAngle = 90, endAngle = 270), Rectangle(origin = {-4, 27}, fillColor = {80, 80, 80}, fillPattern = FillPattern.Vertical, extent = {{-50, 29}, {60, -41}}), Rectangle(extent = {{68, 54}, {68, 54}}), Rectangle(origin = {55, 20}, lineColor = {166, 134, 99}, fillColor = {207, 170, 124}, pattern = LinePattern.None, fillPattern = FillPattern.VerticalCylinder, extent = {{-1, 40}, {3, -40}}), Rectangle(origin = {1, 52}, lineColor = {163, 133, 98}, fillColor = {207, 170, 124}, fillPattern = FillPattern.HorizontalCylinder, extent = {{-53, 4}, {53, -20}}), Rectangle(origin = {-55, 20}, lineColor = {166, 134, 99}, fillColor = {207, 170, 124}, pattern = LinePattern.None, fillPattern = FillPattern.VerticalCylinder, extent = {{-1, 40}, {3, -40}}), Rectangle(origin = {-47, -27}, fillColor = {72, 72, 72}, pattern = LinePattern.None, fillPattern = FillPattern.Solid, extent = {{-5, 13}, {3, -15}}), Rectangle(origin = {52, -28}, fillColor = {72, 72, 72}, pattern = LinePattern.None, fillPattern = FillPattern.Solid, extent = {{-6, 14}, {2, -14}}), Rectangle(origin = {-64, -42}, fillColor = {72, 72, 72}, pattern = LinePattern.None, fillPattern = FillPattern.Solid, extent = {{-20, 2}, {20, -2}}), Rectangle(origin = {65, -42}, fillColor = {72, 72, 72}, pattern = LinePattern.None, fillPattern = FillPattern.Solid, extent = {{-19, 2}, {19, -2}}), Line(origin = {2, 40}, points = {{0, 14}, {0, -8}, {0, -8}})}, coordinateSystem(initialScale = 0.1)));
-end Seilrolle;
+    Winkel_Moment_Connector1.phi = 0;
+  equation
+    Winkel_Moment_Connector1.M = connector1.F * r;
+    v = om * r;
+    der(Winkel_Moment_Connector1.phi) = om;
+    der(connector1.s) = v;
+    annotation(
+      Icon(graphics = {Ellipse(origin = {-44, -36}, rotation = 180, lineColor = {255, 244, 221}, fillColor = {207, 170, 124}, fillPattern = FillPattern.VerticalCylinder, extent = {{-70, -96}, {-132, -16}}, startAngle = 270, endAngle = 90), Ellipse(origin = {-54, 21}, lineColor = {97, 97, 97}, fillColor = {135, 135, 135}, fillPattern = FillPattern.VerticalCylinder, extent = {{-12, 39}, {12, -41}}, startAngle = 90, endAngle = 270), Rectangle(origin = {-4, 27}, fillColor = {80, 80, 80}, fillPattern = FillPattern.Vertical, extent = {{-50, 29}, {60, -41}}), Rectangle(extent = {{68, 54}, {68, 54}}), Rectangle(origin = {55, 20}, lineColor = {166, 134, 99}, fillColor = {207, 170, 124}, pattern = LinePattern.None, fillPattern = FillPattern.VerticalCylinder, extent = {{-1, 40}, {3, -40}}), Rectangle(origin = {1, 52}, lineColor = {163, 133, 98}, fillColor = {207, 170, 124}, fillPattern = FillPattern.HorizontalCylinder, extent = {{-53, 4}, {53, -20}}), Rectangle(origin = {-55, 20}, lineColor = {166, 134, 99}, fillColor = {207, 170, 124}, pattern = LinePattern.None, fillPattern = FillPattern.VerticalCylinder, extent = {{-1, 40}, {3, -40}}), Rectangle(origin = {-47, -27}, fillColor = {72, 72, 72}, pattern = LinePattern.None, fillPattern = FillPattern.Solid, extent = {{-5, 13}, {3, -15}}), Rectangle(origin = {52, -28}, fillColor = {72, 72, 72}, pattern = LinePattern.None, fillPattern = FillPattern.Solid, extent = {{-6, 14}, {2, -14}}), Rectangle(origin = {-64, -42}, fillColor = {72, 72, 72}, pattern = LinePattern.None, fillPattern = FillPattern.Solid, extent = {{-20, 2}, {20, -2}}), Rectangle(origin = {65, -42}, fillColor = {72, 72, 72}, pattern = LinePattern.None, fillPattern = FillPattern.Solid, extent = {{-19, 2}, {19, -2}}), Line(origin = {2, 40}, points = {{0, 14}, {0, -8}, {0, -8}})}, coordinateSystem(initialScale = 0.1)));
+  end Seilrolle;
 
-model Spannungsquelle
-  Spannung_Strom_Connector spannung_Strom_Connector1 annotation(
-    Placement(visible = true, transformation(origin = {70, 4}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {70, 4}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  import SI = Modelica.SIunits;
-  parameter SI.Voltage U = 48;
-  parameter Boolean Richtung = true;
-equation
-
-  spannung_Strom_Connector1.U = if Richtung then U else (-U);
-  annotation(
-    Icon(graphics = {Rectangle(fillColor = {144, 144, 144}, fillPattern = FillPattern.Solid, extent = {{-80, 70}, {60, -70}}), Rectangle(origin = {70, 51}, fillColor = {104, 104, 104}, fillPattern = FillPattern.HorizontalCylinder, extent = {{-10, 9}, {10, -11}}), Rectangle(origin = {70, -49}, fillColor = {104, 104, 104}, fillPattern = FillPattern.HorizontalCylinder, extent = {{-10, 9}, {10, -11}}), Polygon(origin = {-13, -12}, fillColor = {255, 255, 0}, fillPattern = FillPattern.Solid, points = {{3, 56}, {-19, 6}, {3, 6}, {3, -30}, {27, 20}, {3, 20}, {3, 56}, {3, 56}})}, coordinateSystem(initialScale = 0.1)));
-end Spannungsquelle;
+  model Spannungsquelle
+    Spannung_Strom_Connector spannung_Strom_Connector1 annotation(
+      Placement(visible = true, transformation(origin = {70, 4}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {70, 4}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    import SI = Modelica.SIunits;
+    parameter SI.Voltage U = 48;
+    parameter Boolean Richtung = true;
+  equation
+    spannung_Strom_Connector1.U = if Richtung then U else -U;
+    annotation(
+      Icon(graphics = {Rectangle(fillColor = {144, 144, 144}, fillPattern = FillPattern.Solid, extent = {{-80, 70}, {60, -70}}), Rectangle(origin = {70, 51}, fillColor = {104, 104, 104}, fillPattern = FillPattern.HorizontalCylinder, extent = {{-10, 9}, {10, -11}}), Rectangle(origin = {70, -49}, fillColor = {104, 104, 104}, fillPattern = FillPattern.HorizontalCylinder, extent = {{-10, 9}, {10, -11}}), Polygon(origin = {-13, -12}, fillColor = {255, 255, 0}, fillPattern = FillPattern.Solid, points = {{3, 56}, {-19, 6}, {3, 6}, {3, -30}, {27, 20}, {3, 20}, {3, 56}, {3, 56}})}, coordinateSystem(initialScale = 0.1)));
+  end Spannungsquelle;
 
   model Universalmotor
-  
     Flaschenzug.Winkel_Moment_Connector winkel_Moment_Connector1 annotation(
       Placement(visible = true, transformation(origin = {42, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {31, 3}, extent = {{-7, -7}, {7, 7}}, rotation = 0)));
     Flaschenzug.Spannung_Strom_Connector spannung_Strom_Connector1 annotation(
       Placement(visible = true, transformation(origin = {-40, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {-56, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-    
     import SI = Modelica.SIunits;
     constant Real pi = Modelica.Constants.pi;
     // Werte aus Heidrich Skript "Seiten aus AAeA 2011-W Musterklausur fuer Studenten.pdf"
-    constant SI.Voltage Ub = 1.4;     // Buerstenabfallspannung
-    constant SI.Resistance Ra = 0.2;      // Ankerwiderstand
-    constant SI.Inductance La = 0;      // Ankerinduktivitaet (kein Wert bekannt)
-    constant SI.ElectricalTorqueConstant kt = 0.1;      // Drehmomentkonstante
-    constant SI.Resistance Rfw = 0;     // Feldwicklungswiderstand (kein Wert bekannt)
-    constant SI.Inductance Lfw = 0;     // Feldwicklungsinduktion (kein Wert bekannt)
-    constant Real cf(unit = "N.m.s") = 0.0025;      // Reibungsverlustkonstante
-    constant Real cv(unit = "N.m.s2") = 0.000104;     // Ventilationsverlustkonstante
-    constant SI.MomentOfInertia Jtot = 0.005;     // Massentraegheit gesamt (geschaetzter Wert, Vollzylinder mit Masse 1 kg und r = 0.1 m) http://www.hv-engineering.de/pdf/pdf_anleitungen/TechnischeAnleitungNr7.pdf
-    SI.Voltage Ua;      // Ankerspannung
-    SI.ElectricCurrent Ia;      // Ankerstrom
-    SI.Voltage Ufw;     // Felwicklungsspannung
-    SI.ElectricCurrent Ifw;     // Felwicklungsstrom
-    SI.AngularFrequency om;     // Winkelgeschwindigkeit
-    SI.Frequency n;     // Drehzahl
-    SI.Torque Mf;     // Reibungsmoment
-    SI.Torque Mv;     // Ventilationsmoment
-    SI.Torque Ml;     // Lastmoment
+    constant SI.Voltage Ub = 1.4;
+    // Buerstenabfallspannung
+    constant SI.Resistance Ra = 0.2;
+    // Ankerwiderstand
+    constant SI.Inductance La = 0;
+    // Ankerinduktivitaet (kein Wert bekannt)
+    constant SI.ElectricalTorqueConstant kt = 0.1;
+    // Drehmomentkonstante
+    constant SI.Resistance Rfw = 0;
+    // Feldwicklungswiderstand (kein Wert bekannt)
+    constant SI.Inductance Lfw = 0;
+    // Feldwicklungsinduktion (kein Wert bekannt)
+    constant Real cf(unit = "N.m.s") = 0.0025;
+    // Reibungsverlustkonstante
+    constant Real cv(unit = "N.m.s2") = 0.000104;
+    // Ventilationsverlustkonstante
+    constant SI.MomentOfInertia Jtot = 0.005;
+    // Massentraegheit gesamt (geschaetzter Wert, Vollzylinder mit Masse 1 kg und r = 0.1 m) http://www.hv-engineering.de/pdf/pdf_anleitungen/TechnischeAnleitungNr7.pdf
+    SI.Voltage Ua;
+    // Ankerspannung
+    SI.ElectricCurrent Ia;
+    // Ankerstrom
+    SI.Voltage Ufw;
+    // Felwicklungsspannung
+    SI.ElectricCurrent Ifw;
+    // Felwicklungsstrom
+    SI.AngularFrequency om;
+    // Winkelgeschwindigkeit
+    SI.Frequency n;
+    // Drehzahl
+    SI.Torque Mf;
+    // Reibungsmoment
+    SI.Torque Mv;
+    // Ventilationsmoment
+    SI.Torque Ml;
+    // Lastmoment
     parameter Boolean Modus = true;
-    
   equation
   if Modus then
       spannung_Strom_Connector1.U = Ua + Ufw;
 // Reihenschluss
-      Ua = 2 * Ub + Ra * Ia + La * der(Ia) + kt * (om);
+      Ua = 2 * Ub + Ra * Ia + La * der(Ia) + kt * om;
       Ufw = Rfw * Ifw + Lfw * der(Ifw);
       kt * Ia = Jtot * der(om) + Mf + Mv + Ml;
     else
@@ -292,25 +304,20 @@ end Spannungsquelle;
       om = 0;
       Ia = 0;
     end if;
-    
     Ifw = Ia;
 // Reihenschluss
     Ia = spannung_Strom_Connector1.I;
-    
-    Mf = cf*n;
-    Mv = sign(n)*cv*n^2;
+    Mf = cf * n;
+    Mv = sign(n) * cv * n ^ 2;
     Ml = winkel_Moment_Connector1.M;
-    
-    om = 2*pi*n;
-    
+    om = 2 * pi * n;
     der(winkel_Moment_Connector1.phi) = om;
-    
     annotation(
       Icon(graphics = {Rectangle(origin = {20, 3}, lineColor = {145, 145, 145}, fillColor = {253, 253, 253}, fillPattern = FillPattern.HorizontalCylinder, extent = {{-6, 3}, {10, -5}}), Rectangle(origin = {-14, 39}, fillPattern = FillPattern.Solid, extent = {{-20, 21}, {14, -87}}), Ellipse(origin = {12, 8}, rotation = 270, lineColor = {179, 179, 179}, fillColor = {147, 147, 147}, fillPattern = FillPattern.HorizontalCylinder, extent = {{-52, 4}, {56, -32}}, endAngle = 180), Ellipse(origin = {-50, -10}, rotation = 90, lineColor = {179, 179, 179}, fillColor = {147, 147, 147}, fillPattern = FillPattern.HorizontalCylinder, extent = {{-38, 2}, {70, -38}}, endAngle = 180)}, coordinateSystem(initialScale = 0.1)));
   end Universalmotor;
 
   model Bsp
-    Flaschenzug.Masse masse1 annotation(
+    Flaschenzug.Masse masse1(m = 1) annotation(
       Placement(visible = true, transformation(origin = {-21, -75}, extent = {{-27, -27}, {27, 27}}, rotation = 0)));
     Flaschenzug.Fixpunkt fixpunkt1 annotation(
       Placement(visible = true, transformation(origin = {-5, 65}, extent = {{-43, -43}, {43, 43}}, rotation = 0)));
@@ -324,35 +331,35 @@ end Spannungsquelle;
       Placement(visible = true, transformation(origin = {-90, 24}, extent = {{-20, -20}, {20, 20}}, rotation = 0)));
     Flaschenzug.Rolle_Mitte_oben_3c rolle_Mitte_oben_3c1 annotation(
       Placement(visible = true, transformation(origin = {-87, -1}, extent = {{-17, -17}, {17, 17}}, rotation = 0)));
-    Flaschenzug.Seilrolle seilrolle1(Richtung = true)  annotation(
+    Flaschenzug.Seilrolle seilrolle1(Richtung = true) annotation(
       Placement(visible = true, transformation(origin = {-177, -15}, extent = {{-29, -29}, {29, 29}}, rotation = 0)));
-    Flaschenzug.Universalmotor universalmotor1(Modus = true)  annotation(
-      Placement(visible = true, transformation(origin = {-172, -62}, extent = {{-38, -38}, {38, 38}}, rotation = 0)));
-    Flaschenzug.Spannungsquelle spannungsquelle1(Richtung = false, U = 48)  annotation(
+    Flaschenzug.Spannungsquelle spannungsquelle1(Richtung = false, U = 48) annotation(
       Placement(visible = true, transformation(origin = {-252, -62}, extent = {{-38, -38}, {38, 38}}, rotation = 0)));
+    Universalmotor universalmotor1 annotation(
+      Placement(visible = true, transformation(origin = {-172, -62}, extent = {{-38, -38}, {38, 38}}, rotation = 0)));
   equation
-    connect(universalmotor1.spannung_Strom_Connector1, spannungsquelle1.spannung_Strom_Connector1) annotation(
-      Line(points = {{-188, -62}, {-226, -62}, {-226, -60}, {-226, -60}}));
-    connect(seilrolle1.Winkel_Moment_Connector1, universalmotor1.winkel_Moment_Connector1) annotation(
-      Line(points = {{-158, -14}, {-156, -14}, {-156, -62}, {-156, -62}}));
-    connect(deckenrolle_4c1.connector1, seilrolle1.connector1) annotation(
-      Line(points = {{-104, 58}, {-176, 58}, {-176, -2}, {-176, -2}}));
-    connect(rolle_Mitte_oben_3c1.connector2, rolle_Mitte_unten_4c1.connector4) annotation(
-      Line(points = {{-80, 0}, {60, 0}, {60, -6}, {60, -6}}));
-    connect(rolle_Mitte_unten_4c1.connector1, rolle_Mitte_oben_3c1.connector1) annotation(
-      Line(points = {{52, -14}, {-94, -14}, {-94, 0}, {-94, 0}}));
-    connect(rolle_Mitte_oben_3c1.connector3, rolle_Mitte_oben_4c1.connector4) annotation(
-      Line(points = {{-87, 16}, {-90, 16}}));
-    connect(rolle_Mitte_oben_4c1.connector2, rolle_Mitte_unten_4c1.connector2) annotation(
-      Line(points = {{-82, 24}, {68, 24}, {68, -14}}));
-    connect(massenrolle_4c1.connector1, rolle_Mitte_oben_4c1.connector1) annotation(
-      Line(points = {{46, -44}, {-98, -44}, {-98, 24}}));
     connect(rolle_Mitte_oben_4c1.connector3, deckenrolle_4c1.connector4) annotation(
       Line(points = {{-90, 44}, {-91, 44}}));
     connect(deckenrolle_4c1.connector2, massenrolle_4c1.connector2) annotation(
       Line(points = {{-78, 57}, {72, 57}, {72, -44}}));
     connect(deckenrolle_4c1.connector3, fixpunkt1.connector1) annotation(
       Line(points = {{-91, 89}, {-4, 89}, {-4, 90}}));
+    connect(deckenrolle_4c1.connector1, seilrolle1.connector1) annotation(
+      Line(points = {{-104, 58}, {-176, 58}, {-176, -2}, {-176, -2}}));
+    connect(seilrolle1.Winkel_Moment_Connector1, universalmotor1.winkel_Moment_Connector1) annotation(
+      Line(points = {{-151, -9}, {-160, -9}, {-160, -61}}));
+    connect(rolle_Mitte_oben_3c1.connector3, rolle_Mitte_oben_4c1.connector4) annotation(
+      Line(points = {{-87, 16}, {-90, 16}}));
+    connect(rolle_Mitte_oben_4c1.connector2, rolle_Mitte_unten_4c1.connector2) annotation(
+      Line(points = {{-82, 24}, {68, 24}, {68, -14}}));
+    connect(massenrolle_4c1.connector1, rolle_Mitte_oben_4c1.connector1) annotation(
+      Line(points = {{46, -44}, {-98, -44}, {-98, 24}}));
+    connect(universalmotor1.spannung_Strom_Connector1, spannungsquelle1.spannung_Strom_Connector1) annotation(
+      Line(points = {{-193, -62}, {-226, -62}, {-226, -60}}));
+    connect(rolle_Mitte_oben_3c1.connector2, rolle_Mitte_unten_4c1.connector4) annotation(
+      Line(points = {{-80, 0}, {60, 0}, {60, -6}, {60, -6}}));
+    connect(rolle_Mitte_unten_4c1.connector1, rolle_Mitte_oben_3c1.connector1) annotation(
+      Line(points = {{52, -14}, {-94, -14}, {-94, 0}, {-94, 0}}));
     connect(rolle_Mitte_unten_4c1.connector3, massenrolle_4c1.connector4) annotation(
       Line(points = {{60, -34}, {59, -34}, {59, -32}, {60, -32}}));
     connect(massenrolle_4c1.connector3, masse1.connector1) annotation(
@@ -360,4 +367,109 @@ end Spannungsquelle;
     annotation(
       Documentation(info = "<html><head></head><body>Deckenrolle und falls vorhanden Massenrolle parametrieren (Rollenanzahl insgesammt)<div><br></div><div>Masse parametrieren</div><div><br></div><div><br></div><div>Motor parametrieren <span class=\"Apple-tab-span\" style=\"white-space:pre\">	</span>(An/Aus -&gt; True/False)&nbsp;</div><div><span class=\"Apple-tab-span\" style=\"white-space:pre\">				</span>(Vorwärts/Rückwärst -&gt; True/False)</div><div><br></div><div><span class=\"Apple-tab-span\" style=\"white-space:pre\">				</span>Gescheindigkeit des Aufzugs</div><div><span class=\"Apple-tab-span\" style=\"white-space:pre\">				</span></div></body></html>"));
   end Bsp;
+
+  model generische_Rolle
+    Flaschenzug.Connector Seil_links annotation(
+      Placement(visible = true, transformation(origin = {-80, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {-80, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Flaschenzug.Connector Seil_rechts annotation(
+      Placement(visible = true, transformation(origin = {80, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {80, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Flaschenzug.Connector Flaschenzug_oben annotation(
+      Placement(visible = true, transformation(origin = {0, 92}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {0, 90}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Flaschenzug.Connector Flaschenzug_unten annotation(
+      Placement(visible = true, transformation(origin = {2, -92}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {0, -90}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+  equation
+// kräfte werden von unten nach oben übertragen und umgekehrt
+// ebenso von links nach rechts und umgekehrt
+    Flaschenzug_oben.F = Flaschenzug_unten.F + Seil_links.F + Seil_rechts.F;
+//der(Flaschenzug_oben.s) = der(Flaschenzug_unten.s);
+//der(Seil_links.s) = der(Seil_rechts.s);
+    Flaschenzug_oben.s = Flaschenzug_unten.s;
+//(Seil_links.s) = (Seil_rechts.s);
+    der(Seil_links.s) = der(Seil_rechts.s);
+    Seil_links.F = Seil_rechts.F;
+    annotation(
+      Diagram,
+      Icon(graphics = {Ellipse(origin = {0, -1}, fillColor = {132, 132, 132}, fillPattern = FillPattern.Solid, extent = {{-80, 81}, {80, -79}}, endAngle = 360), Rectangle(origin = {4, 3}, fillPattern = FillPattern.Solid, extent = {{-14, 87}, {6, -95}}), Ellipse(origin = {2, -2}, fillColor = {0, 0, 255}, fillPattern = FillPattern.Solid, extent = {{-12, 12}, {8, -8}}, endAngle = 360)}));
+  end generische_Rolle;
+
+  model Flaschenzug_Eigenschaften
+    //inner Flaschenzug.generische_Rolle rolle;
+    //Integer n = 0;
+  equation
+
+  end Flaschenzug_Eigenschaften;
+
+  model test
+    //outer Flaschenzug.Flaschenzug_Eigenschaften props;
+    Flaschenzug.Spannungsquelle spannungsquelle1 annotation(
+      Placement(visible = true, transformation(origin = {-80, -40}, extent = {{-20, -20}, {20, 20}}, rotation = 0)));
+  Flaschenzug.Universalmotor universalmotor1 annotation(
+      Placement(visible = true, transformation(origin = {-20, -40}, extent = {{-20, -20}, {20, 20}}, rotation = 0)));
+  Flaschenzug.Seilrolle seilrolle1(r = 0.1)  annotation(
+      Placement(visible = true, transformation(origin = {-20, 0}, extent = {{-20, -20}, {20, 20}}, rotation = 0)));
+  Flaschenzug.Masse masse1(m = 2)  annotation(
+      Placement(visible = true, transformation(origin = {36, -14}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+  initial equation
+//props.n = props.n + 1;
+  equation
+    connect(seilrolle1.connector1, masse1.connector1) annotation(
+      Line(points = {{-20, 12}, {36, 12}, {36, -7}}));
+    connect(universalmotor1.winkel_Moment_Connector1, seilrolle1.Winkel_Moment_Connector1) annotation(
+      Line(points = {{-14, -40}, {-2, -40}, {-2, 4}, {-2, 4}}));
+    connect(spannungsquelle1.spannung_Strom_Connector1, universalmotor1.spannung_Strom_Connector1) annotation(
+      Line(points = {{-66, -40}, {-30, -40}, {-30, -40}, {-32, -40}}));
+//props.n = 1;
+  end test;
+
+  model Bsp_generisch
+    Flaschenzug.Masse masse1(m = 1) annotation(
+      Placement(visible = true, transformation(origin = {-40, -60}, extent = {{-20, -20}, {20, 20}}, rotation = 0)));
+    Flaschenzug.Fixpunkt fixpunkt3 annotation(
+      Placement(visible = true, transformation(origin = {0, 80}, extent = {{-20, -20}, {20, 20}}, rotation = 0)));
+    Flaschenzug.generische_Rolle generische_Rolle1 annotation(
+      Placement(visible = true, transformation(origin = {0, 40}, extent = {{-20, -20}, {20, 20}}, rotation = 0)));
+    Flaschenzug.generische_Rolle generische_Rolle2 annotation(
+      Placement(visible = true, transformation(origin = {-40, 0}, extent = {{-20, -20}, {20, 20}}, rotation = 0)));
+    Flaschenzug.Fixpunkt fixpunkt1 annotation(
+      Placement(visible = true, transformation(origin = {-60, 80}, extent = {{-20, -20}, {20, 20}}, rotation = 0)));
+    Flaschenzug.Spannungsquelle spannungsquelle1 annotation(
+      Placement(visible = true, transformation(origin = {30, -70}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Flaschenzug.Universalmotor universalmotor1 annotation(
+      Placement(visible = true, transformation(origin = {70, -70}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Flaschenzug.Seilrolle seilrolle1 annotation(
+      Placement(visible = true, transformation(origin = {70, -50}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+  equation
+    connect(seilrolle1.connector1, generische_Rolle1.Seil_rechts) annotation(
+      Line(points = {{70, -44}, {16, -44}, {16, 40}, {16, 40}}));
+    connect(universalmotor1.winkel_Moment_Connector1, seilrolle1.Winkel_Moment_Connector1) annotation(
+      Line(points = {{74, -70}, {88, -70}, {88, -48}, {80, -48}, {80, -48}, {78, -48}, {78, -48}}));
+    connect(spannungsquelle1.spannung_Strom_Connector1, universalmotor1.spannung_Strom_Connector1) annotation(
+      Line(points = {{38, -70}, {64, -70}, {64, -70}, {64, -70}}));
+    connect(generische_Rolle2.Seil_rechts, generische_Rolle1.Seil_links) annotation(
+      Line(points = {{-24, 0}, {-20, 0}, {-20, 40}, {-16, 40}, {-16, 40}}));
+    connect(fixpunkt3.connector1, generische_Rolle1.Flaschenzug_oben) annotation(
+      Line(points = {{0.4, 91.2}, {-0.6, 91.2}, {-0.6, 91.2}, {0.4, 91.2}, {0.4, 57.2}, {0.4, 57.2}, {0.4, 57.2}, {0.4, 57.2}}));
+    connect(fixpunkt1.connector1, generische_Rolle2.Seil_links) annotation(
+      Line(points = {{-60, 92}, {-60, 0}, {-56, 0}}));
+    connect(generische_Rolle2.Flaschenzug_unten, masse1.connector1) annotation(
+      Line(points = {{-40, -18}, {-40, -45}}));
+  end Bsp_generisch;
+
+  model Test_generisch
+    Flaschenzug.Masse masse1 annotation(
+      Placement(visible = true, transformation(origin = {30, -30}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Flaschenzug.Masse masse2 annotation(
+      Placement(visible = true, transformation(origin = {-10, -30}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Flaschenzug.Fixpunkt fixpunkt1 annotation(
+      Placement(visible = true, transformation(origin = {10, 50}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Flaschenzug.generische_Rolle generische_Rolle1 annotation(
+      Placement(visible = true, transformation(origin = {10, 10}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+  equation
+    connect(masse1.connector1, generische_Rolle1.Seil_rechts) annotation(
+      Line(points = {{30, -22}, {30, -22}, {30, 10}, {18, 10}, {18, 10}}));
+    connect(masse2.connector1, generische_Rolle1.Seil_links) annotation(
+      Line(points = {{-10, -22}, {-10, -22}, {-10, 10}, {2, 10}, {2, 10}}));
+    connect(fixpunkt1.connector1, generische_Rolle1.Flaschenzug_oben) annotation(
+      Line(points = {{10, 56}, {10, 56}, {10, 20}, {10, 20}}));
+  end Test_generisch;
 end Flaschenzug;

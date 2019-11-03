@@ -26,10 +26,9 @@ package Motor
     Motor.Winkel_Moment_Connector winkel_Moment_Connector1 annotation(
       Placement(visible = true, transformation(origin = {26, -36}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {0, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
     
-    parameter Real r(unit = "m") = 0.5; // Rollenradius
-    Real om(unit = "rad/s");  // Winkelgeschwindigkeit Rolle
-    Real v(unit = "m/s"); // Geschwingkeit Seil
-    
+    parameter Real r(unit = "m") = 0.5;     // Rollenradius
+    Real om(unit = "rad/s");      // Winkelgeschwindigkeit Rolle
+    Real v(unit = "m/s");     // Geschwingkeit Seil
   initial equation
     winkel_Moment_Connector1.phi = 0;
     
@@ -48,11 +47,10 @@ package Motor
     Motor.Weg_Kraft_Connector weg_Kraft_Connector1 annotation(
       Placement(visible = true, transformation(origin = {-2, 40}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {0, 60}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
     
-    constant Real g(unit = "m/s2") = 9.81;  //Erdbeschleunigung
+    constant Real g(unit = "m/s2") = 9.81;      //Erdbeschleunigung
     parameter Real m(unit = "kg") = 1 "Masse";
-    Real v(unit = "m/s"); //Geschwindigkeit
-    Real a(unit = "m/s2");  //Beschleunigung
-    
+    Real v(unit = "m/s");     //Geschwindigkeit
+    Real a(unit = "m/s2");      //Beschleunigung
   initial equation
     weg_Kraft_Connector1.s = 0;
     v = 0;
@@ -74,53 +72,44 @@ package Motor
       Placement(visible = true, transformation(origin = {-84, -32}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {-60, -60}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));    
   
   constant Real pi = Modelica.Constants.pi;
-  
   // Werte aus Heidrich Skript "Seiten aus AAeA 2011-W Musterklausur fuer Studenten.pdf"
-  constant Real Ub(unit = "V") = 1.4;             // Buerstenabfallspannung
-  constant Real Ra(unit = "Ohm") = 0.2;           // Ankerwiderstand
-  constant Real La(unit = "H") = 0;               // Ankerinduktivitaet (kein Wert bekannt)
-  constant Real kt(unit = "N.m/A") = 0.1;         // Drehmomentkonstante
-  constant Real Rfw(unit = "Ohm") = 0;            // Feldwicklungswiderstand (kein Wert bekannt)
-  constant Real Lfw(unit = "H") = 0;              // Feldwicklungsinduktion (kein Wert bekannt)
-  constant Real cf(unit = "N.m.s") = 0.0025;      // Reibungsverlustkonstante
-  constant Real cv(unit = "N.m.s2") = 0.000104;   // Ventilationsverlustkonstante
-  constant Real Jtot(unit = "kg.m2") = 0.005;     // Massentraegheit gesamt (geschaetzter Wert, Vollzylinder mit Masse 1 kg und r = 0.1 m) http://www.hv-engineering.de/pdf/pdf_anleitungen/TechnischeAnleitungNr7.pdf
-  
-  Real Ua(unit = "V");   // Ankerspannung
-  Real Ia(unit = "A");   // Ankerstrom
-  Real Ufw(unit = "V");   // Felwicklungsspannung
-  Real Ifw(unit = "A");   // Felwicklungsstrom
-  Real om(unit = "rad/s");   // Winkelgeschwindigkeit
-  Real n(unit = "Hz");   // Drehzahl
-  
-  Real Mf(unit = "N.m");  // Reibungsmoment
-  Real Mv(unit = "N.m");  // Ventilationsmoment
-  Real Ml(unit = "N.m");  // Lastmoment
-  
+  constant Real Ub(unit = "V") = 1.4;                 // Buerstenabfallspannung
+  constant Real Ra(unit = "Ohm") = 0.2;               // Ankerwiderstand
+  constant Real La(unit = "H") = 0;                   // Ankerinduktivitaet (kein Wert bekannt)
+  constant Real kt(unit = "N.m/A") = 0.1;             // Drehmomentkonstante
+  constant Real Rfw(unit = "Ohm") = 0;                // Feldwicklungswiderstand (kein Wert bekannt)
+  constant Real Lfw(unit = "H") = 0;                  // Feldwicklungsinduktion (kein Wert bekannt)
+  constant Real cf(unit = "N.m.s") = 0.0025;          // Reibungsverlustkonstante
+  constant Real cv(unit = "N.m.s2") = 0.000104;       // Ventilationsverlustkonstante
+  constant Real Jtot(unit = "kg.m2") = 0.005;       // Massentraegheit gesamt (geschaetzter Wert, Vollzylinder mit Masse 1 kg und r = 0.1 m) http://www.hv-engineering.de/pdf/pdf_anleitungen/TechnischeAnleitungNr7.pdf
+  Real Ua(unit = "V");       // Ankerspannung
+  Real Ia(unit = "A");       // Ankerstrom
+  Real Ufw(unit = "V");       // Felwicklungsspannung
+  Real Ifw(unit = "A");       // Felwicklungsstrom
+  Real om(unit = "rad/s");       // Winkelgeschwindigkeit
+  Real n(unit = "Hz");     // Drehzahl
+  Real Mf(unit = "N.m");      // Reibungsmoment
+  Real Mv(unit = "N.m");      // Ventilationsmoment
+  Real Ml(unit = "N.m");    // Lastmoment
   parameter Boolean Modus = true;
   
   equation
-  
   if Modus then
+      spannung_Strom_Connector1.U = Ua + Ufw;
+// Reihenschluss
+      Ua = 2 * Ub + Ra * Ia + La * der(Ia) + kt * om;
+      Ufw = Rfw * Ifw + Lfw * der(Ifw);
+      kt * Ia = Jtot * der(om) + Mf + Mv + Ml;
+    else
+      Ua = 0;
+      Ufw = 0;
+      om = 0;
+      Ia = 0;
+    end if;
   
-    spannung_Strom_Connector1.U = Ua + Ufw; // Reihenschluss
-    
-    Ua = 2*Ub + Ra*Ia + La*der(Ia) + kt*om;
-    Ufw = Rfw*Ifw + Lfw*der(Ifw);
-    
-    kt*Ia = Jtot*der(om) + Mf + Mv + Ml;
-    
-  else
-  
-    Ua = 0;
-    Ufw = 0;
-    om = 0;
-    Ia = 0;
-    
-  end if;
-  
-  Ifw = Ia; // Reihenschluss
-  Ia = spannung_Strom_Connector1.I;
+  Ifw = Ia;
+// Reihenschluss
+    Ia = spannung_Strom_Connector1.I;
   
   Mf = cf*n;
   Mv = sign(n)*cv*n^2;
@@ -136,7 +125,7 @@ package Motor
       experiment(StartTime = 0, StopTime = 10, Tolerance = 1e-6, Interval = 0.02));end Universalmotor;
 
   model Test
-    Motor.Universalmotor universalmotor1(Modus = false)  annotation(
+    Motor.Universalmotor universalmotor1 annotation(
       Placement(visible = true, transformation(origin = {-48, 20}, extent = {{-20, -20}, {20, 20}}, rotation = 0)));
     Motor.Seilrolle seilrolle1 annotation(
       Placement(visible = true, transformation(origin = {0, 20}, extent = {{-20, -20}, {20, 20}}, rotation = 0)));
@@ -164,8 +153,7 @@ package Motor
   equation
   
     spannung_Strom_Connector1.U = U;
-    //spannung_Strom_Connector1.U = Umax * sin(f*time);
-    
+//spannung_Strom_Connector1.U = Umax * sin(f*time);
     annotation(
       Icon(graphics = {Rectangle(fillColor = {144, 144, 144}, fillPattern = FillPattern.Solid, extent = {{-80, 70}, {60, -70}}), Rectangle(origin = {70, 51}, fillColor = {104, 104, 104}, fillPattern = FillPattern.HorizontalCylinder, extent = {{-10, 9}, {10, -11}}), Rectangle(origin = {70, -49}, fillColor = {104, 104, 104}, fillPattern = FillPattern.HorizontalCylinder, extent = {{-10, 9}, {10, -11}}), Polygon(origin = {-13, -12}, fillColor = {255, 255, 0}, fillPattern = FillPattern.Solid, points = {{3, 56}, {-19, 6}, {3, 6}, {3, -30}, {27, 20}, {3, 20}, {3, 56}, {3, 56}})}, coordinateSystem(initialScale = 0.1)));
   end Spannungsquelle;
