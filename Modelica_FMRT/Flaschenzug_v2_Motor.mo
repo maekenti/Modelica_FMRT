@@ -53,7 +53,7 @@ package Flaschenzug
     Flaschenzug.Connector connector1 annotation(
       Placement(visible = true, transformation(origin = {0, 60}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {2, 56}, extent = {{-16, -16}, {16, 16}}, rotation = 0)));
   equation
-//connector1.s = 0;
+  connector1.s = 0;
     annotation(
       Icon(graphics = {Rectangle(origin = {0, 70}, fillPattern = FillPattern.Solid, extent = {{-100, 30}, {100, -10}})}, coordinateSystem(initialScale = 0.1)));
   end Fixpunkt;
@@ -373,20 +373,25 @@ package Flaschenzug
       Placement(visible = true, transformation(origin = {-80, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {-80, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
     Flaschenzug.Connector Seil_rechts annotation(
       Placement(visible = true, transformation(origin = {80, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {80, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-    Flaschenzug.Connector Flaschenzug_oben annotation(
-      Placement(visible = true, transformation(origin = {0, 92}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {0, 90}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-    Flaschenzug.Connector Flaschenzug_unten annotation(
-      Placement(visible = true, transformation(origin = {2, -92}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {0, -90}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+  
+    Real s (start = 0);
+  
   equation
-// kräfte werden von unten nach oben übertragen und umgekehrt
-// ebenso von links nach rechts und umgekehrt
+  
+  // kräfte werden von unten nach oben übertragen und umgekehrt
+  // ebenso von links nach rechts und umgekehrt
+  
+    /*
     Flaschenzug_oben.F = Flaschenzug_unten.F + Seil_links.F + Seil_rechts.F;
-//der(Flaschenzug_oben.s) = der(Flaschenzug_unten.s);
-//der(Seil_links.s) = der(Seil_rechts.s);
     Flaschenzug_oben.s = Flaschenzug_unten.s;
-//(Seil_links.s) = (Seil_rechts.s);
-    der(Seil_links.s) = der(Seil_rechts.s);
+    Flaschenzug_unten.s = (der(Seil_links.s) + der(Seil_rechts.s)) / 2;
     Seil_links.F = Seil_rechts.F;
+    */
+    
+    //Flaschenzug_oben.F = Flaschenzug_unten.F + Seil_links.F + Seil_rechts.F;
+    s = (der(Seil_links.s) + der(Seil_rechts.s)) / 2;
+    Seil_links.F = Seil_rechts.F;
+    
     annotation(
       Diagram,
       Icon(graphics = {Ellipse(origin = {0, -1}, fillColor = {132, 132, 132}, fillPattern = FillPattern.Solid, extent = {{-80, 81}, {80, -79}}, endAngle = 360), Rectangle(origin = {4, 3}, fillPattern = FillPattern.Solid, extent = {{-14, 87}, {6, -95}}), Ellipse(origin = {2, -2}, fillColor = {0, 0, 255}, fillPattern = FillPattern.Solid, extent = {{-12, 12}, {8, -8}}, endAngle = 360)}));
@@ -422,37 +427,27 @@ package Flaschenzug
   end test;
 
   model Bsp_generisch
-    Flaschenzug.Masse masse1(m = 1) annotation(
-      Placement(visible = true, transformation(origin = {-40, -60}, extent = {{-20, -20}, {20, 20}}, rotation = 0)));
-    Flaschenzug.Fixpunkt fixpunkt3 annotation(
-      Placement(visible = true, transformation(origin = {0, 80}, extent = {{-20, -20}, {20, 20}}, rotation = 0)));
-    Flaschenzug.generische_Rolle generische_Rolle1 annotation(
-      Placement(visible = true, transformation(origin = {0, 40}, extent = {{-20, -20}, {20, 20}}, rotation = 0)));
-    Flaschenzug.generische_Rolle generische_Rolle2 annotation(
-      Placement(visible = true, transformation(origin = {-40, 0}, extent = {{-20, -20}, {20, 20}}, rotation = 0)));
-    Flaschenzug.Fixpunkt fixpunkt1 annotation(
-      Placement(visible = true, transformation(origin = {-60, 80}, extent = {{-20, -20}, {20, 20}}, rotation = 0)));
     Flaschenzug.Spannungsquelle spannungsquelle1 annotation(
-      Placement(visible = true, transformation(origin = {30, -70}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+      Placement(visible = true, transformation(origin = {30, 30}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
     Flaschenzug.Universalmotor universalmotor1 annotation(
-      Placement(visible = true, transformation(origin = {70, -70}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+      Placement(visible = true, transformation(origin = {70, 50}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
     Flaschenzug.Seilrolle seilrolle1 annotation(
-      Placement(visible = true, transformation(origin = {70, -50}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+      Placement(visible = true, transformation(origin = {66, 70}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+  generische_Rolle generische_Rolle2 annotation(
+      Placement(visible = true, transformation(origin = {-40, 0}, extent = {{-20, -20}, {20, 20}}, rotation = 0)));
+  Masse masse1 annotation(
+      Placement(visible = true, transformation(origin = {-40, -60}, extent = {{-20, -20}, {20, 20}}, rotation = 0)));
+  Fixpunkt fixpunkt1 annotation(
+      Placement(visible = true, transformation(origin = {-56, 80}, extent = {{-20, -20}, {20, 20}}, rotation = 0)));
   equation
-    connect(seilrolle1.connector1, generische_Rolle1.Seil_rechts) annotation(
-      Line(points = {{70, -44}, {16, -44}, {16, 40}, {16, 40}}));
-    connect(universalmotor1.winkel_Moment_Connector1, seilrolle1.Winkel_Moment_Connector1) annotation(
-      Line(points = {{74, -70}, {88, -70}, {88, -48}, {80, -48}, {80, -48}, {78, -48}, {78, -48}}));
-    connect(spannungsquelle1.spannung_Strom_Connector1, universalmotor1.spannung_Strom_Connector1) annotation(
-      Line(points = {{38, -70}, {64, -70}, {64, -70}, {64, -70}}));
-    connect(generische_Rolle2.Seil_rechts, generische_Rolle1.Seil_links) annotation(
-      Line(points = {{-24, 0}, {-20, 0}, {-20, 40}, {-16, 40}, {-16, 40}}));
-    connect(fixpunkt3.connector1, generische_Rolle1.Flaschenzug_oben) annotation(
-      Line(points = {{0.4, 91.2}, {-0.6, 91.2}, {-0.6, 91.2}, {0.4, 91.2}, {0.4, 57.2}, {0.4, 57.2}, {0.4, 57.2}, {0.4, 57.2}}));
+  connect(spannungsquelle1.spannung_Strom_Connector1, universalmotor1.spannung_Strom_Connector1) annotation(
+      Line(points = {{37, 30}, {46, 30}, {46, 50}, {64, 50}}));
+  connect(universalmotor1.winkel_Moment_Connector1, seilrolle1.Winkel_Moment_Connector1) annotation(
+      Line(points = {{73, 50}, {83.1, 50}, {83.1, 72}, {75, 72}}));
     connect(fixpunkt1.connector1, generische_Rolle2.Seil_links) annotation(
-      Line(points = {{-60, 92}, {-60, 0}, {-56, 0}}));
-    connect(generische_Rolle2.Flaschenzug_unten, masse1.connector1) annotation(
-      Line(points = {{-40, -18}, {-40, -45}}));
+      Line(points = {{-56, 91}, {-56, 0}}));
+    connect(seilrolle1.connector1, generische_Rolle2.Seil_rechts) annotation(
+      Line(points = {{66, 76}, {-24, 76}, {-24, 0}, {-24, 0}}));
   end Bsp_generisch;
 
   model Test_generisch
