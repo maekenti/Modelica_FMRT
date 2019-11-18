@@ -175,16 +175,14 @@ package Flaschenzug_Bibliothek
   Flaschenzug_Bibliothek.Kraft_Weg_Connector F_s_Decke annotation(
       Placement(visible = true, transformation(origin = {16, 426}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {12, 448}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   parameter Real n = 4;
-    Real Reibung = 1;
+    Real Reibung = 0.98;
     SI.Velocity v(start =0);
     SI.Acceleration a(start=0);
   equation
- F_s_Masse.F = F_s_Motor.F*(n+1);
-//*(Reibung^n);
+ F_s_Masse.F = F_s_Motor.F*(n+1)*(Reibung^n);
     F_s_Masse.s * (n + 1) = F_s_Motor.s;
     F_s_Decke.s = 0;
-    F_s_Decke.F = n*F_s_Motor.F;
-//*(Reibung^(n+1));
+    F_s_Decke.F = n*F_s_Motor.F*(Reibung^(n+1));
     v = der(F_s_Masse.s);
     a = der(v);
     annotation(
@@ -205,18 +203,16 @@ package Flaschenzug_Bibliothek
     Flaschenzug_Bibliothek.Kraft_Weg_Connector F_s_Masse annotation(
       Placement(visible = true, transformation(origin = {2, -118}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {53, -223}, extent = {{-7, -7}, {7, 7}}, rotation = 0)));
     parameter Real n = 4;
-    Real Reibung = 1;
+    Real Reibung = 0.98;
     SI.Velocity v(start =0);
     SI.Acceleration a(start=0);
    // SI.Length s(start =0);
   equation
 //s = F_s_Masse.s;
-    F_s_Masse.F = F_s_Motor.F * n;
-//*(Reibung^n);
+    F_s_Masse.F = F_s_Motor.F * n*(Reibung^n);
     F_s_Masse.s * n = F_s_Motor.s;
     F_s_Decke.s = 0;
-    -F_s_Decke.F = F_s_Motor.F +F_s_Masse.F;
-//*(Reibung^(n+1));
+    -F_s_Decke.F = F_s_Motor.F +F_s_Masse.F*(Reibung^(n+1));
     v = der(F_s_Masse.s);
     a = der(v);
     annotation(
