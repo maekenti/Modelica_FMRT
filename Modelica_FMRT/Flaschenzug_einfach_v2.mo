@@ -96,8 +96,8 @@ package Flaschenzug_Bibliothek
       Icon(graphics = {Rectangle(fillColor = {144, 144, 144}, fillPattern = FillPattern.Solid, extent = {{-80, 70}, {60, -70}}), Rectangle(origin = {70, 51}, fillColor = {104, 104, 104}, fillPattern = FillPattern.HorizontalCylinder, extent = {{-10, 9}, {10, -11}}), Rectangle(origin = {70, -49}, fillColor = {104, 104, 104}, fillPattern = FillPattern.HorizontalCylinder, extent = {{-10, 9}, {10, -11}}), Polygon(origin = {-13, -12}, fillColor = {255, 255, 0}, fillPattern = FillPattern.Solid, points = {{3, 56}, {-19, 6}, {3, 6}, {3, -30}, {27, 20}, {3, 20}, {3, 56}, {3, 56}})}, coordinateSystem(initialScale = 0.1)));
   end Spannungsquelle;
 
-  model Universalmotor
-    Flaschenzug_Bibliothek.Winkel_Moment_Connector winkel_Moment_Connector1 annotation(
+  model Einphasen_Gleichstrommotor
+  Flaschenzug_Bibliothek.Winkel_Moment_Connector winkel_Moment_Connector1 annotation(
       Placement(visible = true, transformation(origin = {42, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {31, 3}, extent = {{-7, -7}, {7, 7}}, rotation = 0)));
     Flaschenzug_Bibliothek.Spannung_Strom_Connector spannung_Strom_Connector1 annotation(
       Placement(visible = true, transformation(origin = {-40, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {-56, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
@@ -112,10 +112,6 @@ package Flaschenzug_Bibliothek
     // Ankerinduktivitaet (kein Wert bekannt)
     constant SI.ElectricalTorqueConstant kt = 0.1;
     // Drehmomentkonstante
-    constant SI.Resistance Rfw = 0;
-    // Feldwicklungswiderstand (kein Wert bekannt)
-    constant SI.Inductance Lfw = 0;
-    // Feldwicklungsinduktion (kein Wert bekannt)
     constant Real cf(unit = "N.m.s") = 0.0025;
     // Reibungsverlustkonstante
     constant Real cv(unit = "N.m.s2") = 0.000104;
@@ -124,12 +120,10 @@ package Flaschenzug_Bibliothek
     // Massentraegheit gesamt (geschaetzter Wert, Vollzylinder mit Masse 1 kg und r = 0.1 m) http://www.hv-engineering.de/pdf/pdf_anleitungen/TechnischeAnleitungNr7.pdf
     SI.Voltage Ua;
     // Ankerspannung
+    SI.Voltage Ug;
+    // Luftspalt-Spannung
     SI.ElectricCurrent Ia;
     // Ankerstrom
-    SI.Voltage Ufw;
-    // Felwicklungsspannung
-    SI.ElectricCurrent Ifw;
-    // Felwicklungsstrom
     SI.AngularFrequency om;
     // Winkelgeschwindigkeit
     SI.Frequency n;
@@ -142,20 +136,17 @@ package Flaschenzug_Bibliothek
     // Lastmoment
     parameter Boolean Modus = true;
   equation
- if Modus then
-      spannung_Strom_Connector1.U = Ua + Ufw;
-// Reihenschluss
-      Ua = 2 * Ub + Ra * Ia + La * der(Ia) + kt * om;
-      Ufw = Rfw * Ifw + Lfw * der(Ifw);
+    if Modus then
+      spannung_Strom_Connector1.U = Ua;
+      Ug = kt * om;
+      Ua = 2 * Ub + Ra * Ia + La * der(Ia) + Ug;
       kt * Ia = Jtot * der(om) + Mf + Mv + Ml;
     else
+      Ug = 0;
       Ua = 0;
-      Ufw = 0;
       om = 0;
       Ia = 0;
     end if;
-    Ifw = Ia;
-// Reihenschluss
     Ia = spannung_Strom_Connector1.I;
     Mf = cf * n;
     Mv = sign(n) * cv * n ^ 2;
@@ -164,7 +155,7 @@ package Flaschenzug_Bibliothek
     der(winkel_Moment_Connector1.phi) = om;
     annotation(
       Icon(graphics = {Rectangle(origin = {20, 3}, lineColor = {145, 145, 145}, fillColor = {253, 253, 253}, fillPattern = FillPattern.HorizontalCylinder, extent = {{-6, 3}, {10, -5}}), Rectangle(origin = {-14, 39}, fillPattern = FillPattern.Solid, extent = {{-20, 21}, {14, -87}}), Ellipse(origin = {12, 8}, rotation = 270, lineColor = {179, 179, 179}, fillColor = {147, 147, 147}, fillPattern = FillPattern.HorizontalCylinder, extent = {{-52, 4}, {56, -32}}, endAngle = 180), Ellipse(origin = {-50, -10}, rotation = 90, lineColor = {179, 179, 179}, fillColor = {147, 147, 147}, fillPattern = FillPattern.HorizontalCylinder, extent = {{-38, 2}, {70, -38}}, endAngle = 180)}, coordinateSystem(initialScale = 0.1)));
-  end Universalmotor;
+  end Einphasen_Gleichstrommotor;
 
   model Flaschenzug_Zugrichtung_oben
    import SI = Modelica.SIunits;
@@ -223,11 +214,9 @@ package Flaschenzug_Bibliothek
   end Flaschenzug_Zugrichtung_unten;
 
   model Simulation
-    Flaschenzug_Bibliothek.Universalmotor universalmotor1(Modus = true) annotation(
-      Placement(visible = true, transformation(origin = {326, -136}, extent = {{-26, -26}, {26, 26}}, rotation = 180)));
-    Flaschenzug_Bibliothek.Spannungsquelle spannungsquelle1(Richtung = true, U = 230) annotation(
+    Flaschenzug_Bibliothek.Spannungsquelle spannungsquelle1(Richtung = true, U = 48) annotation(
       Placement(visible = true, transformation(origin = {395, -143}, extent = {{-21, -21}, {21, 21}}, rotation = 0)));
-  Flaschenzug_Bibliothek.Masse masse1(m = 20)  annotation(
+  Flaschenzug_Bibliothek.Masse masse1(m = 5)  annotation(
       Placement(visible = true, transformation(origin = {31, -103}, extent = {{-47, -47}, {47, 47}}, rotation = 0)));
  Flaschenzug_Bibliothek.Flaschenzug_Zugrichtung_oben flaschenzug_Zugrichtung_oben1 annotation(
       Placement(visible = true, transformation(origin = {-84, -22}, extent = {{-40, -40}, {60, 100}}, rotation = 0)));
@@ -235,15 +224,17 @@ package Flaschenzug_Bibliothek
       Placement(visible = true, transformation(origin = {-50, 78}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
  Flaschenzug_Bibliothek.Seilrolle seilrolle1 annotation(
       Placement(visible = true, transformation(origin = {234, -108}, extent = {{-60, -60}, {60, 60}}, rotation = 0)));
+ Flaschenzug_Bibliothek.Einphasen_Gleichstrommotor einphasen_Gleichstrommotor1 annotation(
+      Placement(visible = true, transformation(origin = {344, -54}, extent = {{38, -38}, {-38, 38}}, rotation = 0)));
   equation
-    connect(seilrolle1.Winkel_Moment_Connector1, universalmotor1.winkel_Moment_Connector1) annotation(
-      Line(points = {{286, -96}, {318, -96}, {318, -136}, {318, -136}}));
+    connect(einphasen_Gleichstrommotor1.spannung_Strom_Connector1, spannungsquelle1.spannung_Strom_Connector1) annotation(
+      Line(points = {{366, -54}, {410, -54}, {410, -142}, {410, -142}}));
+    connect(seilrolle1.Winkel_Moment_Connector1, einphasen_Gleichstrommotor1.winkel_Moment_Connector1) annotation(
+      Line(points = {{286, -96}, {330, -96}, {330, -52}, {332, -52}}));
     connect(flaschenzug_Zugrichtung_oben1.F_s_Motor, seilrolle1.F_s_Flaschenzug) annotation(
       Line(points = {{-72, -32}, {236, -32}, {236, -74}, {236, -74}}));
     connect(flaschenzug_Zugrichtung_oben1.F_s_Decke, fixpunkt1.F_s_Connector) annotation(
       Line(points = {{-82, 68}, {-50, 68}, {-50, 84}}));
-    connect(universalmotor1.spannung_Strom_Connector1, spannungsquelle1.spannung_Strom_Connector1) annotation(
-      Line(points = {{341, -136}, {384.5, -136}, {384.5, -142}, {410, -142}}));
     connect(masse1.F_s_Connector, flaschenzug_Zugrichtung_oben1.F_s_Masse) annotation(
       Line(points = {{32, -68}, {-82, -68}, {-82, -52}, {-82, -52}}));
     annotation(
