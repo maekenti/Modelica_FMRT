@@ -66,12 +66,12 @@ package Flaschenzug_Bibliothek
     Flaschenzug_Bibliothek.Winkel_Moment_Connector Winkel_Moment_Connector1 annotation(
       Placement(visible = true, transformation(origin = {66, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {88, 20}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
     import SI = Modelica.SIunits;
-    parameter SI.Length r = 0.5;
+     SI.Length r = 0.5;
     // Rollenradius
     SI.AngularVelocity om;
     // Winkelgeschwindigkeit Rolle
     SI.Velocity v;
-    parameter Boolean Richtung = true;
+    //parameter Boolean Richtung = true;
     // Geschwingkeit Seil
   initial equation
     Winkel_Moment_Connector1.phi = 0;
@@ -219,25 +219,25 @@ package Flaschenzug_Bibliothek
   end Flaschenzug_Zugrichtung_unten;
 
   model Simulation
-    Flaschenzug_Bibliothek.Spannungsquelle spannungsquelle1(Richtung = true, U = 48) annotation(
-      Placement(visible = true, transformation(origin = {395, -143}, extent = {{-21, -21}, {21, 21}}, rotation = 0)));
   Flaschenzug_Bibliothek.Masse masse1(m = 5)  annotation(
       Placement(visible = true, transformation(origin = {31, -103}, extent = {{-47, -47}, {47, 47}}, rotation = 0)));
  Flaschenzug_Bibliothek.Flaschenzug_Zugrichtung_oben flaschenzug_Zugrichtung_oben1 annotation(
       Placement(visible = true, transformation(origin = {-84, -22}, extent = {{-40, -40}, {60, 100}}, rotation = 0)));
  Flaschenzug_Bibliothek.Fixpunkt fixpunkt1 annotation(
       Placement(visible = true, transformation(origin = {-50, 78}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
- Flaschenzug_Bibliothek.Seilrolle seilrolle1 annotation(
-      Placement(visible = true, transformation(origin = {234, -108}, extent = {{-60, -60}, {60, 60}}, rotation = 0)));
  Flaschenzug_Bibliothek.Einphasen_Gleichstrommotor einphasen_Gleichstrommotor1 annotation(
       Placement(visible = true, transformation(origin = {344, -54}, extent = {{38, -38}, {-38, 38}}, rotation = 0)));
+ Flaschenzug_Bibliothek.Spannungsquelle spannungsquelle1(Richtung = false)  annotation(
+      Placement(visible = true, transformation(origin = {411, -115}, extent = {{-29, -29}, {29, 29}}, rotation = 0)));
+ Flaschenzug_Bibliothek.Seilrolle seilrolle1 annotation(
+      Placement(visible = true, transformation(origin = {159, 13}, extent = {{-69, -69}, {69, 69}}, rotation = 0)));
   equation
+    connect(seilrolle1.F_s_Flaschenzug, flaschenzug_Zugrichtung_oben1.F_s_Motor) annotation(
+      Line(points = {{160, 54}, {-70, 54}, {-70, -32}, {-72, -32}}));
+    connect(einphasen_Gleichstrommotor1.winkel_Moment_Connector1, seilrolle1.Winkel_Moment_Connector1) annotation(
+      Line(points = {{332, -52}, {222, -52}, {222, 26}, {220, 26}}));
     connect(einphasen_Gleichstrommotor1.spannung_Strom_Connector1, spannungsquelle1.spannung_Strom_Connector1) annotation(
-      Line(points = {{366, -54}, {410, -54}, {410, -142}, {410, -142}}));
-    connect(seilrolle1.Winkel_Moment_Connector1, einphasen_Gleichstrommotor1.winkel_Moment_Connector1) annotation(
-      Line(points = {{286, -96}, {330, -96}, {330, -52}, {332, -52}}));
-    connect(flaschenzug_Zugrichtung_oben1.F_s_Motor, seilrolle1.F_s_Flaschenzug) annotation(
-      Line(points = {{-72, -32}, {236, -32}, {236, -74}, {236, -74}}));
+      Line(points = {{366, -54}, {432, -54}, {432, -114}, {431, -114}}));
     connect(flaschenzug_Zugrichtung_oben1.F_s_Decke, fixpunkt1.F_s_Connector) annotation(
       Line(points = {{-82, 68}, {-50, 68}, {-50, 84}}));
     connect(masse1.F_s_Connector, flaschenzug_Zugrichtung_oben1.F_s_Masse) annotation(

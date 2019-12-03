@@ -1,17 +1,19 @@
-Bestandteile die Vorhanden sein müssen:
-				Masse
-				Fixpunkt
-				Deckenrolle
-				Motor
+Bestandteile die Vorhanden sein  müssen inder Simulation:
+	Motor
+	Spannungsquelle
+	Seilwinde
+	Fixpunkt
+	Masse
+	Rollensysten(Zug nach oben oder zug nach unten)
 
-Weitere Rollen sind auf Wunsch hinzuzufügen, dabei muss auf die Konnektionspunkte geachtet werden und die Rollen mit einander zu verbinden.
-Beispiel bei 2 Rollen muss Decken_Rolle_4c und Massen_Rolle_3c verwendet werden.
-Bei 4 Rollen: Massen_Rolle_4c, Decken_Rolle_4c, Rolle_Mitte_Oben_4c und Rolle_Mitte_unten_3c
+Parameter die verändert werden können:
+	Masse
+	Spannung
+	Rollenanzahl
+	Modus (An-true/Aus-false)
+	Richtung (Hoch-true/ Runter-false)
 
-Die Rollenanzahl ist bei der Deckenrolle und falls vorhanden bei der Massenrolle zu parametrieren. Das Gewicht der Masse bei der Masse und die Drehrichtung sowie den Modus(An/Aus).
-Bei letzteren bedeutet True  An bzw Anheben der Masse und False Aus bzw. Senken der Mass.
+Zu beginn alle Komponenten in das Feld ziehen und richtig miteinanser Verbinden (Konnektor Form und Farbe beachten).
+Passende WErte für die Simulation eingeben.
 
-Wichtig ist das die Deckenrolle immer nur an der Decke/ dem Fixpunkt angebracht wird und die Massen_Rolle an der Masse.
-
-Die Geschwindigkeit des Flaschenzugs ist konstant, kann aber im Quellcode geändert werden.
-
+Ein Beispile ist unter Simulation iin der Datei Flaschenzug_einfach_v2.mo zu finden.
