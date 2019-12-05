@@ -1,19 +1,20 @@
-Bestandteile die Vorhanden sein  müssen inder Simulation:
-	Motor
-	Spannungsquelle
-	Seilwinde
-	Fixpunkt
+
+Zu Beginn müssen alle nötigen Bestandteile in die Oberfläche reingezogen werden:
+
+Bestandteile, die vorhanden sein müssen in der Simulation sind:
+	Motor - Spannungsquelle - Seilwinde
 	Masse
-	Rollensysten(Zug nach oben oder zug nach unten)
+	Rollensysten
 
-Parameter die verändert werden können:
-	Masse
-	Spannung
-	Rollenanzahl
-	Modus (An-true/Aus-false)
-	Richtung (Hoch-true/ Runter-false)
+Im nächsten Schritt müssen die Komponenten richtig miteinander verbunden werden. 
+Die zusammengehörigen Konnektoren sind farblich, geometrisch oder/oder symbolisch gekennzeichnet.
 
-Zu beginn alle Komponenten in das Feld ziehen und richtig miteinanser Verbinden (Konnektor Form und Farbe beachten).
-Passende WErte für die Simulation eingeben.
+Zu letzt können folgende Parameter angepasst werden:
+	Masse -> Gewicht
+	Spannungsquelle -> Spannung
+	Rollensystem -> Rollenanzahl
+	Motor -> Modus (An-true/Aus-false)
+	Spannungquelle -> Richtung (Hoch-true/ Runter-false)
 
-Ein Beispile ist unter Simulation iin der Datei Flaschenzug_einfach_v2.mo zu finden.
+Nun d´kann die Simulation gestartet werden.
+
