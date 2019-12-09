@@ -26,14 +26,14 @@ package Flaschenzug_Bibliothek
       Documentation(info = "<html><head></head><body>Kraft als Flussgröße<div>Strecke als Potenzialgröße</div></body></html>"));
   end Kraft_Weg_Connector;
 
-  model Masse
+  model Masse "Für die Masse nur positive Werte eingeben.
+    Bei Eingabe von einer größerer Werte, muss eventuell die Rollenanzahl angepasst werden."
     import SI = Modelica.SIunits;
     Flaschenzug_Bibliothek.Kraft_Weg_Connector F_s_Connector annotation(
       Placement(visible = true, transformation(origin = {2, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {-1, 61}, extent = {{-21, -21}, {21, 21}}, rotation = 0)));
     constant Real g = Modelica.Constants.g_n;
-    parameter SI.Mass m = 10;
-    SI.Force Fg;
-    //Gewichtskraft
+    parameter SI.Mass m = 10 "Masse";
+    SI.Force Fg "Gewichtskraft";
     SI.Velocity v(start = 0);
     //Geschwindigkeit;
     SI.Acceleration a(start = 0);
@@ -83,19 +83,19 @@ end Fixpunkt;
       Icon(graphics = {Rectangle(extent = {{68, 54}, {68, 54}}), Rectangle(origin = {-67, -1}, fillPattern = FillPattern.Solid, extent = {{-9, 71}, {7, -71}}), Rectangle(origin = {87, 1}, fillPattern = FillPattern.Solid, extent = {{-3, 71}, {13, -71}}), Rectangle(origin = {14, -37}, fillPattern = FillPattern.Solid, extent = {{-74, -7}, {70, 11}}), Rectangle(origin = {14, 37}, fillPattern = FillPattern.Solid, extent = {{-74, -11}, {70, 7}}), Polygon(origin = {-32, 0}, fillPattern = FillPattern.Solid, points = {{-14, 26}, {4, -26}, {14, -26}, {-4, 26}, {-14, 26}}), Polygon(origin = {-14, 0}, fillPattern = FillPattern.Solid, points = {{-14, 26}, {4, -26}, {14, -26}, {-4, 26}, {-14, 26}}), Polygon(origin = {4, 0}, fillPattern = FillPattern.Solid, points = {{-14, 26}, {4, -26}, {14, -26}, {-4, 26}, {-14, 26}}), Polygon(origin = {22, 0}, fillPattern = FillPattern.Solid, points = {{-14, 26}, {4, -26}, {14, -26}, {-4, 26}, {-14, 26}}), Polygon(origin = {40, 0}, fillPattern = FillPattern.Solid, points = {{-14, 26}, {4, -26}, {14, -26}, {-4, 26}, {-14, 26}}), Polygon(origin = {58, 0}, fillPattern = FillPattern.Solid, points = {{-14, 26}, {4, -26}, {14, -26}, {-4, 26}, {-14, 26}}), Rectangle(origin = {70, 52}, fillPattern = FillPattern.Solid, extent = {{-4, -26}, {6, 34}}), Rectangle(origin = {-89, 0}, fillPattern = FillPattern.Solid, extent = {{13, -16}, {-11, 16}})}, coordinateSystem(initialScale = 0.1)));
   end Seilrolle;
 
-  model Spannungsquelle
+  model Spannungsquelle"Zugrichung: true -> nach oben; false -> nach unten "
     Flaschenzug_Bibliothek.Spannung_Strom_Connector spannung_Strom_Connector1 annotation(
       Placement(visible = true, transformation(origin = {70, 4}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {84, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
     import SI = Modelica.SIunits;
-    parameter SI.Voltage U = 48;
-    parameter Boolean Richtung = true;
+    parameter SI.Voltage U = 48"Spannung";
+    parameter Boolean Richtung = true"Zugrichtung";
   equation
     spannung_Strom_Connector1.U = if Richtung then U else -U;
     annotation(
       Icon(coordinateSystem(initialScale = 0.1), graphics = {Polygon(origin = {-15, 1}, fillPattern = FillPattern.Solid, points = {{-85, 53}, {85, 53}, {85, -53}, {73, -53}, {73, 41}, {-85, 41}, {-85, 53}}), Polygon(origin = {-21, -46}, fillPattern = FillPattern.Solid, points = {{-79, -6}, {79, -6}, {79, 6}, {-79, 6}, {-79, -6}}), Rectangle(origin = {-93, 1}, fillPattern = FillPattern.Solid, extent = {{-7, 41}, {5, -41}}), Rectangle(origin = {-63, 0}, fillPattern = FillPattern.Solid, extent = {{-17, 4}, {19, -4}}), Rectangle(origin = {33, 0}, fillPattern = FillPattern.Solid, extent = {{-19, 4}, {17, -4}}), Rectangle(origin = {32, 0}, fillPattern = FillPattern.Solid, extent = {{-4, 18}, {4, -18}}), Line(origin = {12, 4}, points = {{0, 0}, {0, 0}}), Rectangle(origin = {83, 0}, fillPattern = FillPattern.Solid, extent = {{-13, 14}, {13, -14}})}));
   end Spannungsquelle;
 
-  model Einphasen_Gleichstrommotor
+  model Einphasen_Gleichstrommotor"Im Modus kann der Betriebsstatus An(True) oder Aus(False) festgelegt werden "
   Flaschenzug_Bibliothek.Winkel_Moment_Connector winkel_Moment_Connector1 annotation(
       Placement(visible = true, transformation(origin = {42, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {91, 1}, extent = {{-7, -7}, {7, 7}}, rotation = 0)));
     Flaschenzug_Bibliothek.Spannung_Strom_Connector spannung_Strom_Connector1 annotation(
@@ -129,13 +129,11 @@ end Fixpunkt;
     // Drehzahl
     SI.Torque Mf;
     // Reibungsmoment
-    SI.Torque Mv;
-    // Ventilationsmoment
-    SI.Torque Ml;
-    // Lastmoment
-    parameter Boolean Modus = true;
-    //Real zeit;
-    //Boolean wert;
+    SI.Torque Mv"Ventilationsmoment";
+  
+    SI.Torque Ml "Lastmoment";
+    parameter Boolean Modus = true "Betriebsmodus";
+   
   equation
 //zeit = time;
 //wert = if (zeit ==5) then true else false;
@@ -160,13 +158,13 @@ end Fixpunkt;
       Icon(coordinateSystem(initialScale = 0.1), graphics = {Rectangle(origin = {-77, -1}, fillPattern = FillPattern.Solid, extent = {{-3, 51}, {3, -51}}), Rectangle(extent = {{80, 50}, {80, 50}}), Rectangle(extent = {{80, 50}, {80, 50}}), Rectangle(extent = {{80, -50}, {80, -50}}), Rectangle(extent = {{-12, 48}, {-12, 48}}), Rectangle(origin = {32, -3}, fillPattern = FillPattern.Solid, extent = {{42, 53}, {48, -49}}), Rectangle(origin = {0, 67}, fillPattern = FillPattern.Solid, extent = {{-60, 3}, {60, -3}}),  Rectangle(origin = {0, -67}, fillPattern = FillPattern.Solid, extent = {{-60, 3}, {60, -3}}),  Polygon(origin = {-70, -61}, fillPattern = FillPattern.Solid, points = {{-10, 9}, {10, -9}, {10, -3}, {-4, 9}, {-4, 9}, {-10, 9}}), Polygon(origin = {70, -61}, fillPattern = FillPattern.Solid, points = {{-10, -3}, {4, 9}, {10, 9}, {-10, -9}, {-10, -3}}), Polygon(origin = {-70, 60}, fillPattern = FillPattern.Solid, points = {{-10, -10}, {10, 10}, {10, 4}, {-4, -10}, {-4, -10}, {-10, -10}}), Polygon(origin = {70, 60}, fillPattern = FillPattern.Solid, points = {{-10, 10}, {10, -10}, {4, -10}, {-10, 4}, {-10, 10}}), Rectangle(origin = {-55, 0}, fillPattern = FillPattern.Solid, extent = {{-5, 64}, {1, -64}}), Rectangle(origin = {59, 0}, fillPattern = FillPattern.Solid, extent = {{-5, 64}, {1, -64}}), Rectangle(origin = {21, 0}, fillPattern = FillPattern.Solid, extent = {{-5, 64}, {1, -64}}),  Rectangle(origin = {-18, 1}, fillPattern = FillPattern.Solid, extent = {{-36, 3}, {36, -5}}), Rectangle(origin = {-20, -17}, fillPattern = FillPattern.Solid, extent = {{-36, 3}, {36, -5}}), Rectangle(origin = {-18, 19}, fillPattern = FillPattern.Solid, extent = {{-36, 3}, {36, -5}}), Rectangle(origin = {-18, -33}, fillPattern = FillPattern.Solid, extent = {{-36, 3}, {36, -5}}),  Rectangle(origin = {-18, 35}, fillPattern = FillPattern.Solid, extent = {{-36, 3}, {36, -5}}), Rectangle(origin = {-18, 47}, fillPattern = FillPattern.Solid, extent = {{-36, 3}, {36, -5}}), Rectangle(origin = {-18, -45}, fillPattern = FillPattern.Solid, extent = {{-36, 3}, {36, -5}}), Rectangle(origin = {-18, 59}, fillPattern = FillPattern.Solid, extent = {{-36, 3}, {36, -5}}), Rectangle(origin = {-18, -57}, fillPattern = FillPattern.Solid, extent = {{-36, 3}, {36, -5}}), Rectangle(origin = {90, 0}, fillPattern = FillPattern.Solid, extent = {{-10, 12}, {10, -12}}), Polygon(origin = {39, -3}, fillColor = {255, 255, 0}, fillPattern = FillPattern.Solid, points = {{3, 37}, {-9, 1}, {-1, 1}, {-7, -31}, {9, 7}, {-1, 7}, {3, 37}}), Polygon(origin = {-2, -82}, fillPattern = FillPattern.Solid, points = {{-70, -8}, {-52, 12}, {54, 12}, {70, -8}, {70, -12}, {-70, -12}, {-70, -8}})}));
   end Einphasen_Gleichstrommotor;
 
-  model Flaschenzug_Zugrichtung_oben
+  model Flaschenzug_Zugrichtung_oben"Hier kann die Rollenanzahl des Flaschenzugs festgelegt werden."
    import SI = Modelica.SIunits;
   Flaschenzug_Bibliothek.Kraft_Weg_Connector F_s_Motor annotation(
       Placement(visible = true, transformation(origin = {66, -72}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {62, -46}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   Flaschenzug_Bibliothek.Kraft_Weg_Connector F_s_Masse annotation(
       Placement(visible = true, transformation(origin = {12, -176}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {12, -148}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  parameter Real n = 4;
+  parameter Real n = 4" Anzahl der Rollen";
     
     SI.Velocity v(start =0);
     SI.Acceleration a(start=0);
@@ -184,13 +182,13 @@ end Fixpunkt;
   
   end Flaschenzug_Zugrichtung_oben;
 
-  model Flaschenzug_Zugrichtung_unten
+  model Flaschenzug_Zugrichtung_unten"Hier kann die Rollenanzahl des Flaschenzugs festgelegt werden."
     import SI = Modelica.SIunits;
     Flaschenzug_Bibliothek.Kraft_Weg_Connector F_s_Motor annotation(
       Placement(visible = true, transformation(origin = {-44, 364}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {6, 258}, extent = {{-8, -8}, {8, 8}}, rotation = 0)));
     Flaschenzug_Bibliothek.Kraft_Weg_Connector F_s_Masse annotation(
       Placement(visible = true, transformation(origin = {2, -118}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {53, -223}, extent = {{-7, -7}, {7, 7}}, rotation = 0)));
-    parameter Real n = 4;
+    parameter Real n = 4"Anzahl der Rollen";
    
     SI.Velocity v(start =0);
     SI.Acceleration a(start=0);
