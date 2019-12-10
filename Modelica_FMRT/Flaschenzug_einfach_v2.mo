@@ -4,7 +4,8 @@ package Flaschenzug_Bibliothek
     SI.Angle phi;
     flow SI.Torque M;
     annotation(
-      Icon(graphics = {Ellipse(origin = {-1, 4}, fillColor = {37, 150, 225}, fillPattern = FillPattern.Solid, extent = {{101, 96}, {-99, -104}}, endAngle = 360), Text(origin = {42, -17}, extent = {{-154, 69}, {70, -27}}, textString = "W&M")}, coordinateSystem(initialScale = 0.1)));
+      Icon(graphics = {Ellipse(origin = {-1, 4}, fillColor = {37, 150, 225}, fillPattern = FillPattern.Solid, extent = {{101, 96}, {-99, -104}}, endAngle = 360), Text(origin = {42, -17}, extent = {{-154, 69}, {70, -27}}, textString = "W&M")}, coordinateSystem(initialScale = 0.1)),
+      Documentation(info = "<html><head></head><body>Dieser Konnektor hat die Flussgröße Moment und die Potenzialgröße Winkel.</body></html>"));
   end Winkel_Moment_Connector;
 
   connector Spannung_Strom_Connector
@@ -12,7 +13,8 @@ package Flaschenzug_Bibliothek
       SI.Power U;
     SI.Current I;
     annotation(
-      Icon(coordinateSystem(initialScale = 0.1), graphics = {Rectangle(fillColor = {121, 193, 66}, fillPattern = FillPattern.Solid, extent = {{-100, 100}, {100, -100}}), Text(origin = {-3, 11}, extent = {{-189, 63}, {189, -63}}, textString = "U&I")}));
+      Icon(coordinateSystem(initialScale = 0.1), graphics = {Rectangle(fillColor = {121, 193, 66}, fillPattern = FillPattern.Solid, extent = {{-100, 100}, {100, -100}}), Text(origin = {-3, 11}, extent = {{-189, 63}, {189, -63}}, textString = "U&I")}),
+      Documentation(info = "<html><head></head><body>Dieser Konnektor hat die Flussgröße Strom und die Potenzialgröße Spannung.</body></html>"));
   end Spannung_Strom_Connector;
 
   connector Kraft_Weg_Connector
@@ -23,22 +25,19 @@ package Flaschenzug_Bibliothek
     //Streck;
     annotation(
       Icon(coordinateSystem(initialScale = 0.1), graphics = {Polygon(fillColor = {200, 159, 34}, fillPattern = FillPattern.Solid, points = {{0, 100}, {0, 100}, {-100, 0}, {-80, -100}, {80, -100}, {100, 0}, {0, 100}}), Text(origin = {48, -23}, extent = {{-208, 59}, {110, -45}}, textString = "F&s")}),
-      Documentation(info = "<html><head></head><body>Kraft als Flussgröße<div>Strecke als Potenzialgröße</div></body></html>"));
+      Documentation(info = "<html><head></head><body>Dieser Konnektor hat die Flussgröße Kraft und die Potenzialgröße Weg.</body></html>"));
   end Kraft_Weg_Connector;
 
   model Masse "Für die Masse nur positive Werte eingeben.
-    Bei Eingabe von einer größerer Werte, muss eventuell die Rollenanzahl angepasst werden."
+    Bei großer Änderung des Wertes, muss eventuell die Rollenanzahl angepasst werden."
     import SI = Modelica.SIunits;
     Flaschenzug_Bibliothek.Kraft_Weg_Connector F_s_Connector annotation(
       Placement(visible = true, transformation(origin = {2, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {-1, 61}, extent = {{-21, -21}, {21, 21}}, rotation = 0)));
     constant Real g = Modelica.Constants.g_n;
     parameter SI.Mass m = 10 "Masse";
     SI.Force Fg "Gewichtskraft";
-    SI.Velocity v(start = 0);
-    //Geschwindigkeit;
-    SI.Acceleration a(start = 0);
-    //Beschleunigung;
-    //SI.Length s(start = 0);
+    SI.Velocity v(start = 0)"Geschwindigkeit";
+    SI.Acceleration a(start = 0)"Beschleunigung";
   equation
     Fg =( m * g + m * a);
     F_s_Connector.F = -Fg;
@@ -48,7 +47,7 @@ package Flaschenzug_Bibliothek
     annotation(
       Diagram,
       Icon(coordinateSystem(initialScale = 0.1), graphics = {Polygon(origin = {0, -55}, fillPattern = FillPattern.Solid, points = {{-100, -45}, {-58, 45}, {58, 45}, {100, -45}, {98, -45}, {-100, -45}}), Ellipse(origin = {7, 3}, fillPattern = FillPattern.Solid, extent = {{-39, 37}, {23, -33}}, endAngle = 360), Ellipse(origin = {5, 5}, fillColor = {255, 255, 255}, fillPattern = FillPattern.Solid, extent = {{-25, 23}, {11, -29}}, endAngle = 360), Rectangle(origin = {4, -23}, fillPattern = FillPattern.Solid, extent = {{-42, 13}, {42, -13}})}),
-      Documentation(info = "<html><head></head><body>Fg ist die Gewichtskraft, anhängig von der Masse<div><br><div>Die Kraft am Konnektor ist gegenläufig (Kräfteausgleich)</div></div><div><br></div><div>Fg = - connector1.F</div></body></html>"));
+      Documentation(info = "<html><head></head><body><p>Fg ist die Gewichtskraft und abhängig von der Masse.</p><p>Kräfte in Richtung Erde sind positiv definiert.</p><p>Und auf Grund vom Kräftegleichgewicht ist die Kraft die am Konektor wirkt negativ definiert.</p><p><br></p><div><br></div></body></html>"));
   end Masse;
 
 model Fixpunkt
@@ -65,25 +64,25 @@ end Fixpunkt;
     Flaschenzug_Bibliothek.Winkel_Moment_Connector Winkel_Moment_Connector1 annotation(
       Placement(visible = true, transformation(origin = {66, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {-90, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
     import SI = Modelica.SIunits;
-     SI.Length r = 0.5;
-    // Rollenradius
-    SI.AngularVelocity om;
-    // Winkelgeschwindigkeit Rolle
-    SI.Velocity v;
-    //parameter Boolean Richtung = true;
-    // Geschwingkeit Seil
+     SI.Length r = 0.5"Rollenradius";
+    
+    SI.AngularVelocity om"Winkelgeschwindigkeit";
+   
+    SI.Velocity v "Geschwindigkeit";
+    
   initial equation
-    Winkel_Moment_Connector1.phi = 0;
+    Winkel_Moment_Connector1.phi = 0"Winkel";
   equation
     Winkel_Moment_Connector1.M = F_s_Flaschenzug.F * r;
     v = om * r;
     der(Winkel_Moment_Connector1.phi) = om;
     der(F_s_Flaschenzug.s) = v;
     annotation(
-      Icon(graphics = {Rectangle(extent = {{68, 54}, {68, 54}}), Rectangle(origin = {-67, -1}, fillPattern = FillPattern.Solid, extent = {{-9, 71}, {7, -71}}), Rectangle(origin = {87, 1}, fillPattern = FillPattern.Solid, extent = {{-3, 71}, {13, -71}}), Rectangle(origin = {14, -37}, fillPattern = FillPattern.Solid, extent = {{-74, -7}, {70, 11}}), Rectangle(origin = {14, 37}, fillPattern = FillPattern.Solid, extent = {{-74, -11}, {70, 7}}), Polygon(origin = {-32, 0}, fillPattern = FillPattern.Solid, points = {{-14, 26}, {4, -26}, {14, -26}, {-4, 26}, {-14, 26}}), Polygon(origin = {-14, 0}, fillPattern = FillPattern.Solid, points = {{-14, 26}, {4, -26}, {14, -26}, {-4, 26}, {-14, 26}}), Polygon(origin = {4, 0}, fillPattern = FillPattern.Solid, points = {{-14, 26}, {4, -26}, {14, -26}, {-4, 26}, {-14, 26}}), Polygon(origin = {22, 0}, fillPattern = FillPattern.Solid, points = {{-14, 26}, {4, -26}, {14, -26}, {-4, 26}, {-14, 26}}), Polygon(origin = {40, 0}, fillPattern = FillPattern.Solid, points = {{-14, 26}, {4, -26}, {14, -26}, {-4, 26}, {-14, 26}}), Polygon(origin = {58, 0}, fillPattern = FillPattern.Solid, points = {{-14, 26}, {4, -26}, {14, -26}, {-4, 26}, {-14, 26}}), Rectangle(origin = {70, 52}, fillPattern = FillPattern.Solid, extent = {{-4, -26}, {6, 34}}), Rectangle(origin = {-89, 0}, fillPattern = FillPattern.Solid, extent = {{13, -16}, {-11, 16}})}, coordinateSystem(initialScale = 0.1)));
+      Icon(graphics = {Rectangle(extent = {{68, 54}, {68, 54}}), Rectangle(origin = {-67, -1}, fillPattern = FillPattern.Solid, extent = {{-9, 71}, {7, -71}}), Rectangle(origin = {87, 1}, fillPattern = FillPattern.Solid, extent = {{-3, 71}, {13, -71}}), Rectangle(origin = {14, -37}, fillPattern = FillPattern.Solid, extent = {{-74, -7}, {70, 11}}), Rectangle(origin = {14, 37}, fillPattern = FillPattern.Solid, extent = {{-74, -11}, {70, 7}}), Polygon(origin = {-32, 0}, fillPattern = FillPattern.Solid, points = {{-14, 26}, {4, -26}, {14, -26}, {-4, 26}, {-14, 26}}), Polygon(origin = {-14, 0}, fillPattern = FillPattern.Solid, points = {{-14, 26}, {4, -26}, {14, -26}, {-4, 26}, {-14, 26}}), Polygon(origin = {4, 0}, fillPattern = FillPattern.Solid, points = {{-14, 26}, {4, -26}, {14, -26}, {-4, 26}, {-14, 26}}), Polygon(origin = {22, 0}, fillPattern = FillPattern.Solid, points = {{-14, 26}, {4, -26}, {14, -26}, {-4, 26}, {-14, 26}}), Polygon(origin = {40, 0}, fillPattern = FillPattern.Solid, points = {{-14, 26}, {4, -26}, {14, -26}, {-4, 26}, {-14, 26}}), Polygon(origin = {58, 0}, fillPattern = FillPattern.Solid, points = {{-14, 26}, {4, -26}, {14, -26}, {-4, 26}, {-14, 26}}), Rectangle(origin = {70, 52}, fillPattern = FillPattern.Solid, extent = {{-4, -26}, {6, 34}}), Rectangle(origin = {-89, 0}, fillPattern = FillPattern.Solid, extent = {{13, -16}, {-11, 16}})}, coordinateSystem(initialScale = 0.1)),
+      Documentation(info = "<html><head></head><body>Die Seilrolle hat den vordefinierten Radius von 0.5m.<div><br></div><div>Mit der nebenstehenden Berechnung kann mit dem Winkel die Strecke berechnet werden, bzw. andersrum.</div><div>Durch Ableitung der Potenzialgrößen wir die Geschwindigkeit bereichnet.</div><div>Mit Hilfe des Radius der Seilrolle kann dann die Umrechnung von Geschwindigkeit &nbsp;und Winkelgeschwindigkeit stattfinden.</div></body></html>"));
   end Seilrolle;
 
-  model Spannungsquelle"Zugrichung: true -> nach oben; false -> nach unten "
+  model Spannungsquelle"Nur positive Spannungwerte eintragen"
     Flaschenzug_Bibliothek.Spannung_Strom_Connector spannung_Strom_Connector1 annotation(
       Placement(visible = true, transformation(origin = {70, 4}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {84, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
     import SI = Modelica.SIunits;
@@ -92,10 +91,11 @@ end Fixpunkt;
   equation
     spannung_Strom_Connector1.U = if Richtung then U else -U;
     annotation(
-      Icon(coordinateSystem(initialScale = 0.1), graphics = {Polygon(origin = {-15, 1}, fillPattern = FillPattern.Solid, points = {{-85, 53}, {85, 53}, {85, -53}, {73, -53}, {73, 41}, {-85, 41}, {-85, 53}}), Polygon(origin = {-21, -46}, fillPattern = FillPattern.Solid, points = {{-79, -6}, {79, -6}, {79, 6}, {-79, 6}, {-79, -6}}), Rectangle(origin = {-93, 1}, fillPattern = FillPattern.Solid, extent = {{-7, 41}, {5, -41}}), Rectangle(origin = {-63, 0}, fillPattern = FillPattern.Solid, extent = {{-17, 4}, {19, -4}}), Rectangle(origin = {33, 0}, fillPattern = FillPattern.Solid, extent = {{-19, 4}, {17, -4}}), Rectangle(origin = {32, 0}, fillPattern = FillPattern.Solid, extent = {{-4, 18}, {4, -18}}), Line(origin = {12, 4}, points = {{0, 0}, {0, 0}}), Rectangle(origin = {83, 0}, fillPattern = FillPattern.Solid, extent = {{-13, 14}, {13, -14}})}));
+      Icon(coordinateSystem(initialScale = 0.1), graphics = {Polygon(origin = {-15, 1}, fillPattern = FillPattern.Solid, points = {{-85, 53}, {85, 53}, {85, -53}, {73, -53}, {73, 41}, {-85, 41}, {-85, 53}}), Polygon(origin = {-21, -46}, fillPattern = FillPattern.Solid, points = {{-79, -6}, {79, -6}, {79, 6}, {-79, 6}, {-79, -6}}), Rectangle(origin = {-93, 1}, fillPattern = FillPattern.Solid, extent = {{-7, 41}, {5, -41}}), Rectangle(origin = {-63, 0}, fillPattern = FillPattern.Solid, extent = {{-17, 4}, {19, -4}}), Rectangle(origin = {33, 0}, fillPattern = FillPattern.Solid, extent = {{-19, 4}, {17, -4}}), Rectangle(origin = {32, 0}, fillPattern = FillPattern.Solid, extent = {{-4, 18}, {4, -18}}), Line(origin = {12, 4}, points = {{0, 0}, {0, 0}}), Rectangle(origin = {83, 0}, fillPattern = FillPattern.Solid, extent = {{-13, 14}, {13, -14}})}),
+      Documentation(info = "<html><head></head><body>Der Parameter Spannung kann erhöht und erniedrigt werden, sollte aber im positiven Bereich bleiben. Wird ein negativer Wert eingetragen ist das Drehverhalten des Seiltrommel anderherum.&nbsp;<div><br></div><div>Mit dem Parameter Richtung kann das eben erwähnte Drehverhalten geändert werden.</div><div>True bedeutet das hochziehen der Masse und False das Herunterlassen der Masse.</div><div><br></div><div><br></div></body></html>"));
   end Spannungsquelle;
 
-  model Einphasen_Gleichstrommotor"Im Modus kann der Betriebsstatus An(True) oder Aus(False) festgelegt werden "
+  model Einphasen_Gleichstrommotor"Im Modus kann der Betriebsstatus An(True) oder Aus(False) festgelegt werden. "
   Flaschenzug_Bibliothek.Winkel_Moment_Connector winkel_Moment_Connector1 annotation(
       Placement(visible = true, transformation(origin = {42, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {91, 1}, extent = {{-7, -7}, {7, 7}}, rotation = 0)));
     Flaschenzug_Bibliothek.Spannung_Strom_Connector spannung_Strom_Connector1 annotation(
@@ -103,40 +103,26 @@ end Fixpunkt;
     import SI = Modelica.SIunits;
     constant Real pi = Modelica.Constants.pi;
     // Werte aus Heidrich Skript "Seiten aus AAeA 2011-W Musterklausur fuer Studenten.pdf"
-    constant SI.Voltage Ub = 1.4;
-    // Buerstenabfallspannung
-    constant SI.Resistance Ra = 0.2;
-    // Ankerwiderstand
-    constant SI.Inductance La = 0;
-    // Ankerinduktivitaet (kein Wert bekannt)
-    constant SI.ElectricalTorqueConstant kt = 0.1;
-    // Drehmomentkonstante
-    constant Real cf(unit = "N.m.s") = 0.0025;
-    // Reibungsverlustkonstante
-    constant Real cv(unit = "N.m.s2") = 0.000104;
-    // Ventilationsverlustkonstante
-    constant SI.MomentOfInertia Jtot = 0.005;
-    // Massentraegheit gesamt (geschaetzter Wert, Vollzylinder mit Masse 1 kg und r = 0.1 m) http://www.hv-engineering.de/pdf/pdf_anleitungen/TechnischeAnleitungNr7.pdf
-    SI.Voltage Ua;
-    // Ankerspannung
-    SI.Voltage Ug;
-    // Luftspalt-Spannung
-    SI.ElectricCurrent Ia;
-    // Ankerstrom
-    SI.AngularFrequency om;
-    // Winkelgeschwindigkeit
-    SI.Frequency n;
-    // Drehzahl
-    SI.Torque Mf;
-    // Reibungsmoment
-    SI.Torque Mv"Ventilationsmoment";
-  
+    constant SI.Voltage Ub = 1.4"Buerstenabfallspannung";
+    constant SI.Resistance Ra = 0.2"Ankerwiderstand";
+    constant SI.Inductance La = 0"Ankerinduktivitaet";
+    constant SI.ElectricalTorqueConstant kt = 0.1"Drehmomentkonstante";
+    constant Real cf(unit = "N.m.s") = 0.0025"Reibungsverlustkonstante"; 
+    constant Real cv(unit = "N.m.s2") = 0.000104"Ventilationsverlustkonstante";
+    constant SI.MomentOfInertia Jtot = 0.005"Massentraegheit";
+    //  gesamt (geschaetzter Wert, Vollzylinder mit Masse 1 kg und r = 0.1 m) http://www.hv-engineering.de/pdf/pdf_anleitungen/TechnischeAnleitungNr7.pdf
+    SI.Voltage Ua"Ankerspannung";
+    SI.Voltage Ug"Luftspalt-Spannung"; 
+    SI.ElectricCurrent Ia"Ankerstrom"; 
+    SI.AngularFrequency om"Winkelgeschwindigkeit";
+    SI.Frequency n"Drehzahl";
+    SI.Torque Mf"Reibungsmoment";
+    SI.Torque Mv "Ventilationsmoment";
     SI.Torque Ml "Lastmoment";
     parameter Boolean Modus = true "Betriebsmodus";
    
   equation
-//zeit = time;
-//wert = if (zeit ==5) then true else false;
+
     if Modus then
       spannung_Strom_Connector1.U = Ua;
       Ug = kt * om;
@@ -155,7 +141,8 @@ end Fixpunkt;
     om = 2 * pi * n;
     der(winkel_Moment_Connector1.phi) = om;
     annotation(
-      Icon(coordinateSystem(initialScale = 0.1), graphics = {Rectangle(origin = {-77, -1}, fillPattern = FillPattern.Solid, extent = {{-3, 51}, {3, -51}}), Rectangle(extent = {{80, 50}, {80, 50}}), Rectangle(extent = {{80, 50}, {80, 50}}), Rectangle(extent = {{80, -50}, {80, -50}}), Rectangle(extent = {{-12, 48}, {-12, 48}}), Rectangle(origin = {32, -3}, fillPattern = FillPattern.Solid, extent = {{42, 53}, {48, -49}}), Rectangle(origin = {0, 67}, fillPattern = FillPattern.Solid, extent = {{-60, 3}, {60, -3}}),  Rectangle(origin = {0, -67}, fillPattern = FillPattern.Solid, extent = {{-60, 3}, {60, -3}}),  Polygon(origin = {-70, -61}, fillPattern = FillPattern.Solid, points = {{-10, 9}, {10, -9}, {10, -3}, {-4, 9}, {-4, 9}, {-10, 9}}), Polygon(origin = {70, -61}, fillPattern = FillPattern.Solid, points = {{-10, -3}, {4, 9}, {10, 9}, {-10, -9}, {-10, -3}}), Polygon(origin = {-70, 60}, fillPattern = FillPattern.Solid, points = {{-10, -10}, {10, 10}, {10, 4}, {-4, -10}, {-4, -10}, {-10, -10}}), Polygon(origin = {70, 60}, fillPattern = FillPattern.Solid, points = {{-10, 10}, {10, -10}, {4, -10}, {-10, 4}, {-10, 10}}), Rectangle(origin = {-55, 0}, fillPattern = FillPattern.Solid, extent = {{-5, 64}, {1, -64}}), Rectangle(origin = {59, 0}, fillPattern = FillPattern.Solid, extent = {{-5, 64}, {1, -64}}), Rectangle(origin = {21, 0}, fillPattern = FillPattern.Solid, extent = {{-5, 64}, {1, -64}}),  Rectangle(origin = {-18, 1}, fillPattern = FillPattern.Solid, extent = {{-36, 3}, {36, -5}}), Rectangle(origin = {-20, -17}, fillPattern = FillPattern.Solid, extent = {{-36, 3}, {36, -5}}), Rectangle(origin = {-18, 19}, fillPattern = FillPattern.Solid, extent = {{-36, 3}, {36, -5}}), Rectangle(origin = {-18, -33}, fillPattern = FillPattern.Solid, extent = {{-36, 3}, {36, -5}}),  Rectangle(origin = {-18, 35}, fillPattern = FillPattern.Solid, extent = {{-36, 3}, {36, -5}}), Rectangle(origin = {-18, 47}, fillPattern = FillPattern.Solid, extent = {{-36, 3}, {36, -5}}), Rectangle(origin = {-18, -45}, fillPattern = FillPattern.Solid, extent = {{-36, 3}, {36, -5}}), Rectangle(origin = {-18, 59}, fillPattern = FillPattern.Solid, extent = {{-36, 3}, {36, -5}}), Rectangle(origin = {-18, -57}, fillPattern = FillPattern.Solid, extent = {{-36, 3}, {36, -5}}), Rectangle(origin = {90, 0}, fillPattern = FillPattern.Solid, extent = {{-10, 12}, {10, -12}}), Polygon(origin = {39, -3}, fillColor = {255, 255, 0}, fillPattern = FillPattern.Solid, points = {{3, 37}, {-9, 1}, {-1, 1}, {-7, -31}, {9, 7}, {-1, 7}, {3, 37}}), Polygon(origin = {-2, -82}, fillPattern = FillPattern.Solid, points = {{-70, -8}, {-52, 12}, {54, 12}, {70, -8}, {70, -12}, {-70, -12}, {-70, -8}})}));
+      Icon(coordinateSystem(initialScale = 0.1), graphics = {Rectangle(origin = {-77, -1}, fillPattern = FillPattern.Solid, extent = {{-3, 51}, {3, -51}}), Rectangle(extent = {{80, 50}, {80, 50}}), Rectangle(extent = {{80, 50}, {80, 50}}), Rectangle(extent = {{80, -50}, {80, -50}}), Rectangle(extent = {{-12, 48}, {-12, 48}}), Rectangle(origin = {32, -3}, fillPattern = FillPattern.Solid, extent = {{42, 53}, {48, -49}}), Rectangle(origin = {0, 67}, fillPattern = FillPattern.Solid, extent = {{-60, 3}, {60, -3}}), Rectangle(origin = {0, -67}, fillPattern = FillPattern.Solid, extent = {{-60, 3}, {60, -3}}), Polygon(origin = {-70, -61}, fillPattern = FillPattern.Solid, points = {{-10, 9}, {10, -9}, {10, -3}, {-4, 9}, {-4, 9}, {-10, 9}}), Polygon(origin = {70, -61}, fillPattern = FillPattern.Solid, points = {{-10, -3}, {4, 9}, {10, 9}, {-10, -9}, {-10, -3}}), Polygon(origin = {-70, 60}, fillPattern = FillPattern.Solid, points = {{-10, -10}, {10, 10}, {10, 4}, {-4, -10}, {-4, -10}, {-10, -10}}), Polygon(origin = {70, 60}, fillPattern = FillPattern.Solid, points = {{-10, 10}, {10, -10}, {4, -10}, {-10, 4}, {-10, 10}}), Rectangle(origin = {-55, 0}, fillPattern = FillPattern.Solid, extent = {{-5, 64}, {1, -64}}), Rectangle(origin = {59, 0}, fillPattern = FillPattern.Solid, extent = {{-5, 64}, {1, -64}}), Rectangle(origin = {21, 0}, fillPattern = FillPattern.Solid, extent = {{-5, 64}, {1, -64}}), Rectangle(origin = {-18, 1}, fillPattern = FillPattern.Solid, extent = {{-36, 3}, {36, -5}}), Rectangle(origin = {-20, -17}, fillPattern = FillPattern.Solid, extent = {{-36, 3}, {36, -5}}), Rectangle(origin = {-18, 19}, fillPattern = FillPattern.Solid, extent = {{-36, 3}, {36, -5}}), Rectangle(origin = {-18, -33}, fillPattern = FillPattern.Solid, extent = {{-36, 3}, {36, -5}}), Rectangle(origin = {-18, 35}, fillPattern = FillPattern.Solid, extent = {{-36, 3}, {36, -5}}), Rectangle(origin = {-18, 47}, fillPattern = FillPattern.Solid, extent = {{-36, 3}, {36, -5}}), Rectangle(origin = {-18, -45}, fillPattern = FillPattern.Solid, extent = {{-36, 3}, {36, -5}}), Rectangle(origin = {-18, 59}, fillPattern = FillPattern.Solid, extent = {{-36, 3}, {36, -5}}), Rectangle(origin = {-18, -57}, fillPattern = FillPattern.Solid, extent = {{-36, 3}, {36, -5}}), Rectangle(origin = {90, 0}, fillPattern = FillPattern.Solid, extent = {{-10, 12}, {10, -12}}), Polygon(origin = {39, -3}, fillColor = {255, 255, 0}, fillPattern = FillPattern.Solid, points = {{3, 37}, {-9, 1}, {-1, 1}, {-7, -31}, {9, 7}, {-1, 7}, {3, 37}}), Polygon(origin = {-2, -82}, fillPattern = FillPattern.Solid, points = {{-70, -8}, {-52, 12}, {54, 12}, {70, -8}, {70, -12}, {-70, -12}, {-70, -8}})}),
+      Documentation(info = "<html><head></head><body>Hier werden notwendige Variablen und und Konstanten definiert, die für den Einpahsen Gleichstrommotor von nöten sind.<div>&nbsp;Der Parameter Modus ist für den Betriebsmodus An/Aus zuständig und mit true/false festzulegen.</div><div>Ist der Motor im Aus-Zustand, ist das System bewegungslos. Der Flaschenzug bewegt sich nur im An-Zustand.</div></body></html>"));
   end Einphasen_Gleichstrommotor;
 
   model Flaschenzug_Zugrichtung_oben"Hier kann die Rollenanzahl des Flaschenzugs festgelegt werden."
@@ -194,7 +181,7 @@ end Fixpunkt;
     SI.Acceleration a(start=0);
    // SI.Length s(start =0);
   equation
-  //s = F_s_Masse.s;
+//s = F_s_Masse.s;
     F_s_Masse.F = F_s_Motor.F * n;
     F_s_Masse.s * n = F_s_Motor.s;
     v = der(F_s_Masse.s);
