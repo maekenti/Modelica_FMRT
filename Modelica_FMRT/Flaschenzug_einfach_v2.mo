@@ -156,8 +156,8 @@ end Fixpunkt;
     SI.Velocity v(start =0);
     SI.Acceleration a(start=0);
   equation
- F_s_Masse.F = F_s_Motor.F*(n+1);
-    F_s_Masse.s * (n + 1) = F_s_Motor.s;
+    F_s_Masse.F = F_s_Motor.F * n;
+    F_s_Masse.s * n = F_s_Motor.s;
     v = der(F_s_Masse.s);
     a = der(v);
     annotation(
@@ -180,9 +180,8 @@ end Fixpunkt;
     SI.Acceleration a(start=0);
    // SI.Length s(start =0);
   equation
-//s = F_s_Masse.s;
-    F_s_Masse.F = F_s_Motor.F * n;
-    F_s_Masse.s * n = F_s_Motor.s;
+    F_s_Masse.F = F_s_Motor.F*(n+1);
+    F_s_Masse.s * (n + 1) = F_s_Motor.s;
     v = der(F_s_Masse.s);
     a = der(v);
     annotation(
