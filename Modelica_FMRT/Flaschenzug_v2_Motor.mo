@@ -29,7 +29,7 @@ package Flaschenzug
   model Masse
     import SI = Modelica.SIunits;
     Flaschenzug.Connector connector1 annotation(
-      Placement(visible = true, transformation(origin = {2, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {0, 74}, extent = {{-26, -26}, {26, 26}}, rotation = 0)));
+      Placement(visible = true, transformation(origin = {2, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {-2, 58}, extent = {{-18, -18}, {18, 18}}, rotation = 0)));
     constant Real g = Modelica.Constants.g_n;
     parameter SI.Mass m = 10;
     SI.Force Fg;
@@ -45,17 +45,17 @@ package Flaschenzug
     der(v) = a;
     annotation(
       Diagram,
-      Icon(graphics = {Polygon(origin = {0, -30}, fillColor = {75, 75, 75}, fillPattern = FillPattern.CrossDiag, points = {{0, 130}, {-100, 30}, {-80, -70}, {80, -70}, {100, 30}, {100, 30}, {0, 130}})}, coordinateSystem(initialScale = 0.1)),
+      Icon(coordinateSystem(initialScale = 0.1), graphics = {Polygon(origin = {0, -55}, fillPattern = FillPattern.Solid, points = {{-100, -45}, {-58, 45}, {58, 45}, {100, -45}, {98, -45}, {-100, -45}}), Ellipse(origin = {7, 3}, fillPattern = FillPattern.Solid, extent = {{-39, 37}, {23, -33}}, endAngle = 360), Ellipse(origin = {5, 5}, fillColor = {255, 255, 255}, fillPattern = FillPattern.Solid, extent = {{-25, 23}, {11, -29}}, endAngle = 360), Rectangle(origin = {4, -23}, fillPattern = FillPattern.Solid, extent = {{-42, 13}, {42, -13}})}),
       Documentation(info = "<html><head></head><body>Fg ist die Gewichtskraft, anhängig von der Masse<div><br><div>Die Kraft am Konnektor ist gegenläufig (Kräfteausgleich)</div></div><div><br></div><div>Fg = - connector1.F</div></body></html>"));
   end Masse;
 
   model Fixpunkt
     Flaschenzug.Connector connector1 annotation(
-      Placement(visible = true, transformation(origin = {0, 60}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {2, 56}, extent = {{-16, -16}, {16, 16}}, rotation = 0)));
+      Placement(visible = true, transformation(origin = {0, 60}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {0, -62}, extent = {{-16, -16}, {16, 16}}, rotation = 0)));
   equation
 
     annotation(
-      Icon(graphics = {Rectangle(origin = {0, 70}, fillPattern = FillPattern.Solid, extent = {{-100, 30}, {100, -10}})}, coordinateSystem(initialScale = 0.1)));
+      Icon(graphics = {Rectangle(origin = {0, 50}, fillPattern = FillPattern.Solid, extent = {{-100, 4}, {100, -10}}), Polygon(origin = {-85, 77}, fillPattern = FillPattern.Solid, points = {{-15, -23}, {15, 23}, {25, 23}, {-5, -23}, {-15, -23}, {-5, -23}, {-15, -23}}), Polygon(origin = {-45, 77}, fillPattern = FillPattern.Solid, points = {{-15, -23}, {15, 23}, {25, 23}, {-5, -23}, {-15, -23}, {-5, -23}, {-15, -23}}), Polygon(origin = {-5, 77}, fillPattern = FillPattern.Solid, points = {{-15, -23}, {15, 23}, {25, 23}, {-5, -23}, {-15, -23}, {-5, -23}, {-15, -23}}), Polygon(origin = {35, 77}, fillPattern = FillPattern.Solid, points = {{-15, -23}, {15, 23}, {25, 23}, {-5, -23}, {-15, -23}, {-5, -23}, {-15, -23}}), Polygon(origin = {75, 77}, fillPattern = FillPattern.Solid, points = {{-15, -23}, {15, 23}, {25, 23}, {-5, -23}, {-15, -23}, {-5, -23}, {-15, -23}}), Rectangle(origin = {0, 25}, fillPattern = FillPattern.Solid, extent = {{-10, 15}, {10, -15}}), Ellipse(origin = {1, -21}, fillPattern = FillPattern.Solid, extent = {{-41, 41}, {39, -39}}, endAngle = 360), Ellipse(origin = {-15, -5}, fillColor = {255, 255, 255}, fillPattern = FillPattern.Solid, extent = {{-9, 9}, {39, -39}}, endAngle = 360), Rectangle(origin = {33, 2}, lineColor = {255, 255, 255}, fillColor = {255, 255, 255}, fillPattern = FillPattern.Solid, extent = {{-23, 22}, {19, -18}}), Ellipse(origin = {31, -15}, fillPattern = FillPattern.Solid, extent = {{-7, 7}, {9, -9}}, endAngle = 360)}, coordinateSystem(initialScale = 0.1)));
   end Fixpunkt;
 
   model Deckenrolle_3c
@@ -212,9 +212,9 @@ package Flaschenzug
 
   model Seilrolle
     Flaschenzug.Connector connector1 annotation(
-      Placement(visible = true, transformation(origin = {2, 42}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {2, 58}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+      Placement(visible = true, transformation(origin = {2, 42}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {70, 90}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
     Flaschenzug.Winkel_Moment_Connector Winkel_Moment_Connector1 annotation(
-      Placement(visible = true, transformation(origin = {66, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {88, 20}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+      Placement(visible = true, transformation(origin = {66, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {-88, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
     import SI = Modelica.SIunits;
     parameter SI.Length r = 0.5;
     // Rollenradius
@@ -231,26 +231,26 @@ package Flaschenzug
     der(Winkel_Moment_Connector1.phi) = om;
     der(connector1.s) = v;
     annotation(
-      Icon(graphics = {Ellipse(origin = {-44, -36}, rotation = 180, lineColor = {255, 244, 221}, fillColor = {207, 170, 124}, fillPattern = FillPattern.VerticalCylinder, extent = {{-70, -96}, {-132, -16}}, startAngle = 270, endAngle = 90), Ellipse(origin = {-54, 21}, lineColor = {97, 97, 97}, fillColor = {135, 135, 135}, fillPattern = FillPattern.VerticalCylinder, extent = {{-12, 39}, {12, -41}}, startAngle = 90, endAngle = 270), Rectangle(origin = {-4, 27}, fillColor = {80, 80, 80}, fillPattern = FillPattern.Vertical, extent = {{-50, 29}, {60, -41}}), Rectangle(extent = {{68, 54}, {68, 54}}), Rectangle(origin = {55, 20}, lineColor = {166, 134, 99}, fillColor = {207, 170, 124}, pattern = LinePattern.None, fillPattern = FillPattern.VerticalCylinder, extent = {{-1, 40}, {3, -40}}), Rectangle(origin = {1, 52}, lineColor = {163, 133, 98}, fillColor = {207, 170, 124}, fillPattern = FillPattern.HorizontalCylinder, extent = {{-53, 4}, {53, -20}}), Rectangle(origin = {-55, 20}, lineColor = {166, 134, 99}, fillColor = {207, 170, 124}, pattern = LinePattern.None, fillPattern = FillPattern.VerticalCylinder, extent = {{-1, 40}, {3, -40}}), Rectangle(origin = {-47, -27}, fillColor = {72, 72, 72}, pattern = LinePattern.None, fillPattern = FillPattern.Solid, extent = {{-5, 13}, {3, -15}}), Rectangle(origin = {52, -28}, fillColor = {72, 72, 72}, pattern = LinePattern.None, fillPattern = FillPattern.Solid, extent = {{-6, 14}, {2, -14}}), Rectangle(origin = {-64, -42}, fillColor = {72, 72, 72}, pattern = LinePattern.None, fillPattern = FillPattern.Solid, extent = {{-20, 2}, {20, -2}}), Rectangle(origin = {65, -42}, fillColor = {72, 72, 72}, pattern = LinePattern.None, fillPattern = FillPattern.Solid, extent = {{-19, 2}, {19, -2}}), Line(origin = {2, 40}, points = {{0, 14}, {0, -8}, {0, -8}})}, coordinateSystem(initialScale = 0.1)));
+      Icon(graphics = {Rectangle(extent = {{68, 54}, {68, 54}}), Rectangle(origin = {-67, -1}, fillPattern = FillPattern.Solid, extent = {{-9, 71}, {7, -71}}), Rectangle(origin = {87, 1}, fillPattern = FillPattern.Solid, extent = {{-3, 71}, {13, -71}}), Rectangle(origin = {14, -37}, fillPattern = FillPattern.Solid, extent = {{-74, -7}, {70, 11}}), Rectangle(origin = {14, 37}, fillPattern = FillPattern.Solid, extent = {{-74, -11}, {70, 7}}), Polygon(origin = {-32, 0}, fillPattern = FillPattern.Solid, points = {{-14, 26}, {4, -26}, {14, -26}, {-4, 26}, {-14, 26}}), Polygon(origin = {-14, 0}, fillPattern = FillPattern.Solid, points = {{-14, 26}, {4, -26}, {14, -26}, {-4, 26}, {-14, 26}}), Polygon(origin = {4, 0}, fillPattern = FillPattern.Solid, points = {{-14, 26}, {4, -26}, {14, -26}, {-4, 26}, {-14, 26}}), Polygon(origin = {22, 0}, fillPattern = FillPattern.Solid, points = {{-14, 26}, {4, -26}, {14, -26}, {-4, 26}, {-14, 26}}), Polygon(origin = {40, 0}, fillPattern = FillPattern.Solid, points = {{-14, 26}, {4, -26}, {14, -26}, {-4, 26}, {-14, 26}}), Polygon(origin = {58, 0}, fillPattern = FillPattern.Solid, points = {{-14, 26}, {4, -26}, {14, -26}, {-4, 26}, {-14, 26}}), Rectangle(origin = {70, 52}, fillPattern = FillPattern.Solid, extent = {{-4, -26}, {6, 34}}), Rectangle(origin = {-89, 0}, fillPattern = FillPattern.Solid, extent = {{13, -16}, {-11, 16}})}, coordinateSystem(initialScale = 0.1)));
   end Seilrolle;
 
   model Spannungsquelle
-    Spannung_Strom_Connector spannung_Strom_Connector1 annotation(
-      Placement(visible = true, transformation(origin = {70, 4}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {70, 4}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Flaschenzug.Spannung_Strom_Connector spannung_Strom_Connector1 annotation(
+      Placement(visible = true, transformation(origin = {70, 4}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {84, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
     import SI = Modelica.SIunits;
     parameter SI.Voltage U = 48;
     parameter Boolean Richtung = true;
   equation
     spannung_Strom_Connector1.U = if Richtung then U else -U;
     annotation(
-      Icon(graphics = {Rectangle(fillColor = {144, 144, 144}, fillPattern = FillPattern.Solid, extent = {{-80, 70}, {60, -70}}), Rectangle(origin = {70, 51}, fillColor = {104, 104, 104}, fillPattern = FillPattern.HorizontalCylinder, extent = {{-10, 9}, {10, -11}}), Rectangle(origin = {70, -49}, fillColor = {104, 104, 104}, fillPattern = FillPattern.HorizontalCylinder, extent = {{-10, 9}, {10, -11}}), Polygon(origin = {-13, -12}, fillColor = {255, 255, 0}, fillPattern = FillPattern.Solid, points = {{3, 56}, {-19, 6}, {3, 6}, {3, -30}, {27, 20}, {3, 20}, {3, 56}, {3, 56}})}, coordinateSystem(initialScale = 0.1)));
+      Icon(coordinateSystem(initialScale = 0.1), graphics = {Polygon(origin = {-15, 1}, fillPattern = FillPattern.Solid, points = {{-85, 53}, {85, 53}, {85, -53}, {73, -53}, {73, 41}, {-85, 41}, {-85, 53}}), Polygon(origin = {-21, -46}, fillPattern = FillPattern.Solid, points = {{-79, -6}, {79, -6}, {79, 6}, {-79, 6}, {-79, -6}}), Rectangle(origin = {-93, 1}, fillPattern = FillPattern.Solid, extent = {{-7, 41}, {5, -41}}), Rectangle(origin = {-63, 0}, fillPattern = FillPattern.Solid, extent = {{-17, 4}, {19, -4}}), Rectangle(origin = {33, 0}, fillPattern = FillPattern.Solid, extent = {{-19, 4}, {17, -4}}), Rectangle(origin = {32, 0}, fillPattern = FillPattern.Solid, extent = {{-4, 18}, {4, -18}}), Line(origin = {12, 4}, points = {{0, 0}, {0, 0}}), Rectangle(origin = {83, 0}, fillPattern = FillPattern.Solid, extent = {{-13, 14}, {13, -14}})}));
   end Spannungsquelle;
 
   model Universalmotor
     Flaschenzug.Winkel_Moment_Connector winkel_Moment_Connector1 annotation(
-      Placement(visible = true, transformation(origin = {42, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {31, 3}, extent = {{-7, -7}, {7, 7}}, rotation = 0)));
+      Placement(visible = true, transformation(origin = {42, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {91, 1}, extent = {{-7, -7}, {7, 7}}, rotation = 0)));
     Flaschenzug.Spannung_Strom_Connector spannung_Strom_Connector1 annotation(
-      Placement(visible = true, transformation(origin = {-40, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {-56, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+      Placement(visible = true, transformation(origin = {-40, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {-90, -42}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
     import SI = Modelica.SIunits;
     constant Real pi = Modelica.Constants.pi;
     // Werte aus Heidrich Skript "Seiten aus AAeA 2011-W Musterklausur fuer Studenten.pdf"
@@ -292,7 +292,7 @@ package Flaschenzug
     // Lastmoment
     parameter Boolean Modus = true;
   equation
-    if Modus then
+  if Modus then
       spannung_Strom_Connector1.U = Ua + Ufw;
 // Reihenschluss
       Ua = 2 * Ub + Ra * Ia + La * der(Ia) + kt * om;
@@ -313,7 +313,7 @@ package Flaschenzug
     om = 2 * pi * n;
     der(winkel_Moment_Connector1.phi) = om;
     annotation(
-      Icon(graphics = {Rectangle(origin = {20, 3}, lineColor = {145, 145, 145}, fillColor = {253, 253, 253}, fillPattern = FillPattern.HorizontalCylinder, extent = {{-6, 3}, {10, -5}}), Rectangle(origin = {-14, 39}, fillPattern = FillPattern.Solid, extent = {{-20, 21}, {14, -87}}), Ellipse(origin = {12, 8}, rotation = 270, lineColor = {179, 179, 179}, fillColor = {147, 147, 147}, fillPattern = FillPattern.HorizontalCylinder, extent = {{-52, 4}, {56, -32}}, endAngle = 180), Ellipse(origin = {-50, -10}, rotation = 90, lineColor = {179, 179, 179}, fillColor = {147, 147, 147}, fillPattern = FillPattern.HorizontalCylinder, extent = {{-38, 2}, {70, -38}}, endAngle = 180)}, coordinateSystem(initialScale = 0.1)));
+      Icon(coordinateSystem(initialScale = 0.1), graphics = {Rectangle(origin = {-77, -1}, fillPattern = FillPattern.Solid, extent = {{-3, 51}, {3, -51}}), Rectangle(extent = {{80, 50}, {80, 50}}), Rectangle(extent = {{80, 50}, {80, 50}}), Rectangle(extent = {{80, -50}, {80, -50}}), Rectangle(extent = {{-12, 48}, {-12, 48}}), Rectangle(origin = {32, -3}, fillPattern = FillPattern.Solid, extent = {{42, 53}, {48, -49}}), Rectangle(origin = {0, 67}, fillPattern = FillPattern.Solid, extent = {{-60, 3}, {60, -3}}),  Rectangle(origin = {0, -67}, fillPattern = FillPattern.Solid, extent = {{-60, 3}, {60, -3}}),  Polygon(origin = {-70, -61}, fillPattern = FillPattern.Solid, points = {{-10, 9}, {10, -9}, {10, -3}, {-4, 9}, {-4, 9}, {-10, 9}}), Polygon(origin = {70, -61}, fillPattern = FillPattern.Solid, points = {{-10, -3}, {4, 9}, {10, 9}, {-10, -9}, {-10, -3}}), Polygon(origin = {-70, 60}, fillPattern = FillPattern.Solid, points = {{-10, -10}, {10, 10}, {10, 4}, {-4, -10}, {-4, -10}, {-10, -10}}), Polygon(origin = {70, 60}, fillPattern = FillPattern.Solid, points = {{-10, 10}, {10, -10}, {4, -10}, {-10, 4}, {-10, 10}}), Rectangle(origin = {-55, 0}, fillPattern = FillPattern.Solid, extent = {{-5, 64}, {1, -64}}), Rectangle(origin = {59, 0}, fillPattern = FillPattern.Solid, extent = {{-5, 64}, {1, -64}}), Rectangle(origin = {21, 0}, fillPattern = FillPattern.Solid, extent = {{-5, 64}, {1, -64}}),  Rectangle(origin = {-18, 1}, fillPattern = FillPattern.Solid, extent = {{-36, 3}, {36, -5}}), Rectangle(origin = {-20, -17}, fillPattern = FillPattern.Solid, extent = {{-36, 3}, {36, -5}}), Rectangle(origin = {-18, 19}, fillPattern = FillPattern.Solid, extent = {{-36, 3}, {36, -5}}), Rectangle(origin = {-18, -33}, fillPattern = FillPattern.Solid, extent = {{-36, 3}, {36, -5}}),  Rectangle(origin = {-18, 35}, fillPattern = FillPattern.Solid, extent = {{-36, 3}, {36, -5}}), Rectangle(origin = {-18, 47}, fillPattern = FillPattern.Solid, extent = {{-36, 3}, {36, -5}}), Rectangle(origin = {-18, -45}, fillPattern = FillPattern.Solid, extent = {{-36, 3}, {36, -5}}), Rectangle(origin = {-18, 59}, fillPattern = FillPattern.Solid, extent = {{-36, 3}, {36, -5}}), Rectangle(origin = {-18, -57}, fillPattern = FillPattern.Solid, extent = {{-36, 3}, {36, -5}}), Rectangle(origin = {90, 0}, fillPattern = FillPattern.Solid, extent = {{-10, 12}, {10, -12}}), Polygon(origin = {39, -3}, fillColor = {255, 255, 0}, fillPattern = FillPattern.Solid, points = {{3, 37}, {-9, 1}, {-1, 1}, {-7, -31}, {9, 7}, {-1, 7}, {3, 37}}), Polygon(origin = {-2, -82}, fillPattern = FillPattern.Solid, points = {{-70, -8}, {-52, 12}, {54, 12}, {70, -8}, {70, -12}, {-70, -12}, {-70, -8}})}));
   end Universalmotor;
 
   model Bsp
@@ -336,10 +336,10 @@ package Flaschenzug
     Flaschenzug.Universalmotor universalmotor1(Modus = true) annotation(
       Placement(visible = true, transformation(origin = {-172, -62}, extent = {{-38, -38}, {38, 38}}, rotation = 0)));
     Flaschenzug.Spannungsquelle spannungsquelle1(Richtung = true, U = 48) annotation(
-      Placement(visible = true, transformation(origin = {-252, -62}, extent = {{-38, -38}, {38, 38}}, rotation = 0)));
+      Placement(visible = true, transformation(origin = {-253, -61}, extent = {{-39, -39}, {39, 39}}, rotation = 0)));
   equation
     connect(universalmotor1.spannung_Strom_Connector1, spannungsquelle1.spannung_Strom_Connector1) annotation(
-      Line(points = {{-188, -62}, {-226, -62}, {-226, -60}, {-226, -60}}));
+      Line(points = {{-188, -62}, {-204, -62}, {-204, -61}, {-220, -61}}));
     connect(seilrolle1.Winkel_Moment_Connector1, universalmotor1.winkel_Moment_Connector1) annotation(
       Line(points = {{-158, -14}, {-156, -14}, {-156, -62}, {-156, -62}}));
     connect(deckenrolle_4c1.connector1, seilrolle1.connector1) annotation(
@@ -377,21 +377,16 @@ package Flaschenzug
       Placement(visible = true, transformation(origin = {-44, 64}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {-44, 64}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   Real vL,vR,vG;
   equation
-  
-  //SL.F +SR.F = SG.F;
-  //SL.F = SR.F;
-  
-  //vL = der(SL.s);
-  //vR = der(SR.s);
-  //vG = der(SG.s);
-  
-  //vG = if (vL>0) then
-    
-  //  abs(  (vL-VR)/2)
-  
-  //
-    //else//
-    //  ((vR-vL)/2);
+//SL.F +SR.F = SG.F;
+//SL.F = SR.F;
+//vL = der(SL.s);
+//vR = der(SR.s);
+//vG = der(SG.s);
+//vG = if (vL>0) then
+//  abs(  (vL-VR)/2)
+//
+//else//
+//  ((vR-vL)/2);
 ///  end if;
 //
 //if (der(connector1.s)
