@@ -1693,7 +1693,7 @@ table.MsoTableGrid
       import SI = Modelica.SIunits;
       // Connectors --------------------
       Flaschenzug_Bibliothek.Connectoren.Weg_Kraft_Connector s_F_Connector annotation(
-        Placement(visible = true, transformation(origin = {2, 42}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {70, 88}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+        Placement(visible = true, transformation(origin = {2, 42}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {54, 88}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
       Flaschenzug_Bibliothek.Connectoren.Winkel_Moment_Connector phi_M_Connector annotation(
         Placement(visible = true, transformation(origin = {66, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {-90, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
       // Parameters --------------------
@@ -4986,7 +4986,7 @@ table.MsoTableGrid
       Flaschenzug_Bibliothek.Connectoren.Winkel_Moment_Connector phi_M_Antrieb annotation(
         Placement(visible = true, transformation(origin = {-74, 2}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {-80, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
       Flaschenzug_Bibliothek.Connectoren.Winkel_Moment_Connector phi_M_Last annotation(
-        Placement(visible = true, transformation(origin = {74, 2}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {88, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+        Placement(visible = true, transformation(origin = {74, 2}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {90, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
       Flaschenzug_Bibliothek.Connectoren.Spannung_Strom_Connector U_I_Connector annotation(
         Placement(visible = true, transformation(origin = {-70, 58}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {-60, 54}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
       // Variables --------------------
@@ -6641,16 +6641,16 @@ table.MsoTableGrid
   Flaschenzug_Bibliothek.Mechanik.Masse masse1 annotation(
         Placement(visible = true, transformation(origin = {70, -80}, extent = {{-20, -20}, {20, 20}}, rotation = 0)));
     equation
-      connect(seilwinde1.phi_M_Connector, bremse1.phi_M_Last) annotation(
-        Line(points = {{0, -28}, {-10, -28}, {-10, -28}, {-12, -28}}));
     connect(flaschenzug_Angriffspunkt_unten1.F_s_Antrieb, seilwinde1.s_F_Connector) annotation(
         Line(points = {{46, -3}, {46, -10}, {32, -10}}));
+    connect(flaschenzug_Angriffspunkt_unten1.F_s_Last, masse1.s_F_Connector) annotation(
+        Line(points = {{70, -49}, {70, -68}}));
+      connect(seilwinde1.phi_M_Connector, bremse1.phi_M_Last) annotation(
+        Line(points = {{0, -28}, {-10, -28}, {-10, -28}, {-12, -28}}));
       connect(einphasen_Gleichstrommotor1.phi_M_Connector, bremse1.phi_M_Antrieb) annotation(
         Line(points = {{-20, -80}, {-14, -80}, {-14, -54}, {-44, -54}, {-44, -28}}));
       connect(bremse1.U_I_Connector, einphasen_Gleichstrommotor1.U_I_Connector) annotation(
         Line(points = {{-40, -17}, {-56, -17}, {-56, -87.2}}));
-    connect(flaschenzug_Angriffspunkt_unten1.F_s_Last, masse1.s_F_Connector) annotation(
-        Line(points = {{70, -49}, {70, -68}}));
     connect(spannungsquelle1.U_I_Connector, einphasen_Gleichstrommotor1.U_I_Connector) annotation(
         Line(points = {{-64, -80}, {-56, -80}, {-56, -88}}));
     annotation(
