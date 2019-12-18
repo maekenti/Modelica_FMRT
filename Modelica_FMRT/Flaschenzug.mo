@@ -854,7 +854,7 @@ table.MsoTableGrid
       // Constants --------------------
       constant Real g = Modelica.Constants.g_n "Erdbeschleunigung";
       // Parameters --------------------
-      parameter SI.Mass m = 5 "Masse";
+      parameter SI.Mass m = 100 "Masse";
       // Variables --------------------
       SI.Force Fg "Gewichtskraft";
       SI.Velocity v (start = 0) "Geschwindigkeit";
@@ -931,7 +931,7 @@ table.MsoTableGrid
   mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
   mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt;height:21.5pt\">
   <p><span style=\"font-size:9.0pt;font-family:&quot;MS Shell Dlg 2&quot;,serif;
-  color:black\">5 kg<o:p></o:p></span></p>
+  color:black\">100 kg<o:p></o:p></span></p>
   </td>
   <td width=\"105\" style=\"width:78.6pt;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
@@ -1697,14 +1697,14 @@ table.MsoTableGrid
       Flaschenzug_Bibliothek.Connectoren.Winkel_Moment_Connector phi_M_Connector annotation(
         Placement(visible = true, transformation(origin = {66, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {-90, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
       // Parameters --------------------
-      parameter SI.Length r = 0.5 "Rollenradius";
+      parameter SI.Length r = 0.05 "Rollenradius";
       // Variables --------------------
-      SI.AngularVelocity om "Winkelgeschwindigkeit";
-      SI.Velocity v "Geschwindigkeit";
-      SI.Length s "Weg";
-      SI.Force F "Kraft";
-      SI.Torque M "Moment";
-      SI.Angle phi(start = 0) "Winkel";
+      SI.AngularVelocity om "Winkelgeschwindigkeit der Welle";
+      SI.Velocity v "Seilgeschwindigkeit";
+      SI.Length s "Seilweg";
+      SI.Force F "Zugkraft am Seil";
+      SI.Torque M "Moment an der Welle";
+      SI.Angle phi(start = 0) "Winkel der Welle";
       // Equations --------------------
     equation
       s_F_Connector.s = s;
@@ -2455,7 +2455,7 @@ table.MsoTableGrid
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
   mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt;height:21.5pt\">
-  <p><span style=\"font-size: 9pt; font-family: 'MS Shell Dlg 2', serif;\">0.5 m<o:p></o:p></span></p>
+  <p><span style=\"font-size: 9pt; font-family: 'MS Shell Dlg 2', serif;\">0.05 m<o:p></o:p></span></p>
   </td>
   <td width=\"105\" style=\"width:78.6pt;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
@@ -3231,7 +3231,759 @@ table.MsoTableGrid
     end Seilwinde;
   annotation(
   Icon(graphics = {Rectangle(fillColor = {255, 255, 255}, fillPattern = FillPattern.Solid, lineThickness = 3, extent = {{-100, 100}, {100, -100}}), Rectangle(origin = {-55, 71}, rotation = 45, fillPattern = FillPattern.Solid, extent = {{-7, 7}, {7, -7}}), Rectangle(origin = {-69, 39}, fillPattern = FillPattern.Solid, extent = {{-7, 7}, {7, -7}}), Ellipse(origin = {-23, 39}, fillPattern = FillPattern.Solid, extent = {{-41, 39}, {39, -41}}, endAngle = 360), Rectangle(origin = {-57, 7}, rotation = 45, fillPattern = FillPattern.Solid, extent = {{-7, 7}, {7, -7}}), Rectangle(origin = {-25, 83}, fillPattern = FillPattern.Solid, extent = {{-7, 7}, {7, -7}}), Rectangle(origin = {-1, -7}, rotation = 45, fillPattern = FillPattern.Solid, extent = {{-7, 7}, {7, -7}}), Rectangle(origin = {-25, -7}, fillPattern = FillPattern.Solid, extent = {{-7, 7}, {7, -7}}), Ellipse(origin = {31, -39}, fillPattern = FillPattern.Solid, extent = {{-41, 39}, {39, -41}}, endAngle = 360), Rectangle(origin = {9, 71}, rotation = 45, fillPattern = FillPattern.Solid, extent = {{-7, 7}, {7, -7}}), Rectangle(origin = {9, 7}, rotation = 45, fillPattern = FillPattern.Solid, extent = {{-7, 7}, {7, -7}}), Rectangle(origin = {-15, -39}, fillPattern = FillPattern.Solid, extent = {{-7, 7}, {7, -7}}), Rectangle(origin = {21, 37}, fillPattern = FillPattern.Solid, extent = {{-7, 7}, {7, -7}}), Rectangle(origin = {-3, -71}, rotation = 45, fillPattern = FillPattern.Solid, extent = {{-7, 7}, {7, -7}}), Rectangle(origin = {29, 5}, fillPattern = FillPattern.Solid, extent = {{-7, 7}, {7, -7}}), Rectangle(origin = {29, -85}, fillPattern = FillPattern.Solid, extent = {{-7, 7}, {7, -7}}), Rectangle(origin = {63, -71}, rotation = 45, fillPattern = FillPattern.Solid, extent = {{-7, 7}, {7, -7}}), Rectangle(origin = {63, -7}, rotation = 45, fillPattern = FillPattern.Solid, extent = {{-7, 7}, {7, -7}}), Rectangle(origin = {75, -41}, fillPattern = FillPattern.Solid, extent = {{-7, 7}, {7, -7}}), Ellipse(origin = {-24, 40}, fillColor = {255, 255, 255}, fillPattern = FillPattern.Solid, extent = {{-28, 26}, {28, -30}}, endAngle = 360), Ellipse(origin = {30, -38}, fillColor = {255, 255, 255}, fillPattern = FillPattern.Solid, extent = {{-28, 26}, {28, -30}}, endAngle = 360)}, coordinateSystem(initialScale = 0.1)),
-      Documentation(info = "<html><head></head><body>Dieses Package beinhaltet alle mechanischen Bauteile der Bibliothek.<div>Dies beinhaltet zwei Flaschenzuege in unterschiedlicher Bauform, sowie eine Masse und eine Seilwinde.<br><div>Eine Übersicht der Komponenten ist in der folgenden Tabelle dargestellt:</div><div><br></div><div><div><br></div></div></div></body></html>"));
+      Documentation(info = "<html><head></head><body>Dieses Package beinhaltet alle mechanischen Bauteile der Bibliothek.<div>Dies beinhaltet zwei Flaschenzuege in unterschiedlicher Bauform, sowie eine Masse und eine Seilwinde.<br><div>In der folgenden Tabelle sind die Kurzbeschreibungen der einzelnen Komponenten angegeben:</div><div><br></div><div>
+
+
+
+
+<!--[if gte mso 9]><xml>
+ <o:OfficeDocumentSettings>
+  <o:AllowPNG/>
+ </o:OfficeDocumentSettings>
+</xml><![endif]-->
+
+
+<!--[if gte mso 9]><xml>
+ <w:WordDocument>
+  <w:View>Normal</w:View>
+  <w:Zoom>0</w:Zoom>
+  <w:TrackMoves/>
+  <w:TrackFormatting/>
+  <w:HyphenationZone>21</w:HyphenationZone>
+  <w:PunctuationKerning/>
+  <w:ValidateAgainstSchemas/>
+  <w:SaveIfXMLInvalid>false</w:SaveIfXMLInvalid>
+  <w:IgnoreMixedContent>false</w:IgnoreMixedContent>
+  <w:AlwaysShowPlaceholderText>false</w:AlwaysShowPlaceholderText>
+  <w:DoNotPromoteQF/>
+  <w:LidThemeOther>DE</w:LidThemeOther>
+  <w:LidThemeAsian>JA</w:LidThemeAsian>
+  <w:LidThemeComplexScript>X-NONE</w:LidThemeComplexScript>
+  <w:Compatibility>
+   <w:BreakWrappedTables/>
+   <w:SnapToGridInCell/>
+   <w:WrapTextWithPunct/>
+   <w:UseAsianBreakRules/>
+   <w:DontGrowAutofit/>
+   <w:SplitPgBreakAndParaMark/>
+   <w:EnableOpenTypeKerning/>
+   <w:DontFlipMirrorIndents/>
+   <w:OverrideTableStyleHps/>
+   <w:UseFELayout/>
+  </w:Compatibility>
+  <m:mathPr>
+   <m:mathFont m:val=\"Cambria Math\"/>
+   <m:brkBin m:val=\"before\"/>
+   <m:brkBinSub m:val=\"&#45;-\"/>
+   <m:smallFrac m:val=\"off\"/>
+   <m:dispDef/>
+   <m:lMargin m:val=\"0\"/>
+   <m:rMargin m:val=\"0\"/>
+   <m:defJc m:val=\"centerGroup\"/>
+   <m:wrapIndent m:val=\"1440\"/>
+   <m:intLim m:val=\"subSup\"/>
+   <m:naryLim m:val=\"undOvr\"/>
+  </m:mathPr></w:WordDocument>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <w:LatentStyles DefLockedState=\"false\" DefUnhideWhenUsed=\"false\"
+  DefSemiHidden=\"false\" DefQFormat=\"false\" DefPriority=\"99\"
+  LatentStyleCount=\"375\">
+  <w:LsdException Locked=\"false\" Priority=\"0\" QFormat=\"true\" Name=\"Normal\"/>
+  <w:LsdException Locked=\"false\" Priority=\"9\" QFormat=\"true\" Name=\"heading 1\"/>
+  <w:LsdException Locked=\"false\" Priority=\"9\" SemiHidden=\"true\"
+   UnhideWhenUsed=\"true\" QFormat=\"true\" Name=\"heading 2\"/>
+  <w:LsdException Locked=\"false\" Priority=\"9\" SemiHidden=\"true\"
+   UnhideWhenUsed=\"true\" QFormat=\"true\" Name=\"heading 3\"/>
+  <w:LsdException Locked=\"false\" Priority=\"9\" SemiHidden=\"true\"
+   UnhideWhenUsed=\"true\" QFormat=\"true\" Name=\"heading 4\"/>
+  <w:LsdException Locked=\"false\" Priority=\"9\" SemiHidden=\"true\"
+   UnhideWhenUsed=\"true\" QFormat=\"true\" Name=\"heading 5\"/>
+  <w:LsdException Locked=\"false\" Priority=\"9\" SemiHidden=\"true\"
+   UnhideWhenUsed=\"true\" QFormat=\"true\" Name=\"heading 6\"/>
+  <w:LsdException Locked=\"false\" Priority=\"9\" SemiHidden=\"true\"
+   UnhideWhenUsed=\"true\" QFormat=\"true\" Name=\"heading 7\"/>
+  <w:LsdException Locked=\"false\" Priority=\"9\" SemiHidden=\"true\"
+   UnhideWhenUsed=\"true\" QFormat=\"true\" Name=\"heading 8\"/>
+  <w:LsdException Locked=\"false\" Priority=\"9\" SemiHidden=\"true\"
+   UnhideWhenUsed=\"true\" QFormat=\"true\" Name=\"heading 9\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"index 1\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"index 2\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"index 3\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"index 4\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"index 5\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"index 6\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"index 7\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"index 8\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"index 9\"/>
+  <w:LsdException Locked=\"false\" Priority=\"39\" SemiHidden=\"true\"
+   UnhideWhenUsed=\"true\" Name=\"toc 1\"/>
+  <w:LsdException Locked=\"false\" Priority=\"39\" SemiHidden=\"true\"
+   UnhideWhenUsed=\"true\" Name=\"toc 2\"/>
+  <w:LsdException Locked=\"false\" Priority=\"39\" SemiHidden=\"true\"
+   UnhideWhenUsed=\"true\" Name=\"toc 3\"/>
+  <w:LsdException Locked=\"false\" Priority=\"39\" SemiHidden=\"true\"
+   UnhideWhenUsed=\"true\" Name=\"toc 4\"/>
+  <w:LsdException Locked=\"false\" Priority=\"39\" SemiHidden=\"true\"
+   UnhideWhenUsed=\"true\" Name=\"toc 5\"/>
+  <w:LsdException Locked=\"false\" Priority=\"39\" SemiHidden=\"true\"
+   UnhideWhenUsed=\"true\" Name=\"toc 6\"/>
+  <w:LsdException Locked=\"false\" Priority=\"39\" SemiHidden=\"true\"
+   UnhideWhenUsed=\"true\" Name=\"toc 7\"/>
+  <w:LsdException Locked=\"false\" Priority=\"39\" SemiHidden=\"true\"
+   UnhideWhenUsed=\"true\" Name=\"toc 8\"/>
+  <w:LsdException Locked=\"false\" Priority=\"39\" SemiHidden=\"true\"
+   UnhideWhenUsed=\"true\" Name=\"toc 9\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Normal Indent\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"footnote text\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"annotation text\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"header\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"footer\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"index heading\"/>
+  <w:LsdException Locked=\"false\" Priority=\"35\" SemiHidden=\"true\"
+   UnhideWhenUsed=\"true\" QFormat=\"true\" Name=\"caption\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"table of figures\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"envelope address\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"envelope return\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"footnote reference\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"annotation reference\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"line number\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"page number\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"endnote reference\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"endnote text\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"table of authorities\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"macro\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"toa heading\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"List\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"List Bullet\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"List Number\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"List 2\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"List 3\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"List 4\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"List 5\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"List Bullet 2\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"List Bullet 3\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"List Bullet 4\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"List Bullet 5\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"List Number 2\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"List Number 3\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"List Number 4\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"List Number 5\"/>
+  <w:LsdException Locked=\"false\" Priority=\"10\" QFormat=\"true\" Name=\"Title\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Closing\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Signature\"/>
+  <w:LsdException Locked=\"false\" Priority=\"1\" SemiHidden=\"true\"
+   UnhideWhenUsed=\"true\" Name=\"Default Paragraph Font\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Body Text\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Body Text Indent\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"List Continue\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"List Continue 2\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"List Continue 3\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"List Continue 4\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"List Continue 5\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Message Header\"/>
+  <w:LsdException Locked=\"false\" Priority=\"11\" QFormat=\"true\" Name=\"Subtitle\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Salutation\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Date\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Body Text First Indent\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Body Text First Indent 2\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Note Heading\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Body Text 2\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Body Text 3\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Body Text Indent 2\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Body Text Indent 3\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Block Text\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Hyperlink\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"FollowedHyperlink\"/>
+  <w:LsdException Locked=\"false\" Priority=\"22\" QFormat=\"true\" Name=\"Strong\"/>
+  <w:LsdException Locked=\"false\" Priority=\"20\" QFormat=\"true\" Name=\"Emphasis\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Document Map\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Plain Text\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"E-mail Signature\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"HTML Top of Form\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"HTML Bottom of Form\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Normal (Web)\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"HTML Acronym\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"HTML Address\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"HTML Cite\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"HTML Code\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"HTML Definition\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"HTML Keyboard\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"HTML Preformatted\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"HTML Sample\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"HTML Typewriter\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"HTML Variable\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Normal Table\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"annotation subject\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"No List\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Outline List 1\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Outline List 2\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Outline List 3\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Table Simple 1\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Table Simple 2\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Table Simple 3\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Table Classic 1\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Table Classic 2\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Table Classic 3\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Table Classic 4\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Table Colorful 1\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Table Colorful 2\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Table Colorful 3\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Table Columns 1\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Table Columns 2\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Table Columns 3\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Table Columns 4\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Table Columns 5\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Table Grid 1\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Table Grid 2\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Table Grid 3\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Table Grid 4\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Table Grid 5\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Table Grid 6\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Table Grid 7\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Table Grid 8\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Table List 1\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Table List 2\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Table List 3\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Table List 4\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Table List 5\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Table List 6\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Table List 7\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Table List 8\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Table 3D effects 1\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Table 3D effects 2\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Table 3D effects 3\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Table Contemporary\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Table Elegant\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Table Professional\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Table Subtle 1\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Table Subtle 2\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Table Web 1\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Table Web 2\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Table Web 3\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Balloon Text\"/>
+  <w:LsdException Locked=\"false\" Priority=\"39\" Name=\"Table Grid\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Table Theme\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" Name=\"Placeholder Text\"/>
+  <w:LsdException Locked=\"false\" Priority=\"1\" QFormat=\"true\" Name=\"No Spacing\"/>
+  <w:LsdException Locked=\"false\" Priority=\"60\" Name=\"Light Shading\"/>
+  <w:LsdException Locked=\"false\" Priority=\"61\" Name=\"Light List\"/>
+  <w:LsdException Locked=\"false\" Priority=\"62\" Name=\"Light Grid\"/>
+  <w:LsdException Locked=\"false\" Priority=\"63\" Name=\"Medium Shading 1\"/>
+  <w:LsdException Locked=\"false\" Priority=\"64\" Name=\"Medium Shading 2\"/>
+  <w:LsdException Locked=\"false\" Priority=\"65\" Name=\"Medium List 1\"/>
+  <w:LsdException Locked=\"false\" Priority=\"66\" Name=\"Medium List 2\"/>
+  <w:LsdException Locked=\"false\" Priority=\"67\" Name=\"Medium Grid 1\"/>
+  <w:LsdException Locked=\"false\" Priority=\"68\" Name=\"Medium Grid 2\"/>
+  <w:LsdException Locked=\"false\" Priority=\"69\" Name=\"Medium Grid 3\"/>
+  <w:LsdException Locked=\"false\" Priority=\"70\" Name=\"Dark List\"/>
+  <w:LsdException Locked=\"false\" Priority=\"71\" Name=\"Colorful Shading\"/>
+  <w:LsdException Locked=\"false\" Priority=\"72\" Name=\"Colorful List\"/>
+  <w:LsdException Locked=\"false\" Priority=\"73\" Name=\"Colorful Grid\"/>
+  <w:LsdException Locked=\"false\" Priority=\"60\" Name=\"Light Shading Accent 1\"/>
+  <w:LsdException Locked=\"false\" Priority=\"61\" Name=\"Light List Accent 1\"/>
+  <w:LsdException Locked=\"false\" Priority=\"62\" Name=\"Light Grid Accent 1\"/>
+  <w:LsdException Locked=\"false\" Priority=\"63\" Name=\"Medium Shading 1 Accent 1\"/>
+  <w:LsdException Locked=\"false\" Priority=\"64\" Name=\"Medium Shading 2 Accent 1\"/>
+  <w:LsdException Locked=\"false\" Priority=\"65\" Name=\"Medium List 1 Accent 1\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" Name=\"Revision\"/>
+  <w:LsdException Locked=\"false\" Priority=\"34\" QFormat=\"true\"
+   Name=\"List Paragraph\"/>
+  <w:LsdException Locked=\"false\" Priority=\"29\" QFormat=\"true\" Name=\"Quote\"/>
+  <w:LsdException Locked=\"false\" Priority=\"30\" QFormat=\"true\"
+   Name=\"Intense Quote\"/>
+  <w:LsdException Locked=\"false\" Priority=\"66\" Name=\"Medium List 2 Accent 1\"/>
+  <w:LsdException Locked=\"false\" Priority=\"67\" Name=\"Medium Grid 1 Accent 1\"/>
+  <w:LsdException Locked=\"false\" Priority=\"68\" Name=\"Medium Grid 2 Accent 1\"/>
+  <w:LsdException Locked=\"false\" Priority=\"69\" Name=\"Medium Grid 3 Accent 1\"/>
+  <w:LsdException Locked=\"false\" Priority=\"70\" Name=\"Dark List Accent 1\"/>
+  <w:LsdException Locked=\"false\" Priority=\"71\" Name=\"Colorful Shading Accent 1\"/>
+  <w:LsdException Locked=\"false\" Priority=\"72\" Name=\"Colorful List Accent 1\"/>
+  <w:LsdException Locked=\"false\" Priority=\"73\" Name=\"Colorful Grid Accent 1\"/>
+  <w:LsdException Locked=\"false\" Priority=\"60\" Name=\"Light Shading Accent 2\"/>
+  <w:LsdException Locked=\"false\" Priority=\"61\" Name=\"Light List Accent 2\"/>
+  <w:LsdException Locked=\"false\" Priority=\"62\" Name=\"Light Grid Accent 2\"/>
+  <w:LsdException Locked=\"false\" Priority=\"63\" Name=\"Medium Shading 1 Accent 2\"/>
+  <w:LsdException Locked=\"false\" Priority=\"64\" Name=\"Medium Shading 2 Accent 2\"/>
+  <w:LsdException Locked=\"false\" Priority=\"65\" Name=\"Medium List 1 Accent 2\"/>
+  <w:LsdException Locked=\"false\" Priority=\"66\" Name=\"Medium List 2 Accent 2\"/>
+  <w:LsdException Locked=\"false\" Priority=\"67\" Name=\"Medium Grid 1 Accent 2\"/>
+  <w:LsdException Locked=\"false\" Priority=\"68\" Name=\"Medium Grid 2 Accent 2\"/>
+  <w:LsdException Locked=\"false\" Priority=\"69\" Name=\"Medium Grid 3 Accent 2\"/>
+  <w:LsdException Locked=\"false\" Priority=\"70\" Name=\"Dark List Accent 2\"/>
+  <w:LsdException Locked=\"false\" Priority=\"71\" Name=\"Colorful Shading Accent 2\"/>
+  <w:LsdException Locked=\"false\" Priority=\"72\" Name=\"Colorful List Accent 2\"/>
+  <w:LsdException Locked=\"false\" Priority=\"73\" Name=\"Colorful Grid Accent 2\"/>
+  <w:LsdException Locked=\"false\" Priority=\"60\" Name=\"Light Shading Accent 3\"/>
+  <w:LsdException Locked=\"false\" Priority=\"61\" Name=\"Light List Accent 3\"/>
+  <w:LsdException Locked=\"false\" Priority=\"62\" Name=\"Light Grid Accent 3\"/>
+  <w:LsdException Locked=\"false\" Priority=\"63\" Name=\"Medium Shading 1 Accent 3\"/>
+  <w:LsdException Locked=\"false\" Priority=\"64\" Name=\"Medium Shading 2 Accent 3\"/>
+  <w:LsdException Locked=\"false\" Priority=\"65\" Name=\"Medium List 1 Accent 3\"/>
+  <w:LsdException Locked=\"false\" Priority=\"66\" Name=\"Medium List 2 Accent 3\"/>
+  <w:LsdException Locked=\"false\" Priority=\"67\" Name=\"Medium Grid 1 Accent 3\"/>
+  <w:LsdException Locked=\"false\" Priority=\"68\" Name=\"Medium Grid 2 Accent 3\"/>
+  <w:LsdException Locked=\"false\" Priority=\"69\" Name=\"Medium Grid 3 Accent 3\"/>
+  <w:LsdException Locked=\"false\" Priority=\"70\" Name=\"Dark List Accent 3\"/>
+  <w:LsdException Locked=\"false\" Priority=\"71\" Name=\"Colorful Shading Accent 3\"/>
+  <w:LsdException Locked=\"false\" Priority=\"72\" Name=\"Colorful List Accent 3\"/>
+  <w:LsdException Locked=\"false\" Priority=\"73\" Name=\"Colorful Grid Accent 3\"/>
+  <w:LsdException Locked=\"false\" Priority=\"60\" Name=\"Light Shading Accent 4\"/>
+  <w:LsdException Locked=\"false\" Priority=\"61\" Name=\"Light List Accent 4\"/>
+  <w:LsdException Locked=\"false\" Priority=\"62\" Name=\"Light Grid Accent 4\"/>
+  <w:LsdException Locked=\"false\" Priority=\"63\" Name=\"Medium Shading 1 Accent 4\"/>
+  <w:LsdException Locked=\"false\" Priority=\"64\" Name=\"Medium Shading 2 Accent 4\"/>
+  <w:LsdException Locked=\"false\" Priority=\"65\" Name=\"Medium List 1 Accent 4\"/>
+  <w:LsdException Locked=\"false\" Priority=\"66\" Name=\"Medium List 2 Accent 4\"/>
+  <w:LsdException Locked=\"false\" Priority=\"67\" Name=\"Medium Grid 1 Accent 4\"/>
+  <w:LsdException Locked=\"false\" Priority=\"68\" Name=\"Medium Grid 2 Accent 4\"/>
+  <w:LsdException Locked=\"false\" Priority=\"69\" Name=\"Medium Grid 3 Accent 4\"/>
+  <w:LsdException Locked=\"false\" Priority=\"70\" Name=\"Dark List Accent 4\"/>
+  <w:LsdException Locked=\"false\" Priority=\"71\" Name=\"Colorful Shading Accent 4\"/>
+  <w:LsdException Locked=\"false\" Priority=\"72\" Name=\"Colorful List Accent 4\"/>
+  <w:LsdException Locked=\"false\" Priority=\"73\" Name=\"Colorful Grid Accent 4\"/>
+  <w:LsdException Locked=\"false\" Priority=\"60\" Name=\"Light Shading Accent 5\"/>
+  <w:LsdException Locked=\"false\" Priority=\"61\" Name=\"Light List Accent 5\"/>
+  <w:LsdException Locked=\"false\" Priority=\"62\" Name=\"Light Grid Accent 5\"/>
+  <w:LsdException Locked=\"false\" Priority=\"63\" Name=\"Medium Shading 1 Accent 5\"/>
+  <w:LsdException Locked=\"false\" Priority=\"64\" Name=\"Medium Shading 2 Accent 5\"/>
+  <w:LsdException Locked=\"false\" Priority=\"65\" Name=\"Medium List 1 Accent 5\"/>
+  <w:LsdException Locked=\"false\" Priority=\"66\" Name=\"Medium List 2 Accent 5\"/>
+  <w:LsdException Locked=\"false\" Priority=\"67\" Name=\"Medium Grid 1 Accent 5\"/>
+  <w:LsdException Locked=\"false\" Priority=\"68\" Name=\"Medium Grid 2 Accent 5\"/>
+  <w:LsdException Locked=\"false\" Priority=\"69\" Name=\"Medium Grid 3 Accent 5\"/>
+  <w:LsdException Locked=\"false\" Priority=\"70\" Name=\"Dark List Accent 5\"/>
+  <w:LsdException Locked=\"false\" Priority=\"71\" Name=\"Colorful Shading Accent 5\"/>
+  <w:LsdException Locked=\"false\" Priority=\"72\" Name=\"Colorful List Accent 5\"/>
+  <w:LsdException Locked=\"false\" Priority=\"73\" Name=\"Colorful Grid Accent 5\"/>
+  <w:LsdException Locked=\"false\" Priority=\"60\" Name=\"Light Shading Accent 6\"/>
+  <w:LsdException Locked=\"false\" Priority=\"61\" Name=\"Light List Accent 6\"/>
+  <w:LsdException Locked=\"false\" Priority=\"62\" Name=\"Light Grid Accent 6\"/>
+  <w:LsdException Locked=\"false\" Priority=\"63\" Name=\"Medium Shading 1 Accent 6\"/>
+  <w:LsdException Locked=\"false\" Priority=\"64\" Name=\"Medium Shading 2 Accent 6\"/>
+  <w:LsdException Locked=\"false\" Priority=\"65\" Name=\"Medium List 1 Accent 6\"/>
+  <w:LsdException Locked=\"false\" Priority=\"66\" Name=\"Medium List 2 Accent 6\"/>
+  <w:LsdException Locked=\"false\" Priority=\"67\" Name=\"Medium Grid 1 Accent 6\"/>
+  <w:LsdException Locked=\"false\" Priority=\"68\" Name=\"Medium Grid 2 Accent 6\"/>
+  <w:LsdException Locked=\"false\" Priority=\"69\" Name=\"Medium Grid 3 Accent 6\"/>
+  <w:LsdException Locked=\"false\" Priority=\"70\" Name=\"Dark List Accent 6\"/>
+  <w:LsdException Locked=\"false\" Priority=\"71\" Name=\"Colorful Shading Accent 6\"/>
+  <w:LsdException Locked=\"false\" Priority=\"72\" Name=\"Colorful List Accent 6\"/>
+  <w:LsdException Locked=\"false\" Priority=\"73\" Name=\"Colorful Grid Accent 6\"/>
+  <w:LsdException Locked=\"false\" Priority=\"19\" QFormat=\"true\"
+   Name=\"Subtle Emphasis\"/>
+  <w:LsdException Locked=\"false\" Priority=\"21\" QFormat=\"true\"
+   Name=\"Intense Emphasis\"/>
+  <w:LsdException Locked=\"false\" Priority=\"31\" QFormat=\"true\"
+   Name=\"Subtle Reference\"/>
+  <w:LsdException Locked=\"false\" Priority=\"32\" QFormat=\"true\"
+   Name=\"Intense Reference\"/>
+  <w:LsdException Locked=\"false\" Priority=\"33\" QFormat=\"true\" Name=\"Book Title\"/>
+  <w:LsdException Locked=\"false\" Priority=\"37\" SemiHidden=\"true\"
+   UnhideWhenUsed=\"true\" Name=\"Bibliography\"/>
+  <w:LsdException Locked=\"false\" Priority=\"39\" SemiHidden=\"true\"
+   UnhideWhenUsed=\"true\" QFormat=\"true\" Name=\"TOC Heading\"/>
+  <w:LsdException Locked=\"false\" Priority=\"41\" Name=\"Plain Table 1\"/>
+  <w:LsdException Locked=\"false\" Priority=\"42\" Name=\"Plain Table 2\"/>
+  <w:LsdException Locked=\"false\" Priority=\"43\" Name=\"Plain Table 3\"/>
+  <w:LsdException Locked=\"false\" Priority=\"44\" Name=\"Plain Table 4\"/>
+  <w:LsdException Locked=\"false\" Priority=\"45\" Name=\"Plain Table 5\"/>
+  <w:LsdException Locked=\"false\" Priority=\"40\" Name=\"Grid Table Light\"/>
+  <w:LsdException Locked=\"false\" Priority=\"46\" Name=\"Grid Table 1 Light\"/>
+  <w:LsdException Locked=\"false\" Priority=\"47\" Name=\"Grid Table 2\"/>
+  <w:LsdException Locked=\"false\" Priority=\"48\" Name=\"Grid Table 3\"/>
+  <w:LsdException Locked=\"false\" Priority=\"49\" Name=\"Grid Table 4\"/>
+  <w:LsdException Locked=\"false\" Priority=\"50\" Name=\"Grid Table 5 Dark\"/>
+  <w:LsdException Locked=\"false\" Priority=\"51\" Name=\"Grid Table 6 Colorful\"/>
+  <w:LsdException Locked=\"false\" Priority=\"52\" Name=\"Grid Table 7 Colorful\"/>
+  <w:LsdException Locked=\"false\" Priority=\"46\"
+   Name=\"Grid Table 1 Light Accent 1\"/>
+  <w:LsdException Locked=\"false\" Priority=\"47\" Name=\"Grid Table 2 Accent 1\"/>
+  <w:LsdException Locked=\"false\" Priority=\"48\" Name=\"Grid Table 3 Accent 1\"/>
+  <w:LsdException Locked=\"false\" Priority=\"49\" Name=\"Grid Table 4 Accent 1\"/>
+  <w:LsdException Locked=\"false\" Priority=\"50\" Name=\"Grid Table 5 Dark Accent 1\"/>
+  <w:LsdException Locked=\"false\" Priority=\"51\"
+   Name=\"Grid Table 6 Colorful Accent 1\"/>
+  <w:LsdException Locked=\"false\" Priority=\"52\"
+   Name=\"Grid Table 7 Colorful Accent 1\"/>
+  <w:LsdException Locked=\"false\" Priority=\"46\"
+   Name=\"Grid Table 1 Light Accent 2\"/>
+  <w:LsdException Locked=\"false\" Priority=\"47\" Name=\"Grid Table 2 Accent 2\"/>
+  <w:LsdException Locked=\"false\" Priority=\"48\" Name=\"Grid Table 3 Accent 2\"/>
+  <w:LsdException Locked=\"false\" Priority=\"49\" Name=\"Grid Table 4 Accent 2\"/>
+  <w:LsdException Locked=\"false\" Priority=\"50\" Name=\"Grid Table 5 Dark Accent 2\"/>
+  <w:LsdException Locked=\"false\" Priority=\"51\"
+   Name=\"Grid Table 6 Colorful Accent 2\"/>
+  <w:LsdException Locked=\"false\" Priority=\"52\"
+   Name=\"Grid Table 7 Colorful Accent 2\"/>
+  <w:LsdException Locked=\"false\" Priority=\"46\"
+   Name=\"Grid Table 1 Light Accent 3\"/>
+  <w:LsdException Locked=\"false\" Priority=\"47\" Name=\"Grid Table 2 Accent 3\"/>
+  <w:LsdException Locked=\"false\" Priority=\"48\" Name=\"Grid Table 3 Accent 3\"/>
+  <w:LsdException Locked=\"false\" Priority=\"49\" Name=\"Grid Table 4 Accent 3\"/>
+  <w:LsdException Locked=\"false\" Priority=\"50\" Name=\"Grid Table 5 Dark Accent 3\"/>
+  <w:LsdException Locked=\"false\" Priority=\"51\"
+   Name=\"Grid Table 6 Colorful Accent 3\"/>
+  <w:LsdException Locked=\"false\" Priority=\"52\"
+   Name=\"Grid Table 7 Colorful Accent 3\"/>
+  <w:LsdException Locked=\"false\" Priority=\"46\"
+   Name=\"Grid Table 1 Light Accent 4\"/>
+  <w:LsdException Locked=\"false\" Priority=\"47\" Name=\"Grid Table 2 Accent 4\"/>
+  <w:LsdException Locked=\"false\" Priority=\"48\" Name=\"Grid Table 3 Accent 4\"/>
+  <w:LsdException Locked=\"false\" Priority=\"49\" Name=\"Grid Table 4 Accent 4\"/>
+  <w:LsdException Locked=\"false\" Priority=\"50\" Name=\"Grid Table 5 Dark Accent 4\"/>
+  <w:LsdException Locked=\"false\" Priority=\"51\"
+   Name=\"Grid Table 6 Colorful Accent 4\"/>
+  <w:LsdException Locked=\"false\" Priority=\"52\"
+   Name=\"Grid Table 7 Colorful Accent 4\"/>
+  <w:LsdException Locked=\"false\" Priority=\"46\"
+   Name=\"Grid Table 1 Light Accent 5\"/>
+  <w:LsdException Locked=\"false\" Priority=\"47\" Name=\"Grid Table 2 Accent 5\"/>
+  <w:LsdException Locked=\"false\" Priority=\"48\" Name=\"Grid Table 3 Accent 5\"/>
+  <w:LsdException Locked=\"false\" Priority=\"49\" Name=\"Grid Table 4 Accent 5\"/>
+  <w:LsdException Locked=\"false\" Priority=\"50\" Name=\"Grid Table 5 Dark Accent 5\"/>
+  <w:LsdException Locked=\"false\" Priority=\"51\"
+   Name=\"Grid Table 6 Colorful Accent 5\"/>
+  <w:LsdException Locked=\"false\" Priority=\"52\"
+   Name=\"Grid Table 7 Colorful Accent 5\"/>
+  <w:LsdException Locked=\"false\" Priority=\"46\"
+   Name=\"Grid Table 1 Light Accent 6\"/>
+  <w:LsdException Locked=\"false\" Priority=\"47\" Name=\"Grid Table 2 Accent 6\"/>
+  <w:LsdException Locked=\"false\" Priority=\"48\" Name=\"Grid Table 3 Accent 6\"/>
+  <w:LsdException Locked=\"false\" Priority=\"49\" Name=\"Grid Table 4 Accent 6\"/>
+  <w:LsdException Locked=\"false\" Priority=\"50\" Name=\"Grid Table 5 Dark Accent 6\"/>
+  <w:LsdException Locked=\"false\" Priority=\"51\"
+   Name=\"Grid Table 6 Colorful Accent 6\"/>
+  <w:LsdException Locked=\"false\" Priority=\"52\"
+   Name=\"Grid Table 7 Colorful Accent 6\"/>
+  <w:LsdException Locked=\"false\" Priority=\"46\" Name=\"List Table 1 Light\"/>
+  <w:LsdException Locked=\"false\" Priority=\"47\" Name=\"List Table 2\"/>
+  <w:LsdException Locked=\"false\" Priority=\"48\" Name=\"List Table 3\"/>
+  <w:LsdException Locked=\"false\" Priority=\"49\" Name=\"List Table 4\"/>
+  <w:LsdException Locked=\"false\" Priority=\"50\" Name=\"List Table 5 Dark\"/>
+  <w:LsdException Locked=\"false\" Priority=\"51\" Name=\"List Table 6 Colorful\"/>
+  <w:LsdException Locked=\"false\" Priority=\"52\" Name=\"List Table 7 Colorful\"/>
+  <w:LsdException Locked=\"false\" Priority=\"46\"
+   Name=\"List Table 1 Light Accent 1\"/>
+  <w:LsdException Locked=\"false\" Priority=\"47\" Name=\"List Table 2 Accent 1\"/>
+  <w:LsdException Locked=\"false\" Priority=\"48\" Name=\"List Table 3 Accent 1\"/>
+  <w:LsdException Locked=\"false\" Priority=\"49\" Name=\"List Table 4 Accent 1\"/>
+  <w:LsdException Locked=\"false\" Priority=\"50\" Name=\"List Table 5 Dark Accent 1\"/>
+  <w:LsdException Locked=\"false\" Priority=\"51\"
+   Name=\"List Table 6 Colorful Accent 1\"/>
+  <w:LsdException Locked=\"false\" Priority=\"52\"
+   Name=\"List Table 7 Colorful Accent 1\"/>
+  <w:LsdException Locked=\"false\" Priority=\"46\"
+   Name=\"List Table 1 Light Accent 2\"/>
+  <w:LsdException Locked=\"false\" Priority=\"47\" Name=\"List Table 2 Accent 2\"/>
+  <w:LsdException Locked=\"false\" Priority=\"48\" Name=\"List Table 3 Accent 2\"/>
+  <w:LsdException Locked=\"false\" Priority=\"49\" Name=\"List Table 4 Accent 2\"/>
+  <w:LsdException Locked=\"false\" Priority=\"50\" Name=\"List Table 5 Dark Accent 2\"/>
+  <w:LsdException Locked=\"false\" Priority=\"51\"
+   Name=\"List Table 6 Colorful Accent 2\"/>
+  <w:LsdException Locked=\"false\" Priority=\"52\"
+   Name=\"List Table 7 Colorful Accent 2\"/>
+  <w:LsdException Locked=\"false\" Priority=\"46\"
+   Name=\"List Table 1 Light Accent 3\"/>
+  <w:LsdException Locked=\"false\" Priority=\"47\" Name=\"List Table 2 Accent 3\"/>
+  <w:LsdException Locked=\"false\" Priority=\"48\" Name=\"List Table 3 Accent 3\"/>
+  <w:LsdException Locked=\"false\" Priority=\"49\" Name=\"List Table 4 Accent 3\"/>
+  <w:LsdException Locked=\"false\" Priority=\"50\" Name=\"List Table 5 Dark Accent 3\"/>
+  <w:LsdException Locked=\"false\" Priority=\"51\"
+   Name=\"List Table 6 Colorful Accent 3\"/>
+  <w:LsdException Locked=\"false\" Priority=\"52\"
+   Name=\"List Table 7 Colorful Accent 3\"/>
+  <w:LsdException Locked=\"false\" Priority=\"46\"
+   Name=\"List Table 1 Light Accent 4\"/>
+  <w:LsdException Locked=\"false\" Priority=\"47\" Name=\"List Table 2 Accent 4\"/>
+  <w:LsdException Locked=\"false\" Priority=\"48\" Name=\"List Table 3 Accent 4\"/>
+  <w:LsdException Locked=\"false\" Priority=\"49\" Name=\"List Table 4 Accent 4\"/>
+  <w:LsdException Locked=\"false\" Priority=\"50\" Name=\"List Table 5 Dark Accent 4\"/>
+  <w:LsdException Locked=\"false\" Priority=\"51\"
+   Name=\"List Table 6 Colorful Accent 4\"/>
+  <w:LsdException Locked=\"false\" Priority=\"52\"
+   Name=\"List Table 7 Colorful Accent 4\"/>
+  <w:LsdException Locked=\"false\" Priority=\"46\"
+   Name=\"List Table 1 Light Accent 5\"/>
+  <w:LsdException Locked=\"false\" Priority=\"47\" Name=\"List Table 2 Accent 5\"/>
+  <w:LsdException Locked=\"false\" Priority=\"48\" Name=\"List Table 3 Accent 5\"/>
+  <w:LsdException Locked=\"false\" Priority=\"49\" Name=\"List Table 4 Accent 5\"/>
+  <w:LsdException Locked=\"false\" Priority=\"50\" Name=\"List Table 5 Dark Accent 5\"/>
+  <w:LsdException Locked=\"false\" Priority=\"51\"
+   Name=\"List Table 6 Colorful Accent 5\"/>
+  <w:LsdException Locked=\"false\" Priority=\"52\"
+   Name=\"List Table 7 Colorful Accent 5\"/>
+  <w:LsdException Locked=\"false\" Priority=\"46\"
+   Name=\"List Table 1 Light Accent 6\"/>
+  <w:LsdException Locked=\"false\" Priority=\"47\" Name=\"List Table 2 Accent 6\"/>
+  <w:LsdException Locked=\"false\" Priority=\"48\" Name=\"List Table 3 Accent 6\"/>
+  <w:LsdException Locked=\"false\" Priority=\"49\" Name=\"List Table 4 Accent 6\"/>
+  <w:LsdException Locked=\"false\" Priority=\"50\" Name=\"List Table 5 Dark Accent 6\"/>
+  <w:LsdException Locked=\"false\" Priority=\"51\"
+   Name=\"List Table 6 Colorful Accent 6\"/>
+  <w:LsdException Locked=\"false\" Priority=\"52\"
+   Name=\"List Table 7 Colorful Accent 6\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Mention\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Smart Hyperlink\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Hashtag\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Unresolved Mention\"/>
+ </w:LatentStyles>
+</xml><![endif]-->
+
+<!--[if gte mso 10]>
+<style>
+ /* Style Definitions */
+ table.MsoNormalTable
+	{mso-style-name:\"Normale Tabelle\";
+	mso-tstyle-rowband-size:0;
+	mso-tstyle-colband-size:0;
+	mso-style-noshow:yes;
+	mso-style-priority:99;
+	mso-style-parent:\"\";
+	mso-padding-alt:0cm 5.4pt 0cm 5.4pt;
+	mso-para-margin-top:0cm;
+	mso-para-margin-right:0cm;
+	mso-para-margin-bottom:8.0pt;
+	mso-para-margin-left:0cm;
+	line-height:107%;
+	mso-pagination:widow-orphan;
+	font-size:11.0pt;
+	font-family:\"Calibri\",sans-serif;
+	mso-ascii-font-family:Calibri;
+	mso-ascii-theme-font:minor-latin;
+	mso-hansi-font-family:Calibri;
+	mso-hansi-theme-font:minor-latin;
+	mso-bidi-font-family:\"Times New Roman\";
+	mso-bidi-theme-font:minor-bidi;}
+</style>
+<![endif]-->
+
+
+
+<!--StartFragment-->
+
+<table class=\"MsoNormalTable\" border=\"1\" cellspacing=\"0\" cellpadding=\"0\" width=\"561\" style=\"width:420.45pt;border-collapse:collapse;border:none;mso-border-alt:
+ solid windowtext .5pt;mso-yfti-tbllook:1184;mso-padding-alt:0cm 0cm 0cm 0cm;
+ mso-border-insideh:.5pt solid windowtext;mso-border-insidev:.5pt solid windowtext\">
+ <tbody><tr style=\"mso-yfti-irow:0;mso-yfti-firstrow:yes;height:24.4pt\">
+  <td width=\"172\" style=\"width:129.05pt;border:solid windowtext 1.0pt;mso-border-alt:
+  solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt;height:24.4pt\">
+  <p class=\"MsoNormal\"><b><span style=\"font-size:9.0pt;font-family:&quot;MS Shell Dlg 2&quot;,sans-serif;
+  mso-fareast-font-family:&quot;Times New Roman&quot;\">Name</span></b><span style=\"font-size:12.0pt;font-family:&quot;MS Shell Dlg 2&quot;,sans-serif;mso-fareast-font-family:
+  &quot;Times New Roman&quot;\"><o:p></o:p></span></p>
+  </td>
+  <td width=\"389\" style=\"width:291.4pt;border:solid windowtext 1.0pt;border-left:
+  none;mso-border-left-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt;height:24.4pt\">
+  <p class=\"MsoNormal\"><b><span style=\"font-size:9.0pt;font-family:&quot;MS Shell Dlg 2&quot;,sans-serif;
+  mso-fareast-font-family:&quot;Times New Roman&quot;\">Kurzbeschreibung</span></b><span style=\"font-size:12.0pt;font-family:&quot;MS Shell Dlg 2&quot;,sans-serif;mso-fareast-font-family:
+  &quot;Times New Roman&quot;\"><o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style=\"mso-yfti-irow:1;height:24.4pt\">
+  <td width=\"172\" style=\"width:129.05pt;border:solid windowtext 1.0pt;border-top:
+  none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt;height:24.4pt\">
+  <p class=\"MsoNormal\"><span style=\"font-size:9.0pt;font-family:&quot;MS Shell Dlg 2&quot;,sans-serif;
+  mso-fareast-font-family:&quot;Times New Roman&quot;\">Flaschenzug_Angriffspunkt_oben</span><span style=\"font-size:12.0pt;font-family:&quot;MS Shell Dlg 2&quot;,sans-serif;mso-fareast-font-family:
+  &quot;Times New Roman&quot;\"><o:p></o:p></span></p>
+  </td>
+  <td width=\"389\" style=\"width:291.4pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt;height:24.4pt\">
+  <p class=\"MsoNormal\"><span style=\"font-size:9.0pt;font-family:&quot;MS Shell Dlg 2&quot;,sans-serif;
+  mso-fareast-font-family:&quot;Times New Roman&quot;\">Modell eines Flaschenzuges mit
+  parametrisierbarer Rollenzahl, Seil greift an der obersten Rolle an</span><span style=\"font-size:12.0pt;font-family:&quot;MS Shell Dlg 2&quot;,sans-serif;mso-fareast-font-family:
+  &quot;Times New Roman&quot;\"><o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style=\"mso-yfti-irow:2;height:24.4pt\">
+  <td width=\"172\" style=\"width:129.05pt;border:solid windowtext 1.0pt;border-top:
+  none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt;height:24.4pt\">
+  <p class=\"MsoNormal\"><span style=\"font-size:9.0pt;font-family:&quot;MS Shell Dlg 2&quot;,sans-serif;
+  mso-fareast-font-family:&quot;Times New Roman&quot;\">Flaschenzug_Angriffspunkt_unten</span><span style=\"font-size:12.0pt;font-family:&quot;MS Shell Dlg 2&quot;,sans-serif;mso-fareast-font-family:
+  &quot;Times New Roman&quot;\"><o:p></o:p></span></p>
+  </td>
+  <td width=\"389\" style=\"width:291.4pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt;height:24.4pt\">
+  <p class=\"MsoNormal\"><span style=\"font-size:9.0pt;font-family:&quot;MS Shell Dlg 2&quot;,sans-serif;
+  mso-fareast-font-family:&quot;Times New Roman&quot;\">Modell eines Flaschenzuges mit
+  parametrisierbarer Rollenzahl, Seil greift an der untersten Rolle an</span><span style=\"font-size:12.0pt;font-family:&quot;MS Shell Dlg 2&quot;,sans-serif;mso-fareast-font-family:
+  &quot;Times New Roman&quot;\"><o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style=\"mso-yfti-irow:3;height:24.4pt\">
+  <td width=\"172\" style=\"width:129.05pt;border:solid windowtext 1.0pt;border-top:
+  none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt;height:24.4pt\">
+  <p class=\"MsoNormal\"><span style=\"font-size:9.0pt;font-family:&quot;MS Shell Dlg 2&quot;,sans-serif;
+  mso-fareast-font-family:&quot;Times New Roman&quot;\">Masse<o:p></o:p></span></p>
+  </td>
+  <td width=\"389\" style=\"width:291.4pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt;height:24.4pt\">
+  <p class=\"MsoNormal\"><span style=\"font-size:9.0pt;font-family:&quot;MS Shell Dlg 2&quot;,sans-serif;
+  mso-fareast-font-family:&quot;Times New Roman&quot;\">Modell einer Masse unter Einfluss
+  der Erdbeschleunigung<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style=\"mso-yfti-irow:4;mso-yfti-lastrow:yes;height:24.4pt\">
+  <td width=\"172\" style=\"width:129.05pt;border:solid windowtext 1.0pt;border-top:
+  none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt;height:24.4pt\">
+  <p class=\"MsoNormal\"><span style=\"font-size:9.0pt;font-family:&quot;MS Shell Dlg 2&quot;,sans-serif;
+  mso-fareast-font-family:&quot;Times New Roman&quot;\">Seilwinde<o:p></o:p></span></p>
+  </td>
+  <td width=\"389\" style=\"width:291.4pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt;height:24.4pt\">
+  <p class=\"MsoNormal\"><span style=\"font-size:9.0pt;font-family:&quot;MS Shell Dlg 2&quot;,sans-serif;
+  mso-fareast-font-family:&quot;Times New Roman&quot;\">Seilwinde zur Umwandlung eines
+  Winkels und Moments in Strecke und Kraft über den Radius der Winde<o:p></o:p></span></p>
+  </td>
+ </tr>
+</tbody></table>
+
+<!--EndFragment--></div><div><br></div><div>Weitere Informationen über die Modelle können in deren Dokumentationen einzeln nachgelesen werden.</div><div><br></div><div><div><br></div></div></div></body></html>"));
     
   end Mechanik;
 
@@ -3248,12 +4000,12 @@ table.MsoTableGrid
       // Constants --------------------
       constant Real pi = Modelica.Constants.pi "PI";
       constant SI.Voltage Ub = 0 "Buerstenabfallspannung";
-      constant SI.Resistance Ra = 0.2 "Ankerwiderstand";
+      parameter SI.Resistance Ra = 0.2 "Ankerwiderstand";
       constant SI.Inductance La = 0 "Ankerinduktivitaet";
-      constant SI.ElectricalTorqueConstant kt = 0.1 "Drehmomentkonstante";
-      constant Real cf(unit = "N.m.s") = 0.0025 "Reibungsverlustkonstante";
-      constant Real cv(unit = "N.m.s2") = 0.000104 "Ventilationsverlustkonstante";
-      constant SI.MomentOfInertia Jtot = 0.005 "Massentraegheit";
+      parameter SI.ElectricalTorqueConstant kt = 0.1 "Drehmomentkonstante";
+      parameter Real cf(unit = "N.m.s") = 0.0025 "Reibungsverlustkonstante";
+      parameter Real cv(unit = "N.m.s2") = 0.000104 "Ventilationsverlustkonstante";
+      parameter SI.MomentOfInertia Jtot = 0.005 "Massentraegheit";
       // Variables --------------------
       SI.Voltage Ua "Ankerspannung";
       SI.Voltage Ug "Luftspalt-Spannung";
@@ -3281,7 +4033,950 @@ table.MsoTableGrid
 // Annotation --------------------
       annotation(
         Icon(coordinateSystem(initialScale = 0.1), graphics = {Rectangle(origin = {-77, -1}, fillPattern = FillPattern.Solid, extent = {{-3, 51}, {3, -51}}), Rectangle(extent = {{80, 50}, {80, 50}}), Rectangle(extent = {{80, 50}, {80, 50}}), Rectangle(extent = {{80, -50}, {80, -50}}), Rectangle(extent = {{-12, 48}, {-12, 48}}), Rectangle(origin = {32, -3}, fillPattern = FillPattern.Solid, extent = {{42, 53}, {48, -49}}), Rectangle(origin = {0, 67}, fillPattern = FillPattern.Solid, extent = {{-60, 3}, {60, -3}}), Rectangle(origin = {0, -67}, fillPattern = FillPattern.Solid, extent = {{-60, 3}, {60, -3}}), Polygon(origin = {-70, -61}, fillPattern = FillPattern.Solid, points = {{-10, 9}, {10, -9}, {10, -3}, {-4, 9}, {-4, 9}, {-10, 9}}), Polygon(origin = {70, -61}, fillPattern = FillPattern.Solid, points = {{-10, -3}, {4, 9}, {10, 9}, {-10, -9}, {-10, -3}}), Polygon(origin = {-70, 60}, fillPattern = FillPattern.Solid, points = {{-10, -10}, {10, 10}, {10, 4}, {-4, -10}, {-4, -10}, {-10, -10}}), Polygon(origin = {70, 60}, fillPattern = FillPattern.Solid, points = {{-10, 10}, {10, -10}, {4, -10}, {-10, 4}, {-10, 10}}), Rectangle(origin = {-55, 0}, fillPattern = FillPattern.Solid, extent = {{-5, 64}, {1, -64}}), Rectangle(origin = {59, 0}, fillPattern = FillPattern.Solid, extent = {{-5, 64}, {1, -64}}), Rectangle(origin = {21, 0}, fillPattern = FillPattern.Solid, extent = {{-5, 64}, {1, -64}}), Rectangle(origin = {-18, 1}, fillPattern = FillPattern.Solid, extent = {{-36, 3}, {36, -5}}), Rectangle(origin = {-20, -17}, fillPattern = FillPattern.Solid, extent = {{-36, 3}, {36, -5}}), Rectangle(origin = {-18, 19}, fillPattern = FillPattern.Solid, extent = {{-36, 3}, {36, -5}}), Rectangle(origin = {-18, -33}, fillPattern = FillPattern.Solid, extent = {{-36, 3}, {36, -5}}), Rectangle(origin = {-18, 35}, fillPattern = FillPattern.Solid, extent = {{-36, 3}, {36, -5}}), Rectangle(origin = {-18, 47}, fillPattern = FillPattern.Solid, extent = {{-36, 3}, {36, -5}}), Rectangle(origin = {-18, -45}, fillPattern = FillPattern.Solid, extent = {{-36, 3}, {36, -5}}), Rectangle(origin = {-18, 59}, fillPattern = FillPattern.Solid, extent = {{-36, 3}, {36, -5}}), Rectangle(origin = {-18, -57}, fillPattern = FillPattern.Solid, extent = {{-36, 3}, {36, -5}}), Rectangle(origin = {90, 0}, fillPattern = FillPattern.Solid, extent = {{-10, 12}, {10, -12}}), Polygon(origin = {39, -3}, fillPattern = FillPattern.Solid, points = {{3, 37}, {-9, 1}, {-1, 1}, {-7, -31}, {9, 7}, {-1, 7}, {3, 37}}), Polygon(origin = {-2, -82}, fillPattern = FillPattern.Solid, points = {{-70, -8}, {-52, 12}, {54, 12}, {70, -8}, {70, -12}, {-70, -12}, {-70, -8}})}),
-        Documentation(info = "<html><head></head><body><!--StartFragment--><div><u><span style=\"font-size: 9pt; font-family: 'MS Shell Dlg 2', sans-serif;\">Beschreibung:</span></u></div><div><br></div><div>Dieses Modell beschreibt einen einphasigen Gleichstrommotor, welcher ein realistisches Verhalten der Drehzahl und des Stromes in Abhängigkeit der angelegten Spannung und des Lastmoments abbildet.<br></div><div><br></div><div>Versorgt wird der Motor über einen Spannung_Strom_Connector, über welchen eine vorgegebene Spannung übertragen wird.<br>Der simulierte Winkel sowie das angelegte Lastmoment werden über einen Winkel_Moment_Connector übertragen.</div><div>Die internen Kennwerte des Motors können über das Parameter-Interface angepasst werden.</div><div>Die Parameter besitzen jedoch bereits vorinitialisierte Standardwerte, welche die Benutzung des Motors im unveränderten Zustand gewährleisten.<br>Als&nbsp;<b>Nennspannung</b>&nbsp;für den Motor wurden&nbsp;<b>48 V</b>&nbsp;gewählt, es können jedoch in der Simulation auch deutlich niedrige bzw. höhere Werte verwendet werden.</div><div><br></div><div>Bei der Verwendung einer positiven Versorgungsspannung dreht der Motor in die positive Drehrichtung, also so dass der(phi) &gt; 0 ist.</div><div>Eine negative Drehrichtung kann dementsprechend durch das Anlegen einer negativen Spannung erreicht werden.</div><div>Die Vorgabe der Drehrichtung über die Versorgungsspannung ist jedoch nicht immer möglich, z.B. wenn die Last zu hoch gewählt wurde und der Motor nicht genügend elektrisches Moment erzeugen kann, um das Lastmoment auszugleichen. In diesem Fall würde der Motor also in die entgegengesetzte Drehrichtung angetrieben werden, jedoch nicht von der angelegten Spannung, sondern vom angelegten Lastmoment.</div><div>Im Leerlauf und im Betrieb mit geringer Last ist die Drehrichtungsvorgabe über das Vorzeichen der angelegten Spannung zuverlässig.</div><div><p class=\"MsoNormal\"><u><span style=\"font-size: 9pt; font-family: 'MS Shell Dlg 2', sans-serif;\">Parameter:</span></u><span style=\"font-size: 9pt; font-family: 'MS Shell Dlg 2', sans-serif;\"><o:p></o:p></span></p><table class=\"MsoNormalTable\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\" style=\"border-collapse: collapse;\"><tbody><tr style=\"height: 21.5pt;\"><td width=\"47\" style=\"width: 35.3pt; border: 1pt solid windowtext; padding: 0cm 5.4pt; height: 21.5pt;\"><p class=\"MsoNormal\"><b><span style=\"font-size: 9pt; font-family: 'MS Shell Dlg 2', sans-serif;\">Name</span></b><span style=\"font-size: 9pt; font-family: 'MS Shell Dlg 2', sans-serif;\"><o:p></o:p></span></p></td><td width=\"90\" style=\"width: 67.85pt; border-style: solid solid solid none; border-top-color: windowtext; border-right-color: windowtext; border-bottom-color: windowtext; border-top-width: 1pt; border-right-width: 1pt; border-bottom-width: 1pt; padding: 0cm 5.4pt; height: 21.5pt;\"><p class=\"MsoNormal\"><b><span style=\"font-size: 9pt; font-family: 'MS Shell Dlg 2', sans-serif;\">Formelzeichen</span></b><span style=\"font-size: 9pt; font-family: 'MS Shell Dlg 2', sans-serif;\"><o:p></o:p></span></p></td><td width=\"50\" style=\"width: 37.85pt; border-style: solid solid solid none; border-top-color: windowtext; border-right-color: windowtext; border-bottom-color: windowtext; border-top-width: 1pt; border-right-width: 1pt; border-bottom-width: 1pt; padding: 0cm 5.4pt; height: 21.5pt;\"><p class=\"MsoNormal\"><b><span style=\"font-size: 9pt; font-family: 'MS Shell Dlg 2', sans-serif;\">Einheit</span></b><span style=\"font-size: 9pt; font-family: 'MS Shell Dlg 2', sans-serif;\"><o:p></o:p></span></p></td><td width=\"86\" style=\"width: 64.35pt; border-style: solid solid solid none; border-top-color: windowtext; border-right-color: windowtext; border-bottom-color: windowtext; border-top-width: 1pt; border-right-width: 1pt; border-bottom-width: 1pt; padding: 0cm 5.4pt; height: 21.5pt;\"><p class=\"MsoNormal\"><b><span style=\"font-size: 9pt; font-family: 'MS Shell Dlg 2', sans-serif;\">Standardwert</span></b><span style=\"font-size: 9pt; font-family: 'MS Shell Dlg 2', sans-serif;\"><o:p></o:p></span></p></td><td width=\"105\" style=\"width: 78.6pt; border-style: solid solid solid none; border-top-color: windowtext; border-right-color: windowtext; border-bottom-color: windowtext; border-top-width: 1pt; border-right-width: 1pt; border-bottom-width: 1pt; padding: 0cm 5.4pt; height: 21.5pt;\"><p class=\"MsoNormal\"><b><span style=\"font-size: 9pt; font-family: 'MS Shell Dlg 2', sans-serif;\">Einschränkungen</span></b><span style=\"font-size: 9pt; font-family: 'MS Shell Dlg 2', sans-serif;\"><o:p></o:p></span></p></td></tr><tr style=\"height: 21.5pt;\"><td width=\"47\" style=\"width: 35.3pt; border-style: none solid solid; border-right-color: windowtext; border-bottom-color: windowtext; border-left-color: windowtext; border-right-width: 1pt; border-bottom-width: 1pt; border-left-width: 1pt; padding: 0cm 5.4pt; height: 21.5pt;\"><p class=\"MsoNormal\"><span style=\"font-size: 9pt; font-family: 'MS Shell Dlg 2', sans-serif;\">Bürstenabfallspannung</span><span style=\"font-size: 9pt; font-family: 'MS Shell Dlg 2', sans-serif;\"><o:p></o:p></span></p></td><td width=\"90\" style=\"width: 67.85pt; border-style: none solid solid none; border-bottom-color: windowtext; border-bottom-width: 1pt; border-right-color: windowtext; border-right-width: 1pt; padding: 0cm 5.4pt; height: 21.5pt;\"><p class=\"MsoNormal\"><span style=\"font-size: 9pt; font-family: 'MS Shell Dlg 2', sans-serif;\">Ub<o:p></o:p></span></p></td><td width=\"50\" style=\"width: 37.85pt; border-style: none solid solid none; border-bottom-color: windowtext; border-bottom-width: 1pt; border-right-color: windowtext; border-right-width: 1pt; padding: 0cm 5.4pt; height: 21.5pt;\"><p class=\"MsoNormal\"><span style=\"font-size: 9pt; font-family: 'MS Shell Dlg 2', sans-serif;\">V<o:p></o:p></span></p></td><td width=\"86\" style=\"width: 64.35pt; border-style: none solid solid none; border-bottom-color: windowtext; border-bottom-width: 1pt; border-right-color: windowtext; border-right-width: 1pt; padding: 0cm 5.4pt; height: 21.5pt;\"><p class=\"MsoNormal\"><span style=\"font-size: 9pt; font-family: 'MS Shell Dlg 2', sans-serif;\">0 V<o:p></o:p></span></p></td><td width=\"105\" style=\"width: 78.6pt; border-style: none solid solid none; border-bottom-color: windowtext; border-bottom-width: 1pt; border-right-color: windowtext; border-right-width: 1pt; padding: 0cm 5.4pt; height: 21.5pt;\"><p class=\"MsoNormal\"><span style=\"font-size: 9pt; font-family: 'MS Shell Dlg 2', sans-serif;\">Ub&nbsp;</span><span style=\"font-size: 9pt; font-family: 'MS Shell Dlg 2', sans-serif;\">≥ 0 V</span><span style=\"font-size: 9pt; font-family: 'MS Shell Dlg 2', sans-serif;\"><o:p></o:p></span></p></td></tr><tr style=\"height: 21.5pt;\"><td width=\"47\" style=\"width: 35.3pt; border-style: none solid solid; border-right-color: windowtext; border-bottom-color: windowtext; border-left-color: windowtext; border-right-width: 1pt; border-bottom-width: 1pt; border-left-width: 1pt; padding: 0cm 5.4pt; height: 21.5pt;\"><p class=\"MsoNormal\"><span lang=\"EN-US\" style=\"font-size: 9pt; font-family: 'MS Shell Dlg 2', sans-serif;\">Ankerwiderstand</span><span style=\"font-size: 9pt; font-family: 'MS Shell Dlg 2', sans-serif;\"><o:p></o:p></span></p></td><td width=\"90\" style=\"width: 67.85pt; border-style: none solid solid none; border-bottom-color: windowtext; border-bottom-width: 1pt; border-right-color: windowtext; border-right-width: 1pt; padding: 0cm 5.4pt; height: 21.5pt;\"><p class=\"MsoNormal\"><span style=\"font-size: 9pt; font-family: 'MS Shell Dlg 2', sans-serif;\">Ra<o:p></o:p></span></p></td><td width=\"50\" style=\"width: 37.85pt; border-style: none solid solid none; border-bottom-color: windowtext; border-bottom-width: 1pt; border-right-color: windowtext; border-right-width: 1pt; padding: 0cm 5.4pt; height: 21.5pt;\"><p class=\"MsoNormal\"><span style=\"font-size: 9pt; font-family: 'MS Shell Dlg 2', sans-serif;\">Ω</span><span style=\"font-size: 9pt; font-family: 'MS Shell Dlg 2', sans-serif;\"><o:p></o:p></span></p></td><td width=\"86\" style=\"width: 64.35pt; border-style: none solid solid none; border-bottom-color: windowtext; border-bottom-width: 1pt; border-right-color: windowtext; border-right-width: 1pt; padding: 0cm 5.4pt; height: 21.5pt;\"><p class=\"MsoNormal\"><span style=\"font-size: 9pt; font-family: 'MS Shell Dlg 2', sans-serif;\">0.2&nbsp;</span><span style=\"font-size: 9pt; font-family: 'MS Shell Dlg 2', sans-serif;\">Ω</span><span style=\"font-size: 9pt; font-family: 'MS Shell Dlg 2', sans-serif;\"><o:p></o:p></span></p></td><td width=\"105\" style=\"width: 78.6pt; border-style: none solid solid none; border-bottom-color: windowtext; border-bottom-width: 1pt; border-right-color: windowtext; border-right-width: 1pt; padding: 0cm 5.4pt; height: 21.5pt;\"><p class=\"MsoNormal\"><span style=\"font-size: 9pt; font-family: 'MS Shell Dlg 2', sans-serif;\">Ra&nbsp;</span><span style=\"font-size: 9pt; font-family: 'MS Shell Dlg 2', sans-serif;\">≥ 0&nbsp;</span><span style=\"font-size: 9pt; font-family: 'MS Shell Dlg 2', sans-serif;\">Ω</span><span style=\"font-size: 9pt; font-family: 'MS Shell Dlg 2', sans-serif;\"><o:p></o:p></span></p></td></tr><tr style=\"height: 21.5pt;\"><td width=\"47\" style=\"width: 35.3pt; border-style: none solid solid; border-right-color: windowtext; border-bottom-color: windowtext; border-left-color: windowtext; border-right-width: 1pt; border-bottom-width: 1pt; border-left-width: 1pt; padding: 0cm 5.4pt; height: 21.5pt;\"><p class=\"MsoNormal\"><span lang=\"EN-US\" style=\"font-size: 9pt; font-family: 'MS Shell Dlg 2', sans-serif;\">Ankerinduktivitaet</span><span style=\"font-size: 9pt; font-family: 'MS Shell Dlg 2', sans-serif;\"><o:p></o:p></span></p></td><td width=\"90\" style=\"width: 67.85pt; border-style: none solid solid none; border-bottom-color: windowtext; border-bottom-width: 1pt; border-right-color: windowtext; border-right-width: 1pt; padding: 0cm 5.4pt; height: 21.5pt;\"><p class=\"MsoNormal\"><span style=\"font-size: 9pt; font-family: 'MS Shell Dlg 2', sans-serif;\">La<o:p></o:p></span></p></td><td width=\"50\" style=\"width: 37.85pt; border-style: none solid solid none; border-bottom-color: windowtext; border-bottom-width: 1pt; border-right-color: windowtext; border-right-width: 1pt; padding: 0cm 5.4pt; height: 21.5pt;\"><p class=\"MsoNormal\"><span style=\"font-size: 9pt; font-family: 'MS Shell Dlg 2', sans-serif;\">H<o:p></o:p></span></p></td><td width=\"86\" style=\"width: 64.35pt; border-style: none solid solid none; border-bottom-color: windowtext; border-bottom-width: 1pt; border-right-color: windowtext; border-right-width: 1pt; padding: 0cm 5.4pt; height: 21.5pt;\"><p class=\"MsoNormal\"><span style=\"font-size: 9pt; font-family: 'MS Shell Dlg 2', sans-serif;\">0 H<o:p></o:p></span></p></td><td width=\"105\" style=\"width: 78.6pt; border-style: none solid solid none; border-bottom-color: windowtext; border-bottom-width: 1pt; border-right-color: windowtext; border-right-width: 1pt; padding: 0cm 5.4pt; height: 21.5pt;\"><p class=\"MsoNormal\"><span style=\"font-size: 9pt; font-family: 'MS Shell Dlg 2', sans-serif;\">La&nbsp;</span><span style=\"font-size: 9pt; font-family: 'MS Shell Dlg 2', sans-serif;\">≥ 0 H</span><span style=\"font-size: 9pt; font-family: 'MS Shell Dlg 2', sans-serif;\"><o:p></o:p></span></p></td></tr><tr style=\"height: 21.5pt;\"><td width=\"47\" style=\"width: 35.3pt; border-style: none solid solid; border-right-color: windowtext; border-bottom-color: windowtext; border-left-color: windowtext; border-right-width: 1pt; border-bottom-width: 1pt; border-left-width: 1pt; padding: 0cm 5.4pt; height: 21.5pt;\"><p class=\"MsoNormal\"><span lang=\"EN-US\" style=\"font-size: 9pt; font-family: 'MS Shell Dlg 2', sans-serif;\">Drehmomentkonstante</span><span style=\"font-size: 9pt; font-family: 'MS Shell Dlg 2', sans-serif;\"><o:p></o:p></span></p></td><td width=\"90\" style=\"width: 67.85pt; border-style: none solid solid none; border-bottom-color: windowtext; border-bottom-width: 1pt; border-right-color: windowtext; border-right-width: 1pt; padding: 0cm 5.4pt; height: 21.5pt;\"><p class=\"MsoNormal\"><span style=\"font-size: 9pt; font-family: 'MS Shell Dlg 2', sans-serif;\">kt<o:p></o:p></span></p></td><td width=\"50\" style=\"width: 37.85pt; border-style: none solid solid none; border-bottom-color: windowtext; border-bottom-width: 1pt; border-right-color: windowtext; border-right-width: 1pt; padding: 0cm 5.4pt; height: 21.5pt;\"><p class=\"MsoNormal\"><span style=\"font-size: 9pt; font-family: 'MS Shell Dlg 2', sans-serif;\">Nm/A<o:p></o:p></span></p></td><td width=\"86\" style=\"width: 64.35pt; border-style: none solid solid none; border-bottom-color: windowtext; border-bottom-width: 1pt; border-right-color: windowtext; border-right-width: 1pt; padding: 0cm 5.4pt; height: 21.5pt;\"><p class=\"MsoNormal\"><span style=\"font-size: 9pt; font-family: 'MS Shell Dlg 2', sans-serif;\">0.1 Nm/A<o:p></o:p></span></p></td><td width=\"105\" style=\"width: 78.6pt; border-style: none solid solid none; border-bottom-color: windowtext; border-bottom-width: 1pt; border-right-color: windowtext; border-right-width: 1pt; padding: 0cm 5.4pt; height: 21.5pt;\"><p class=\"MsoNormal\"><span style=\"font-size: 9pt; font-family: 'MS Shell Dlg 2', sans-serif;\">kt ≥ 0</span><span style=\"font-size: 9pt; font-family: 'MS Shell Dlg 2', sans-serif;\"><o:p></o:p></span></p></td></tr><tr style=\"height: 21.5pt;\"><td width=\"47\" style=\"width: 35.3pt; border-style: none solid solid; border-right-color: windowtext; border-bottom-color: windowtext; border-left-color: windowtext; border-right-width: 1pt; border-bottom-width: 1pt; border-left-width: 1pt; padding: 0cm 5.4pt; height: 21.5pt;\"><p class=\"MsoNormal\"><span style=\"font-size: 9pt; font-family: 'MS Shell Dlg 2', sans-serif;\">Reibungsverlustkonstante</span><span style=\"font-size: 9pt; font-family: 'MS Shell Dlg 2', sans-serif;\"><o:p></o:p></span></p></td><td width=\"90\" style=\"width: 67.85pt; border-style: none solid solid none; border-bottom-color: windowtext; border-bottom-width: 1pt; border-right-color: windowtext; border-right-width: 1pt; padding: 0cm 5.4pt; height: 21.5pt;\"><p class=\"MsoNormal\"><span style=\"font-size: 9pt; font-family: 'MS Shell Dlg 2', sans-serif;\">cf<o:p></o:p></span></p></td><td width=\"50\" style=\"width: 37.85pt; border-style: none solid solid none; border-bottom-color: windowtext; border-bottom-width: 1pt; border-right-color: windowtext; border-right-width: 1pt; padding: 0cm 5.4pt; height: 21.5pt;\"><p class=\"MsoNormal\"><span style=\"font-size: 9pt; font-family: 'MS Shell Dlg 2', sans-serif;\">Nms<o:p></o:p></span></p></td><td width=\"86\" style=\"width: 64.35pt; border-style: none solid solid none; border-bottom-color: windowtext; border-bottom-width: 1pt; border-right-color: windowtext; border-right-width: 1pt; padding: 0cm 5.4pt; height: 21.5pt;\"><p class=\"MsoNormal\"><span style=\"font-size: 9pt; font-family: 'MS Shell Dlg 2', sans-serif;\">0.0025 Nms<o:p></o:p></span></p></td><td width=\"105\" style=\"width: 78.6pt; border-style: none solid solid none; border-bottom-color: windowtext; border-bottom-width: 1pt; border-right-color: windowtext; border-right-width: 1pt; padding: 0cm 5.4pt; height: 21.5pt;\"><p class=\"MsoNormal\"><span style=\"font-size: 9pt; font-family: 'MS Shell Dlg 2', sans-serif;\">cf ≥ 0</span><span style=\"font-size: 9pt; font-family: 'MS Shell Dlg 2', sans-serif;\"><o:p></o:p></span></p></td></tr><tr style=\"height: 21.5pt;\"><td width=\"47\" style=\"width: 35.3pt; border-style: none solid solid; border-right-color: windowtext; border-bottom-color: windowtext; border-left-color: windowtext; border-right-width: 1pt; border-bottom-width: 1pt; border-left-width: 1pt; padding: 0cm 5.4pt; height: 21.5pt;\"><p class=\"MsoNormal\"><span lang=\"EN-US\" style=\"font-size: 9pt; font-family: 'MS Shell Dlg 2', sans-serif;\">Ventilationsverlustkonstante</span><span style=\"font-size: 9pt; font-family: 'MS Shell Dlg 2', sans-serif;\"><o:p></o:p></span></p></td><td width=\"90\" style=\"width: 67.85pt; border-style: none solid solid none; border-bottom-color: windowtext; border-bottom-width: 1pt; border-right-color: windowtext; border-right-width: 1pt; padding: 0cm 5.4pt; height: 21.5pt;\"><p class=\"MsoNormal\"><span style=\"font-size: 9pt; font-family: 'MS Shell Dlg 2', sans-serif;\">cv<o:p></o:p></span></p></td><td width=\"50\" style=\"width: 37.85pt; border-style: none solid solid none; border-bottom-color: windowtext; border-bottom-width: 1pt; border-right-color: windowtext; border-right-width: 1pt; padding: 0cm 5.4pt; height: 21.5pt;\"><p class=\"MsoNormal\"><span style=\"font-size: 9pt; font-family: 'MS Shell Dlg 2', sans-serif;\">Nms²<o:p></o:p></span></p></td><td width=\"86\" style=\"width: 64.35pt; border-style: none solid solid none; border-bottom-color: windowtext; border-bottom-width: 1pt; border-right-color: windowtext; border-right-width: 1pt; padding: 0cm 5.4pt; height: 21.5pt;\"><p class=\"MsoNormal\"><span style=\"font-size: 9pt; font-family: 'MS Shell Dlg 2', sans-serif;\">0.000104 Nms²<o:p></o:p></span></p></td><td width=\"105\" style=\"width: 78.6pt; border-style: none solid solid none; border-bottom-color: windowtext; border-bottom-width: 1pt; border-right-color: windowtext; border-right-width: 1pt; padding: 0cm 5.4pt; height: 21.5pt;\"><p class=\"MsoNormal\"><span style=\"font-size: 9pt; font-family: 'MS Shell Dlg 2', sans-serif;\">cv ≥ 0</span><span style=\"font-size: 9pt; font-family: 'MS Shell Dlg 2', sans-serif;\"><o:p></o:p></span></p></td></tr><tr style=\"height: 21.5pt;\"><td width=\"47\" style=\"width: 35.3pt; border-style: none solid solid; border-right-color: windowtext; border-bottom-color: windowtext; border-left-color: windowtext; border-right-width: 1pt; border-bottom-width: 1pt; border-left-width: 1pt; padding: 0cm 5.4pt; height: 21.5pt;\"><p class=\"MsoNormal\"><span style=\"font-size: 9pt; font-family: 'MS Shell Dlg 2', sans-serif;\">Massentraegheit</span><span style=\"font-size: 9pt; font-family: 'MS Shell Dlg 2', sans-serif;\"><o:p></o:p></span></p></td><td width=\"90\" style=\"width: 67.85pt; border-style: none solid solid none; border-bottom-color: windowtext; border-bottom-width: 1pt; border-right-color: windowtext; border-right-width: 1pt; padding: 0cm 5.4pt; height: 21.5pt;\"><p class=\"MsoNormal\"><span style=\"font-size: 9pt; font-family: 'MS Shell Dlg 2', sans-serif;\">Jtot<o:p></o:p></span></p></td><td width=\"50\" style=\"width: 37.85pt; border-style: none solid solid none; border-bottom-color: windowtext; border-bottom-width: 1pt; border-right-color: windowtext; border-right-width: 1pt; padding: 0cm 5.4pt; height: 21.5pt;\"><p class=\"MsoNormal\"><span style=\"font-size: 9pt; font-family: 'MS Shell Dlg 2', sans-serif;\">kgm²<o:p></o:p></span></p></td><td width=\"86\" style=\"width: 64.35pt; border-style: none solid solid none; border-bottom-color: windowtext; border-bottom-width: 1pt; border-right-color: windowtext; border-right-width: 1pt; padding: 0cm 5.4pt; height: 21.5pt;\"><p class=\"MsoNormal\"><span style=\"font-size: 9pt; font-family: 'MS Shell Dlg 2', sans-serif;\">0.005 kgm²<o:p></o:p></span></p></td><td width=\"105\" style=\"width: 78.6pt; border-style: none solid solid none; border-bottom-color: windowtext; border-bottom-width: 1pt; border-right-color: windowtext; border-right-width: 1pt; padding: 0cm 5.4pt; height: 21.5pt;\"><p class=\"MsoNormal\"><span style=\"font-size: 9pt; font-family: 'MS Shell Dlg 2', sans-serif;\">Jtot ≥ 0</span><span style=\"font-family: 'MS Shell Dlg 2', sans-serif; font-size: 9pt;\">&nbsp;</span></p></td></tr></tbody></table><p class=\"MsoNormal\"><u><span style=\"font-size: 9pt; font-family: 'MS Shell Dlg 2', sans-serif;\"><br>Connectoren:</span></u><span style=\"font-size: 9pt; font-family: 'MS Shell Dlg 2', sans-serif;\"><o:p></o:p></span></p><table class=\"MsoNormalTable\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\" style=\"border-collapse: collapse;\"><tbody><tr style=\"height: 25.65pt;\"><td width=\"88\" style=\"width: 66pt; border: 1pt solid windowtext; padding: 0cm 5.4pt; height: 25.65pt;\"><p class=\"MsoNormal\"><b><span style=\"font-size: 9pt; font-family: 'MS Shell Dlg 2', sans-serif;\">Name</span></b><span style=\"font-size: 9pt; font-family: 'Times New Roman', serif;\"><o:p></o:p></span></p></td><td width=\"132\" style=\"width: 98.7pt; border-style: solid solid solid none; border-top-color: windowtext; border-right-color: windowtext; border-bottom-color: windowtext; border-top-width: 1pt; border-right-width: 1pt; border-bottom-width: 1pt; padding: 0cm 5.4pt; height: 25.65pt;\"><p class=\"MsoNormal\"><b><span style=\"font-size: 9pt; font-family: 'MS Shell Dlg 2', sans-serif;\">Typ</span></b><span style=\"font-size: 9pt; font-family: 'Times New Roman', serif;\"><o:p></o:p></span></p></td><td width=\"66\" style=\"width: 49.55pt; border-style: solid solid solid none; border-top-color: windowtext; border-right-color: windowtext; border-bottom-color: windowtext; border-top-width: 1pt; border-right-width: 1pt; border-bottom-width: 1pt; padding: 0cm 5.4pt; height: 25.65pt;\"><p class=\"MsoNormal\"><b><span style=\"font-size: 9pt; font-family: 'MS Shell Dlg 2', sans-serif;\">Variablen</span></b><span style=\"font-size: 9pt; font-family: 'Times New Roman', serif;\"><o:p></o:p></span></p></td><td width=\"111\" style=\"width: 83.35pt; border-style: solid solid solid none; border-top-color: windowtext; border-right-color: windowtext; border-bottom-color: windowtext; border-top-width: 1pt; border-right-width: 1pt; border-bottom-width: 1pt; padding: 0cm 5.4pt; height: 25.65pt;\"><p class=\"MsoNormal\"><b><span style=\"font-size: 9pt; font-family: 'MS Shell Dlg 2', sans-serif;\">Verwendungszweck</span></b><span style=\"font-size: 9pt; font-family: 'Times New Roman', serif;\"><o:p></o:p></span></p></td></tr><tr style=\"height: 25.65pt;\"><td width=\"88\" style=\"width: 66pt; border-style: none solid solid; border-right-color: windowtext; border-bottom-color: windowtext; border-left-color: windowtext; border-right-width: 1pt; border-bottom-width: 1pt; border-left-width: 1pt; padding: 0cm 5.4pt; height: 25.65pt;\"><p class=\"MsoNormal\"><span style=\"font-size: 9pt; font-family: 'MS Shell Dlg 2', sans-serif;\">U_I_Connector</span><span style=\"font-size: 9pt; font-family: 'Times New Roman', serif;\"><o:p></o:p></span></p></td><td width=\"132\" style=\"width: 98.7pt; border-style: none solid solid none; border-bottom-color: windowtext; border-bottom-width: 1pt; border-right-color: windowtext; border-right-width: 1pt; padding: 0cm 5.4pt; height: 25.65pt;\"><p class=\"MsoNormal\"><span style=\"font-size: 9pt; font-family: 'MS Shell Dlg 2', sans-serif;\">Spannung_Strom_Connector</span><span style=\"font-size: 9pt; font-family: 'Times New Roman', serif;\"><o:p></o:p></span></p></td><td width=\"66\" style=\"width: 49.55pt; border-style: none solid solid none; border-bottom-color: windowtext; border-bottom-width: 1pt; border-right-color: windowtext; border-right-width: 1pt; padding: 0cm 5.4pt; height: 25.65pt;\"><p class=\"MsoNormal\"><span style=\"font-size: 9pt; font-family: 'MS Shell Dlg 2', sans-serif;\">U und I</span><span style=\"font-size: 9pt; font-family: 'Times New Roman', serif;\"><o:p></o:p></span></p></td><td width=\"111\" style=\"width: 83.35pt; border-style: none solid solid none; border-bottom-color: windowtext; border-bottom-width: 1pt; border-right-color: windowtext; border-right-width: 1pt; padding: 0cm 5.4pt; height: 25.65pt;\"><p class=\"MsoNormal\"><span style=\"font-size: 9pt; font-family: 'MS Shell Dlg 2', sans-serif;\">Anbindung der Spannungsquelle</span><span style=\"font-size: 9pt; font-family: 'Times New Roman', serif;\"><o:p></o:p></span></p></td></tr><tr style=\"height: 25.65pt;\"><td width=\"88\" style=\"width: 66pt; border-style: none solid solid; border-right-color: windowtext; border-bottom-color: windowtext; border-left-color: windowtext; border-right-width: 1pt; border-bottom-width: 1pt; border-left-width: 1pt; padding: 0cm 5.4pt; height: 25.65pt;\"><p class=\"MsoNormal\"><span style=\"font-size: 9pt; font-family: 'MS Shell Dlg 2', sans-serif;\">phi_M_Connector</span><span style=\"font-size: 9pt; font-family: 'Times New Roman', serif;\"><o:p></o:p></span></p></td><td width=\"132\" style=\"width: 98.7pt; border-style: none solid solid none; border-bottom-color: windowtext; border-bottom-width: 1pt; border-right-color: windowtext; border-right-width: 1pt; padding: 0cm 5.4pt; height: 25.65pt;\"><p class=\"MsoNormal\"><span style=\"font-size: 9pt; font-family: 'MS Shell Dlg 2', sans-serif;\">Winkel_Moment_Connector</span><span style=\"font-size: 9pt; font-family: 'Times New Roman', serif;\"><o:p></o:p></span></p></td><td width=\"66\" style=\"width: 49.55pt; border-style: none solid solid none; border-bottom-color: windowtext; border-bottom-width: 1pt; border-right-color: windowtext; border-right-width: 1pt; padding: 0cm 5.4pt; height: 25.65pt;\"><p class=\"MsoNormal\"><span style=\"font-size: 9pt; font-family: 'MS Shell Dlg 2', sans-serif;\">phi und M</span><span style=\"font-size: 9pt; font-family: 'Times New Roman', serif;\"><o:p></o:p></span></p></td><td width=\"111\" style=\"width: 83.35pt; border-style: none solid solid none; border-bottom-color: windowtext; border-bottom-width: 1pt; border-right-color: windowtext; border-right-width: 1pt; padding: 0cm 5.4pt; height: 25.65pt;\"><p class=\"MsoNormal\"><span style=\"font-size: 9pt; font-family: 'MS Shell Dlg 2', sans-serif;\">Anbindung einer (rotierenden) Welle</span><span style=\"font-size: 9pt; font-family: 'Times New Roman', serif;\"><o:p></o:p></span></p></td></tr></tbody></table></div><!--EndFragment--></body></html>"));
+        Documentation(info = "<html><head></head><body><!--StartFragment--><div><u><span style=\"font-size: 9pt; font-family: 'MS Shell Dlg 2', sans-serif;\">Beschreibung:</span></u></div><div><br></div><div>Dieses Modell beschreibt einen einphasigen Gleichstrommotor, welcher ein realistisches Verhalten der Drehzahl und des Stromes in Abhängigkeit der angelegten Spannung und des Lastmoments abbildet.<br></div><div><br></div><div>Versorgt wird der Motor über einen Spannung_Strom_Connector, über welchen eine vorgegebene Spannung übertragen wird.<br>Der simulierte Winkel sowie das angelegte Lastmoment werden über einen Winkel_Moment_Connector übertragen.</div><div>Die internen Kennwerte des Motors können über das Parameter-Interface angepasst werden.</div><div>Die Parameter besitzen jedoch bereits vorinitialisierte Standardwerte, welche die Benutzung des Motors im unveränderten Zustand gewährleisten.<br>Als&nbsp;<b>Nennspannung</b>&nbsp;für den Motor wurden&nbsp;<b>48 V</b>&nbsp;gewählt, es können jedoch in der Simulation auch deutlich niedrige bzw. höhere Werte verwendet werden.</div><div><br></div><div>Bei der Verwendung einer positiven Versorgungsspannung dreht der Motor in die positive Drehrichtung, also so dass der(phi) &gt; 0 ist.</div><div>Eine negative Drehrichtung kann dementsprechend durch das Anlegen einer negativen Spannung erreicht werden.</div><div>Die Vorgabe der Drehrichtung über die Versorgungsspannung ist jedoch nicht immer möglich, z.B. wenn die Last zu hoch gewählt wurde und der Motor nicht genügend elektrisches Moment erzeugen kann, um das Lastmoment auszugleichen. In diesem Fall würde der Motor also in die entgegengesetzte Drehrichtung angetrieben werden, jedoch nicht von der angelegten Spannung, sondern vom angelegten Lastmoment.</div><div>Im Leerlauf und im Betrieb mit geringer Last ist die Drehrichtungsvorgabe über das Vorzeichen der angelegten Spannung zuverlässig.</div><div><p class=\"MsoNormal\"><u><span style=\"font-size: 9pt; font-family: 'MS Shell Dlg 2', sans-serif;\">Parameter:</span></u><span style=\"font-size: 9pt; font-family: 'MS Shell Dlg 2', sans-serif;\"><o:p></o:p></span></p><p class=\"MsoNormal\">
+
+
+
+
+<!--[if gte mso 9]><xml>
+ <o:OfficeDocumentSettings>
+  <o:AllowPNG/>
+ </o:OfficeDocumentSettings>
+</xml><![endif]-->
+
+
+<!--[if gte mso 9]><xml>
+ <w:WordDocument>
+  <w:View>Normal</w:View>
+  <w:Zoom>0</w:Zoom>
+  <w:TrackMoves/>
+  <w:TrackFormatting/>
+  <w:HyphenationZone>21</w:HyphenationZone>
+  <w:PunctuationKerning/>
+  <w:ValidateAgainstSchemas/>
+  <w:SaveIfXMLInvalid>false</w:SaveIfXMLInvalid>
+  <w:IgnoreMixedContent>false</w:IgnoreMixedContent>
+  <w:AlwaysShowPlaceholderText>false</w:AlwaysShowPlaceholderText>
+  <w:DoNotPromoteQF/>
+  <w:LidThemeOther>DE</w:LidThemeOther>
+  <w:LidThemeAsian>JA</w:LidThemeAsian>
+  <w:LidThemeComplexScript>X-NONE</w:LidThemeComplexScript>
+  <w:Compatibility>
+   <w:BreakWrappedTables/>
+   <w:SnapToGridInCell/>
+   <w:WrapTextWithPunct/>
+   <w:UseAsianBreakRules/>
+   <w:DontGrowAutofit/>
+   <w:SplitPgBreakAndParaMark/>
+   <w:EnableOpenTypeKerning/>
+   <w:DontFlipMirrorIndents/>
+   <w:OverrideTableStyleHps/>
+   <w:UseFELayout/>
+  </w:Compatibility>
+  <m:mathPr>
+   <m:mathFont m:val=\"Cambria Math\"/>
+   <m:brkBin m:val=\"before\"/>
+   <m:brkBinSub m:val=\"&#45;-\"/>
+   <m:smallFrac m:val=\"off\"/>
+   <m:dispDef/>
+   <m:lMargin m:val=\"0\"/>
+   <m:rMargin m:val=\"0\"/>
+   <m:defJc m:val=\"centerGroup\"/>
+   <m:wrapIndent m:val=\"1440\"/>
+   <m:intLim m:val=\"subSup\"/>
+   <m:naryLim m:val=\"undOvr\"/>
+  </m:mathPr></w:WordDocument>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <w:LatentStyles DefLockedState=\"false\" DefUnhideWhenUsed=\"false\"
+  DefSemiHidden=\"false\" DefQFormat=\"false\" DefPriority=\"99\"
+  LatentStyleCount=\"375\">
+  <w:LsdException Locked=\"false\" Priority=\"0\" QFormat=\"true\" Name=\"Normal\"/>
+  <w:LsdException Locked=\"false\" Priority=\"9\" QFormat=\"true\" Name=\"heading 1\"/>
+  <w:LsdException Locked=\"false\" Priority=\"9\" SemiHidden=\"true\"
+   UnhideWhenUsed=\"true\" QFormat=\"true\" Name=\"heading 2\"/>
+  <w:LsdException Locked=\"false\" Priority=\"9\" SemiHidden=\"true\"
+   UnhideWhenUsed=\"true\" QFormat=\"true\" Name=\"heading 3\"/>
+  <w:LsdException Locked=\"false\" Priority=\"9\" SemiHidden=\"true\"
+   UnhideWhenUsed=\"true\" QFormat=\"true\" Name=\"heading 4\"/>
+  <w:LsdException Locked=\"false\" Priority=\"9\" SemiHidden=\"true\"
+   UnhideWhenUsed=\"true\" QFormat=\"true\" Name=\"heading 5\"/>
+  <w:LsdException Locked=\"false\" Priority=\"9\" SemiHidden=\"true\"
+   UnhideWhenUsed=\"true\" QFormat=\"true\" Name=\"heading 6\"/>
+  <w:LsdException Locked=\"false\" Priority=\"9\" SemiHidden=\"true\"
+   UnhideWhenUsed=\"true\" QFormat=\"true\" Name=\"heading 7\"/>
+  <w:LsdException Locked=\"false\" Priority=\"9\" SemiHidden=\"true\"
+   UnhideWhenUsed=\"true\" QFormat=\"true\" Name=\"heading 8\"/>
+  <w:LsdException Locked=\"false\" Priority=\"9\" SemiHidden=\"true\"
+   UnhideWhenUsed=\"true\" QFormat=\"true\" Name=\"heading 9\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"index 1\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"index 2\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"index 3\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"index 4\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"index 5\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"index 6\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"index 7\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"index 8\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"index 9\"/>
+  <w:LsdException Locked=\"false\" Priority=\"39\" SemiHidden=\"true\"
+   UnhideWhenUsed=\"true\" Name=\"toc 1\"/>
+  <w:LsdException Locked=\"false\" Priority=\"39\" SemiHidden=\"true\"
+   UnhideWhenUsed=\"true\" Name=\"toc 2\"/>
+  <w:LsdException Locked=\"false\" Priority=\"39\" SemiHidden=\"true\"
+   UnhideWhenUsed=\"true\" Name=\"toc 3\"/>
+  <w:LsdException Locked=\"false\" Priority=\"39\" SemiHidden=\"true\"
+   UnhideWhenUsed=\"true\" Name=\"toc 4\"/>
+  <w:LsdException Locked=\"false\" Priority=\"39\" SemiHidden=\"true\"
+   UnhideWhenUsed=\"true\" Name=\"toc 5\"/>
+  <w:LsdException Locked=\"false\" Priority=\"39\" SemiHidden=\"true\"
+   UnhideWhenUsed=\"true\" Name=\"toc 6\"/>
+  <w:LsdException Locked=\"false\" Priority=\"39\" SemiHidden=\"true\"
+   UnhideWhenUsed=\"true\" Name=\"toc 7\"/>
+  <w:LsdException Locked=\"false\" Priority=\"39\" SemiHidden=\"true\"
+   UnhideWhenUsed=\"true\" Name=\"toc 8\"/>
+  <w:LsdException Locked=\"false\" Priority=\"39\" SemiHidden=\"true\"
+   UnhideWhenUsed=\"true\" Name=\"toc 9\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Normal Indent\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"footnote text\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"annotation text\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"header\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"footer\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"index heading\"/>
+  <w:LsdException Locked=\"false\" Priority=\"35\" SemiHidden=\"true\"
+   UnhideWhenUsed=\"true\" QFormat=\"true\" Name=\"caption\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"table of figures\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"envelope address\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"envelope return\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"footnote reference\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"annotation reference\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"line number\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"page number\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"endnote reference\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"endnote text\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"table of authorities\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"macro\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"toa heading\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"List\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"List Bullet\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"List Number\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"List 2\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"List 3\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"List 4\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"List 5\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"List Bullet 2\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"List Bullet 3\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"List Bullet 4\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"List Bullet 5\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"List Number 2\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"List Number 3\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"List Number 4\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"List Number 5\"/>
+  <w:LsdException Locked=\"false\" Priority=\"10\" QFormat=\"true\" Name=\"Title\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Closing\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Signature\"/>
+  <w:LsdException Locked=\"false\" Priority=\"1\" SemiHidden=\"true\"
+   UnhideWhenUsed=\"true\" Name=\"Default Paragraph Font\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Body Text\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Body Text Indent\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"List Continue\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"List Continue 2\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"List Continue 3\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"List Continue 4\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"List Continue 5\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Message Header\"/>
+  <w:LsdException Locked=\"false\" Priority=\"11\" QFormat=\"true\" Name=\"Subtitle\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Salutation\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Date\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Body Text First Indent\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Body Text First Indent 2\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Note Heading\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Body Text 2\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Body Text 3\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Body Text Indent 2\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Body Text Indent 3\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Block Text\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Hyperlink\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"FollowedHyperlink\"/>
+  <w:LsdException Locked=\"false\" Priority=\"22\" QFormat=\"true\" Name=\"Strong\"/>
+  <w:LsdException Locked=\"false\" Priority=\"20\" QFormat=\"true\" Name=\"Emphasis\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Document Map\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Plain Text\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"E-mail Signature\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"HTML Top of Form\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"HTML Bottom of Form\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Normal (Web)\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"HTML Acronym\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"HTML Address\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"HTML Cite\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"HTML Code\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"HTML Definition\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"HTML Keyboard\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"HTML Preformatted\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"HTML Sample\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"HTML Typewriter\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"HTML Variable\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Normal Table\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"annotation subject\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"No List\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Outline List 1\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Outline List 2\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Outline List 3\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Table Simple 1\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Table Simple 2\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Table Simple 3\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Table Classic 1\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Table Classic 2\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Table Classic 3\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Table Classic 4\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Table Colorful 1\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Table Colorful 2\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Table Colorful 3\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Table Columns 1\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Table Columns 2\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Table Columns 3\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Table Columns 4\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Table Columns 5\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Table Grid 1\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Table Grid 2\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Table Grid 3\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Table Grid 4\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Table Grid 5\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Table Grid 6\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Table Grid 7\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Table Grid 8\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Table List 1\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Table List 2\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Table List 3\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Table List 4\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Table List 5\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Table List 6\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Table List 7\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Table List 8\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Table 3D effects 1\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Table 3D effects 2\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Table 3D effects 3\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Table Contemporary\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Table Elegant\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Table Professional\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Table Subtle 1\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Table Subtle 2\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Table Web 1\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Table Web 2\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Table Web 3\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Balloon Text\"/>
+  <w:LsdException Locked=\"false\" Priority=\"39\" Name=\"Table Grid\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Table Theme\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" Name=\"Placeholder Text\"/>
+  <w:LsdException Locked=\"false\" Priority=\"1\" QFormat=\"true\" Name=\"No Spacing\"/>
+  <w:LsdException Locked=\"false\" Priority=\"60\" Name=\"Light Shading\"/>
+  <w:LsdException Locked=\"false\" Priority=\"61\" Name=\"Light List\"/>
+  <w:LsdException Locked=\"false\" Priority=\"62\" Name=\"Light Grid\"/>
+  <w:LsdException Locked=\"false\" Priority=\"63\" Name=\"Medium Shading 1\"/>
+  <w:LsdException Locked=\"false\" Priority=\"64\" Name=\"Medium Shading 2\"/>
+  <w:LsdException Locked=\"false\" Priority=\"65\" Name=\"Medium List 1\"/>
+  <w:LsdException Locked=\"false\" Priority=\"66\" Name=\"Medium List 2\"/>
+  <w:LsdException Locked=\"false\" Priority=\"67\" Name=\"Medium Grid 1\"/>
+  <w:LsdException Locked=\"false\" Priority=\"68\" Name=\"Medium Grid 2\"/>
+  <w:LsdException Locked=\"false\" Priority=\"69\" Name=\"Medium Grid 3\"/>
+  <w:LsdException Locked=\"false\" Priority=\"70\" Name=\"Dark List\"/>
+  <w:LsdException Locked=\"false\" Priority=\"71\" Name=\"Colorful Shading\"/>
+  <w:LsdException Locked=\"false\" Priority=\"72\" Name=\"Colorful List\"/>
+  <w:LsdException Locked=\"false\" Priority=\"73\" Name=\"Colorful Grid\"/>
+  <w:LsdException Locked=\"false\" Priority=\"60\" Name=\"Light Shading Accent 1\"/>
+  <w:LsdException Locked=\"false\" Priority=\"61\" Name=\"Light List Accent 1\"/>
+  <w:LsdException Locked=\"false\" Priority=\"62\" Name=\"Light Grid Accent 1\"/>
+  <w:LsdException Locked=\"false\" Priority=\"63\" Name=\"Medium Shading 1 Accent 1\"/>
+  <w:LsdException Locked=\"false\" Priority=\"64\" Name=\"Medium Shading 2 Accent 1\"/>
+  <w:LsdException Locked=\"false\" Priority=\"65\" Name=\"Medium List 1 Accent 1\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" Name=\"Revision\"/>
+  <w:LsdException Locked=\"false\" Priority=\"34\" QFormat=\"true\"
+   Name=\"List Paragraph\"/>
+  <w:LsdException Locked=\"false\" Priority=\"29\" QFormat=\"true\" Name=\"Quote\"/>
+  <w:LsdException Locked=\"false\" Priority=\"30\" QFormat=\"true\"
+   Name=\"Intense Quote\"/>
+  <w:LsdException Locked=\"false\" Priority=\"66\" Name=\"Medium List 2 Accent 1\"/>
+  <w:LsdException Locked=\"false\" Priority=\"67\" Name=\"Medium Grid 1 Accent 1\"/>
+  <w:LsdException Locked=\"false\" Priority=\"68\" Name=\"Medium Grid 2 Accent 1\"/>
+  <w:LsdException Locked=\"false\" Priority=\"69\" Name=\"Medium Grid 3 Accent 1\"/>
+  <w:LsdException Locked=\"false\" Priority=\"70\" Name=\"Dark List Accent 1\"/>
+  <w:LsdException Locked=\"false\" Priority=\"71\" Name=\"Colorful Shading Accent 1\"/>
+  <w:LsdException Locked=\"false\" Priority=\"72\" Name=\"Colorful List Accent 1\"/>
+  <w:LsdException Locked=\"false\" Priority=\"73\" Name=\"Colorful Grid Accent 1\"/>
+  <w:LsdException Locked=\"false\" Priority=\"60\" Name=\"Light Shading Accent 2\"/>
+  <w:LsdException Locked=\"false\" Priority=\"61\" Name=\"Light List Accent 2\"/>
+  <w:LsdException Locked=\"false\" Priority=\"62\" Name=\"Light Grid Accent 2\"/>
+  <w:LsdException Locked=\"false\" Priority=\"63\" Name=\"Medium Shading 1 Accent 2\"/>
+  <w:LsdException Locked=\"false\" Priority=\"64\" Name=\"Medium Shading 2 Accent 2\"/>
+  <w:LsdException Locked=\"false\" Priority=\"65\" Name=\"Medium List 1 Accent 2\"/>
+  <w:LsdException Locked=\"false\" Priority=\"66\" Name=\"Medium List 2 Accent 2\"/>
+  <w:LsdException Locked=\"false\" Priority=\"67\" Name=\"Medium Grid 1 Accent 2\"/>
+  <w:LsdException Locked=\"false\" Priority=\"68\" Name=\"Medium Grid 2 Accent 2\"/>
+  <w:LsdException Locked=\"false\" Priority=\"69\" Name=\"Medium Grid 3 Accent 2\"/>
+  <w:LsdException Locked=\"false\" Priority=\"70\" Name=\"Dark List Accent 2\"/>
+  <w:LsdException Locked=\"false\" Priority=\"71\" Name=\"Colorful Shading Accent 2\"/>
+  <w:LsdException Locked=\"false\" Priority=\"72\" Name=\"Colorful List Accent 2\"/>
+  <w:LsdException Locked=\"false\" Priority=\"73\" Name=\"Colorful Grid Accent 2\"/>
+  <w:LsdException Locked=\"false\" Priority=\"60\" Name=\"Light Shading Accent 3\"/>
+  <w:LsdException Locked=\"false\" Priority=\"61\" Name=\"Light List Accent 3\"/>
+  <w:LsdException Locked=\"false\" Priority=\"62\" Name=\"Light Grid Accent 3\"/>
+  <w:LsdException Locked=\"false\" Priority=\"63\" Name=\"Medium Shading 1 Accent 3\"/>
+  <w:LsdException Locked=\"false\" Priority=\"64\" Name=\"Medium Shading 2 Accent 3\"/>
+  <w:LsdException Locked=\"false\" Priority=\"65\" Name=\"Medium List 1 Accent 3\"/>
+  <w:LsdException Locked=\"false\" Priority=\"66\" Name=\"Medium List 2 Accent 3\"/>
+  <w:LsdException Locked=\"false\" Priority=\"67\" Name=\"Medium Grid 1 Accent 3\"/>
+  <w:LsdException Locked=\"false\" Priority=\"68\" Name=\"Medium Grid 2 Accent 3\"/>
+  <w:LsdException Locked=\"false\" Priority=\"69\" Name=\"Medium Grid 3 Accent 3\"/>
+  <w:LsdException Locked=\"false\" Priority=\"70\" Name=\"Dark List Accent 3\"/>
+  <w:LsdException Locked=\"false\" Priority=\"71\" Name=\"Colorful Shading Accent 3\"/>
+  <w:LsdException Locked=\"false\" Priority=\"72\" Name=\"Colorful List Accent 3\"/>
+  <w:LsdException Locked=\"false\" Priority=\"73\" Name=\"Colorful Grid Accent 3\"/>
+  <w:LsdException Locked=\"false\" Priority=\"60\" Name=\"Light Shading Accent 4\"/>
+  <w:LsdException Locked=\"false\" Priority=\"61\" Name=\"Light List Accent 4\"/>
+  <w:LsdException Locked=\"false\" Priority=\"62\" Name=\"Light Grid Accent 4\"/>
+  <w:LsdException Locked=\"false\" Priority=\"63\" Name=\"Medium Shading 1 Accent 4\"/>
+  <w:LsdException Locked=\"false\" Priority=\"64\" Name=\"Medium Shading 2 Accent 4\"/>
+  <w:LsdException Locked=\"false\" Priority=\"65\" Name=\"Medium List 1 Accent 4\"/>
+  <w:LsdException Locked=\"false\" Priority=\"66\" Name=\"Medium List 2 Accent 4\"/>
+  <w:LsdException Locked=\"false\" Priority=\"67\" Name=\"Medium Grid 1 Accent 4\"/>
+  <w:LsdException Locked=\"false\" Priority=\"68\" Name=\"Medium Grid 2 Accent 4\"/>
+  <w:LsdException Locked=\"false\" Priority=\"69\" Name=\"Medium Grid 3 Accent 4\"/>
+  <w:LsdException Locked=\"false\" Priority=\"70\" Name=\"Dark List Accent 4\"/>
+  <w:LsdException Locked=\"false\" Priority=\"71\" Name=\"Colorful Shading Accent 4\"/>
+  <w:LsdException Locked=\"false\" Priority=\"72\" Name=\"Colorful List Accent 4\"/>
+  <w:LsdException Locked=\"false\" Priority=\"73\" Name=\"Colorful Grid Accent 4\"/>
+  <w:LsdException Locked=\"false\" Priority=\"60\" Name=\"Light Shading Accent 5\"/>
+  <w:LsdException Locked=\"false\" Priority=\"61\" Name=\"Light List Accent 5\"/>
+  <w:LsdException Locked=\"false\" Priority=\"62\" Name=\"Light Grid Accent 5\"/>
+  <w:LsdException Locked=\"false\" Priority=\"63\" Name=\"Medium Shading 1 Accent 5\"/>
+  <w:LsdException Locked=\"false\" Priority=\"64\" Name=\"Medium Shading 2 Accent 5\"/>
+  <w:LsdException Locked=\"false\" Priority=\"65\" Name=\"Medium List 1 Accent 5\"/>
+  <w:LsdException Locked=\"false\" Priority=\"66\" Name=\"Medium List 2 Accent 5\"/>
+  <w:LsdException Locked=\"false\" Priority=\"67\" Name=\"Medium Grid 1 Accent 5\"/>
+  <w:LsdException Locked=\"false\" Priority=\"68\" Name=\"Medium Grid 2 Accent 5\"/>
+  <w:LsdException Locked=\"false\" Priority=\"69\" Name=\"Medium Grid 3 Accent 5\"/>
+  <w:LsdException Locked=\"false\" Priority=\"70\" Name=\"Dark List Accent 5\"/>
+  <w:LsdException Locked=\"false\" Priority=\"71\" Name=\"Colorful Shading Accent 5\"/>
+  <w:LsdException Locked=\"false\" Priority=\"72\" Name=\"Colorful List Accent 5\"/>
+  <w:LsdException Locked=\"false\" Priority=\"73\" Name=\"Colorful Grid Accent 5\"/>
+  <w:LsdException Locked=\"false\" Priority=\"60\" Name=\"Light Shading Accent 6\"/>
+  <w:LsdException Locked=\"false\" Priority=\"61\" Name=\"Light List Accent 6\"/>
+  <w:LsdException Locked=\"false\" Priority=\"62\" Name=\"Light Grid Accent 6\"/>
+  <w:LsdException Locked=\"false\" Priority=\"63\" Name=\"Medium Shading 1 Accent 6\"/>
+  <w:LsdException Locked=\"false\" Priority=\"64\" Name=\"Medium Shading 2 Accent 6\"/>
+  <w:LsdException Locked=\"false\" Priority=\"65\" Name=\"Medium List 1 Accent 6\"/>
+  <w:LsdException Locked=\"false\" Priority=\"66\" Name=\"Medium List 2 Accent 6\"/>
+  <w:LsdException Locked=\"false\" Priority=\"67\" Name=\"Medium Grid 1 Accent 6\"/>
+  <w:LsdException Locked=\"false\" Priority=\"68\" Name=\"Medium Grid 2 Accent 6\"/>
+  <w:LsdException Locked=\"false\" Priority=\"69\" Name=\"Medium Grid 3 Accent 6\"/>
+  <w:LsdException Locked=\"false\" Priority=\"70\" Name=\"Dark List Accent 6\"/>
+  <w:LsdException Locked=\"false\" Priority=\"71\" Name=\"Colorful Shading Accent 6\"/>
+  <w:LsdException Locked=\"false\" Priority=\"72\" Name=\"Colorful List Accent 6\"/>
+  <w:LsdException Locked=\"false\" Priority=\"73\" Name=\"Colorful Grid Accent 6\"/>
+  <w:LsdException Locked=\"false\" Priority=\"19\" QFormat=\"true\"
+   Name=\"Subtle Emphasis\"/>
+  <w:LsdException Locked=\"false\" Priority=\"21\" QFormat=\"true\"
+   Name=\"Intense Emphasis\"/>
+  <w:LsdException Locked=\"false\" Priority=\"31\" QFormat=\"true\"
+   Name=\"Subtle Reference\"/>
+  <w:LsdException Locked=\"false\" Priority=\"32\" QFormat=\"true\"
+   Name=\"Intense Reference\"/>
+  <w:LsdException Locked=\"false\" Priority=\"33\" QFormat=\"true\" Name=\"Book Title\"/>
+  <w:LsdException Locked=\"false\" Priority=\"37\" SemiHidden=\"true\"
+   UnhideWhenUsed=\"true\" Name=\"Bibliography\"/>
+  <w:LsdException Locked=\"false\" Priority=\"39\" SemiHidden=\"true\"
+   UnhideWhenUsed=\"true\" QFormat=\"true\" Name=\"TOC Heading\"/>
+  <w:LsdException Locked=\"false\" Priority=\"41\" Name=\"Plain Table 1\"/>
+  <w:LsdException Locked=\"false\" Priority=\"42\" Name=\"Plain Table 2\"/>
+  <w:LsdException Locked=\"false\" Priority=\"43\" Name=\"Plain Table 3\"/>
+  <w:LsdException Locked=\"false\" Priority=\"44\" Name=\"Plain Table 4\"/>
+  <w:LsdException Locked=\"false\" Priority=\"45\" Name=\"Plain Table 5\"/>
+  <w:LsdException Locked=\"false\" Priority=\"40\" Name=\"Grid Table Light\"/>
+  <w:LsdException Locked=\"false\" Priority=\"46\" Name=\"Grid Table 1 Light\"/>
+  <w:LsdException Locked=\"false\" Priority=\"47\" Name=\"Grid Table 2\"/>
+  <w:LsdException Locked=\"false\" Priority=\"48\" Name=\"Grid Table 3\"/>
+  <w:LsdException Locked=\"false\" Priority=\"49\" Name=\"Grid Table 4\"/>
+  <w:LsdException Locked=\"false\" Priority=\"50\" Name=\"Grid Table 5 Dark\"/>
+  <w:LsdException Locked=\"false\" Priority=\"51\" Name=\"Grid Table 6 Colorful\"/>
+  <w:LsdException Locked=\"false\" Priority=\"52\" Name=\"Grid Table 7 Colorful\"/>
+  <w:LsdException Locked=\"false\" Priority=\"46\"
+   Name=\"Grid Table 1 Light Accent 1\"/>
+  <w:LsdException Locked=\"false\" Priority=\"47\" Name=\"Grid Table 2 Accent 1\"/>
+  <w:LsdException Locked=\"false\" Priority=\"48\" Name=\"Grid Table 3 Accent 1\"/>
+  <w:LsdException Locked=\"false\" Priority=\"49\" Name=\"Grid Table 4 Accent 1\"/>
+  <w:LsdException Locked=\"false\" Priority=\"50\" Name=\"Grid Table 5 Dark Accent 1\"/>
+  <w:LsdException Locked=\"false\" Priority=\"51\"
+   Name=\"Grid Table 6 Colorful Accent 1\"/>
+  <w:LsdException Locked=\"false\" Priority=\"52\"
+   Name=\"Grid Table 7 Colorful Accent 1\"/>
+  <w:LsdException Locked=\"false\" Priority=\"46\"
+   Name=\"Grid Table 1 Light Accent 2\"/>
+  <w:LsdException Locked=\"false\" Priority=\"47\" Name=\"Grid Table 2 Accent 2\"/>
+  <w:LsdException Locked=\"false\" Priority=\"48\" Name=\"Grid Table 3 Accent 2\"/>
+  <w:LsdException Locked=\"false\" Priority=\"49\" Name=\"Grid Table 4 Accent 2\"/>
+  <w:LsdException Locked=\"false\" Priority=\"50\" Name=\"Grid Table 5 Dark Accent 2\"/>
+  <w:LsdException Locked=\"false\" Priority=\"51\"
+   Name=\"Grid Table 6 Colorful Accent 2\"/>
+  <w:LsdException Locked=\"false\" Priority=\"52\"
+   Name=\"Grid Table 7 Colorful Accent 2\"/>
+  <w:LsdException Locked=\"false\" Priority=\"46\"
+   Name=\"Grid Table 1 Light Accent 3\"/>
+  <w:LsdException Locked=\"false\" Priority=\"47\" Name=\"Grid Table 2 Accent 3\"/>
+  <w:LsdException Locked=\"false\" Priority=\"48\" Name=\"Grid Table 3 Accent 3\"/>
+  <w:LsdException Locked=\"false\" Priority=\"49\" Name=\"Grid Table 4 Accent 3\"/>
+  <w:LsdException Locked=\"false\" Priority=\"50\" Name=\"Grid Table 5 Dark Accent 3\"/>
+  <w:LsdException Locked=\"false\" Priority=\"51\"
+   Name=\"Grid Table 6 Colorful Accent 3\"/>
+  <w:LsdException Locked=\"false\" Priority=\"52\"
+   Name=\"Grid Table 7 Colorful Accent 3\"/>
+  <w:LsdException Locked=\"false\" Priority=\"46\"
+   Name=\"Grid Table 1 Light Accent 4\"/>
+  <w:LsdException Locked=\"false\" Priority=\"47\" Name=\"Grid Table 2 Accent 4\"/>
+  <w:LsdException Locked=\"false\" Priority=\"48\" Name=\"Grid Table 3 Accent 4\"/>
+  <w:LsdException Locked=\"false\" Priority=\"49\" Name=\"Grid Table 4 Accent 4\"/>
+  <w:LsdException Locked=\"false\" Priority=\"50\" Name=\"Grid Table 5 Dark Accent 4\"/>
+  <w:LsdException Locked=\"false\" Priority=\"51\"
+   Name=\"Grid Table 6 Colorful Accent 4\"/>
+  <w:LsdException Locked=\"false\" Priority=\"52\"
+   Name=\"Grid Table 7 Colorful Accent 4\"/>
+  <w:LsdException Locked=\"false\" Priority=\"46\"
+   Name=\"Grid Table 1 Light Accent 5\"/>
+  <w:LsdException Locked=\"false\" Priority=\"47\" Name=\"Grid Table 2 Accent 5\"/>
+  <w:LsdException Locked=\"false\" Priority=\"48\" Name=\"Grid Table 3 Accent 5\"/>
+  <w:LsdException Locked=\"false\" Priority=\"49\" Name=\"Grid Table 4 Accent 5\"/>
+  <w:LsdException Locked=\"false\" Priority=\"50\" Name=\"Grid Table 5 Dark Accent 5\"/>
+  <w:LsdException Locked=\"false\" Priority=\"51\"
+   Name=\"Grid Table 6 Colorful Accent 5\"/>
+  <w:LsdException Locked=\"false\" Priority=\"52\"
+   Name=\"Grid Table 7 Colorful Accent 5\"/>
+  <w:LsdException Locked=\"false\" Priority=\"46\"
+   Name=\"Grid Table 1 Light Accent 6\"/>
+  <w:LsdException Locked=\"false\" Priority=\"47\" Name=\"Grid Table 2 Accent 6\"/>
+  <w:LsdException Locked=\"false\" Priority=\"48\" Name=\"Grid Table 3 Accent 6\"/>
+  <w:LsdException Locked=\"false\" Priority=\"49\" Name=\"Grid Table 4 Accent 6\"/>
+  <w:LsdException Locked=\"false\" Priority=\"50\" Name=\"Grid Table 5 Dark Accent 6\"/>
+  <w:LsdException Locked=\"false\" Priority=\"51\"
+   Name=\"Grid Table 6 Colorful Accent 6\"/>
+  <w:LsdException Locked=\"false\" Priority=\"52\"
+   Name=\"Grid Table 7 Colorful Accent 6\"/>
+  <w:LsdException Locked=\"false\" Priority=\"46\" Name=\"List Table 1 Light\"/>
+  <w:LsdException Locked=\"false\" Priority=\"47\" Name=\"List Table 2\"/>
+  <w:LsdException Locked=\"false\" Priority=\"48\" Name=\"List Table 3\"/>
+  <w:LsdException Locked=\"false\" Priority=\"49\" Name=\"List Table 4\"/>
+  <w:LsdException Locked=\"false\" Priority=\"50\" Name=\"List Table 5 Dark\"/>
+  <w:LsdException Locked=\"false\" Priority=\"51\" Name=\"List Table 6 Colorful\"/>
+  <w:LsdException Locked=\"false\" Priority=\"52\" Name=\"List Table 7 Colorful\"/>
+  <w:LsdException Locked=\"false\" Priority=\"46\"
+   Name=\"List Table 1 Light Accent 1\"/>
+  <w:LsdException Locked=\"false\" Priority=\"47\" Name=\"List Table 2 Accent 1\"/>
+  <w:LsdException Locked=\"false\" Priority=\"48\" Name=\"List Table 3 Accent 1\"/>
+  <w:LsdException Locked=\"false\" Priority=\"49\" Name=\"List Table 4 Accent 1\"/>
+  <w:LsdException Locked=\"false\" Priority=\"50\" Name=\"List Table 5 Dark Accent 1\"/>
+  <w:LsdException Locked=\"false\" Priority=\"51\"
+   Name=\"List Table 6 Colorful Accent 1\"/>
+  <w:LsdException Locked=\"false\" Priority=\"52\"
+   Name=\"List Table 7 Colorful Accent 1\"/>
+  <w:LsdException Locked=\"false\" Priority=\"46\"
+   Name=\"List Table 1 Light Accent 2\"/>
+  <w:LsdException Locked=\"false\" Priority=\"47\" Name=\"List Table 2 Accent 2\"/>
+  <w:LsdException Locked=\"false\" Priority=\"48\" Name=\"List Table 3 Accent 2\"/>
+  <w:LsdException Locked=\"false\" Priority=\"49\" Name=\"List Table 4 Accent 2\"/>
+  <w:LsdException Locked=\"false\" Priority=\"50\" Name=\"List Table 5 Dark Accent 2\"/>
+  <w:LsdException Locked=\"false\" Priority=\"51\"
+   Name=\"List Table 6 Colorful Accent 2\"/>
+  <w:LsdException Locked=\"false\" Priority=\"52\"
+   Name=\"List Table 7 Colorful Accent 2\"/>
+  <w:LsdException Locked=\"false\" Priority=\"46\"
+   Name=\"List Table 1 Light Accent 3\"/>
+  <w:LsdException Locked=\"false\" Priority=\"47\" Name=\"List Table 2 Accent 3\"/>
+  <w:LsdException Locked=\"false\" Priority=\"48\" Name=\"List Table 3 Accent 3\"/>
+  <w:LsdException Locked=\"false\" Priority=\"49\" Name=\"List Table 4 Accent 3\"/>
+  <w:LsdException Locked=\"false\" Priority=\"50\" Name=\"List Table 5 Dark Accent 3\"/>
+  <w:LsdException Locked=\"false\" Priority=\"51\"
+   Name=\"List Table 6 Colorful Accent 3\"/>
+  <w:LsdException Locked=\"false\" Priority=\"52\"
+   Name=\"List Table 7 Colorful Accent 3\"/>
+  <w:LsdException Locked=\"false\" Priority=\"46\"
+   Name=\"List Table 1 Light Accent 4\"/>
+  <w:LsdException Locked=\"false\" Priority=\"47\" Name=\"List Table 2 Accent 4\"/>
+  <w:LsdException Locked=\"false\" Priority=\"48\" Name=\"List Table 3 Accent 4\"/>
+  <w:LsdException Locked=\"false\" Priority=\"49\" Name=\"List Table 4 Accent 4\"/>
+  <w:LsdException Locked=\"false\" Priority=\"50\" Name=\"List Table 5 Dark Accent 4\"/>
+  <w:LsdException Locked=\"false\" Priority=\"51\"
+   Name=\"List Table 6 Colorful Accent 4\"/>
+  <w:LsdException Locked=\"false\" Priority=\"52\"
+   Name=\"List Table 7 Colorful Accent 4\"/>
+  <w:LsdException Locked=\"false\" Priority=\"46\"
+   Name=\"List Table 1 Light Accent 5\"/>
+  <w:LsdException Locked=\"false\" Priority=\"47\" Name=\"List Table 2 Accent 5\"/>
+  <w:LsdException Locked=\"false\" Priority=\"48\" Name=\"List Table 3 Accent 5\"/>
+  <w:LsdException Locked=\"false\" Priority=\"49\" Name=\"List Table 4 Accent 5\"/>
+  <w:LsdException Locked=\"false\" Priority=\"50\" Name=\"List Table 5 Dark Accent 5\"/>
+  <w:LsdException Locked=\"false\" Priority=\"51\"
+   Name=\"List Table 6 Colorful Accent 5\"/>
+  <w:LsdException Locked=\"false\" Priority=\"52\"
+   Name=\"List Table 7 Colorful Accent 5\"/>
+  <w:LsdException Locked=\"false\" Priority=\"46\"
+   Name=\"List Table 1 Light Accent 6\"/>
+  <w:LsdException Locked=\"false\" Priority=\"47\" Name=\"List Table 2 Accent 6\"/>
+  <w:LsdException Locked=\"false\" Priority=\"48\" Name=\"List Table 3 Accent 6\"/>
+  <w:LsdException Locked=\"false\" Priority=\"49\" Name=\"List Table 4 Accent 6\"/>
+  <w:LsdException Locked=\"false\" Priority=\"50\" Name=\"List Table 5 Dark Accent 6\"/>
+  <w:LsdException Locked=\"false\" Priority=\"51\"
+   Name=\"List Table 6 Colorful Accent 6\"/>
+  <w:LsdException Locked=\"false\" Priority=\"52\"
+   Name=\"List Table 7 Colorful Accent 6\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Mention\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Smart Hyperlink\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Hashtag\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Unresolved Mention\"/>
+ </w:LatentStyles>
+</xml><![endif]-->
+
+<!--[if gte mso 10]>
+<style>
+ /* Style Definitions */
+ table.MsoNormalTable
+	{mso-style-name:\"Normale Tabelle\";
+	mso-tstyle-rowband-size:0;
+	mso-tstyle-colband-size:0;
+	mso-style-noshow:yes;
+	mso-style-priority:99;
+	mso-style-parent:\"\";
+	mso-padding-alt:0cm 5.4pt 0cm 5.4pt;
+	mso-para-margin-top:0cm;
+	mso-para-margin-right:0cm;
+	mso-para-margin-bottom:8.0pt;
+	mso-para-margin-left:0cm;
+	line-height:107%;
+	mso-pagination:widow-orphan;
+	font-size:11.0pt;
+	font-family:\"Calibri\",sans-serif;
+	mso-ascii-font-family:Calibri;
+	mso-ascii-theme-font:minor-latin;
+	mso-hansi-font-family:Calibri;
+	mso-hansi-theme-font:minor-latin;
+	mso-bidi-font-family:\"Times New Roman\";
+	mso-bidi-theme-font:minor-bidi;}
+</style>
+<![endif]-->
+
+
+
+<!--StartFragment-->
+
+
+
+<!--EndFragment--></p><table class=\"MsoNormalTable\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\" style=\"border-collapse:collapse;mso-yfti-tbllook:1184;mso-padding-alt:0cm 0cm 0cm 0cm\">
+ <tbody><tr style=\"mso-yfti-irow:0;mso-yfti-firstrow:yes;height:21.5pt\">
+  <td width=\"163\" style=\"width:122.25pt;border:solid windowtext 1.0pt;mso-border-alt:
+  solid windowtext 1.0pt;mso-border-bottom-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt;height:21.5pt\">
+  <p class=\"MsoNormal\" style=\"mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+  line-height:normal\"><b><span style=\"font-size:9.0pt;font-family:&quot;MS Shell Dlg 2&quot;,sans-serif;
+  mso-fareast-font-family:&quot;Times New Roman&quot;;mso-bidi-font-family:&quot;Times New Roman&quot;\">Name</span></b><span style=\"font-size:9.0pt;font-family:&quot;MS Shell Dlg 2&quot;,sans-serif;mso-fareast-font-family:
+  &quot;Times New Roman&quot;;mso-bidi-font-family:&quot;Times New Roman&quot;\"><o:p></o:p></span></p>
+  </td>
+  <td width=\"102\" style=\"width:76.55pt;border:solid windowtext 1.0pt;border-left:
+  none;mso-border-top-alt:solid windowtext 1.0pt;mso-border-bottom-alt:solid windowtext .5pt;
+  mso-border-right-alt:solid windowtext 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;
+  height:21.5pt\">
+  <p class=\"MsoNormal\" style=\"mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+  line-height:normal\"><b><span style=\"font-size:9.0pt;font-family:&quot;MS Shell Dlg 2&quot;,sans-serif;
+  mso-fareast-font-family:&quot;Times New Roman&quot;;mso-bidi-font-family:&quot;Times New Roman&quot;\">Formelzeichen</span></b><span style=\"font-size:9.0pt;font-family:&quot;MS Shell Dlg 2&quot;,sans-serif;mso-fareast-font-family:
+  &quot;Times New Roman&quot;;mso-bidi-font-family:&quot;Times New Roman&quot;\"><o:p></o:p></span></p>
+  </td>
+  <td width=\"57\" style=\"width:42.4pt;border:solid windowtext 1.0pt;border-left:
+  none;mso-border-top-alt:solid windowtext 1.0pt;mso-border-bottom-alt:solid windowtext .5pt;
+  mso-border-right-alt:solid windowtext 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;
+  height:21.5pt\">
+  <p class=\"MsoNormal\" style=\"mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+  line-height:normal\"><b><span style=\"font-size:9.0pt;font-family:&quot;MS Shell Dlg 2&quot;,sans-serif;
+  mso-fareast-font-family:&quot;Times New Roman&quot;;mso-bidi-font-family:&quot;Times New Roman&quot;\">Einheit</span></b><span style=\"font-size:9.0pt;font-family:&quot;MS Shell Dlg 2&quot;,sans-serif;mso-fareast-font-family:
+  &quot;Times New Roman&quot;;mso-bidi-font-family:&quot;Times New Roman&quot;\"><o:p></o:p></span></p>
+  </td>
+  <td width=\"97\" style=\"width:73.05pt;border:solid windowtext 1.0pt;border-left:
+  none;mso-border-top-alt:solid windowtext 1.0pt;mso-border-bottom-alt:solid windowtext .5pt;
+  mso-border-right-alt:solid windowtext 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;
+  height:21.5pt\">
+  <p class=\"MsoNormal\" style=\"mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+  line-height:normal\"><b><span style=\"font-size:9.0pt;font-family:&quot;MS Shell Dlg 2&quot;,sans-serif;
+  mso-fareast-font-family:&quot;Times New Roman&quot;;mso-bidi-font-family:&quot;Times New Roman&quot;\">Standardwert</span></b><span style=\"font-size:9.0pt;font-family:&quot;MS Shell Dlg 2&quot;,sans-serif;mso-fareast-font-family:
+  &quot;Times New Roman&quot;;mso-bidi-font-family:&quot;Times New Roman&quot;\"><o:p></o:p></span></p>
+  </td>
+  <td width=\"118\" style=\"width:88.75pt;border:solid windowtext 1.0pt;border-left:
+  none;mso-border-top-alt:solid windowtext 1.0pt;mso-border-bottom-alt:solid windowtext .5pt;
+  mso-border-right-alt:solid windowtext 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;
+  height:21.5pt\">
+  <p class=\"MsoNormal\" style=\"mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+  line-height:normal\"><b><span style=\"font-size:9.0pt;font-family:&quot;MS Shell Dlg 2&quot;,sans-serif;
+  mso-fareast-font-family:&quot;Times New Roman&quot;;mso-bidi-font-family:&quot;Times New Roman&quot;\">Einschränkungen</span></b><span style=\"font-size:9.0pt;font-family:&quot;MS Shell Dlg 2&quot;,sans-serif;mso-fareast-font-family:
+  &quot;Times New Roman&quot;;mso-bidi-font-family:&quot;Times New Roman&quot;\"><o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style=\"mso-yfti-irow:1;height:21.5pt\">
+  <td width=\"163\" style=\"width:122.25pt;border:solid windowtext 1.0pt;border-top:
+  none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt;height:21.5pt\">
+  <p class=\"MsoNormal\" style=\"mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+  line-height:normal\"><span lang=\"EN-US\" style=\"font-size:9.0pt;mso-bidi-font-size:
+  11.0pt;font-family:&quot;MS Shell Dlg 2&quot;,sans-serif;mso-ansi-language:EN-US\">Ankerwiderstand</span><span style=\"font-size:9.0pt;font-family:&quot;MS Shell Dlg 2&quot;,sans-serif;mso-fareast-font-family:
+  &quot;Times New Roman&quot;;mso-bidi-font-family:&quot;Times New Roman&quot;\"><o:p></o:p></span></p>
+  </td>
+  <td width=\"102\" style=\"width:76.55pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt;height:21.5pt\">
+  <p class=\"MsoNormal\" style=\"mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+  line-height:normal\"><span style=\"font-size:9.0pt;font-family:&quot;MS Shell Dlg 2&quot;,sans-serif;
+  mso-fareast-font-family:&quot;Times New Roman&quot;;mso-bidi-font-family:&quot;Times New Roman&quot;\">Ra<o:p></o:p></span></p>
+  </td>
+  <td width=\"57\" style=\"width:42.4pt;border-top:none;border-left:none;border-bottom:
+  solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;mso-border-top-alt:
+  solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;mso-border-alt:
+  solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt;height:21.5pt\">
+  <p class=\"MsoNormal\" style=\"mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+  line-height:normal\"><span style=\"font-size:9.0pt;font-family:&quot;MS Shell Dlg 2&quot;,sans-serif;
+  mso-fareast-font-family:&quot;Times New Roman&quot;\">Ω</span><span style=\"font-size:
+  9.0pt;font-family:&quot;MS Shell Dlg 2&quot;,sans-serif;mso-fareast-font-family:&quot;Times New Roman&quot;;
+  mso-bidi-font-family:&quot;Times New Roman&quot;\"><o:p></o:p></span></p>
+  </td>
+  <td width=\"97\" style=\"width:73.05pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt;height:21.5pt\">
+  <p class=\"MsoNormal\" style=\"mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+  line-height:normal\"><span style=\"font-size:9.0pt;font-family:&quot;MS Shell Dlg 2&quot;,sans-serif;
+  mso-fareast-font-family:&quot;Times New Roman&quot;;mso-bidi-font-family:&quot;Times New Roman&quot;\">0.2
+  </span><span style=\"font-size:9.0pt;font-family:&quot;MS Shell Dlg 2&quot;,sans-serif;
+  mso-fareast-font-family:&quot;Times New Roman&quot;\">Ω</span><span style=\"font-size:
+  9.0pt;font-family:&quot;MS Shell Dlg 2&quot;,sans-serif;mso-fareast-font-family:&quot;Times New Roman&quot;;
+  mso-bidi-font-family:&quot;Times New Roman&quot;\"><o:p></o:p></span></p>
+  </td>
+  <td width=\"118\" style=\"width:88.75pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt;height:21.5pt\">
+  <p class=\"MsoNormal\" style=\"mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+  line-height:normal\"><span style=\"font-size:9.0pt;font-family:&quot;MS Shell Dlg 2&quot;,sans-serif;
+  mso-fareast-font-family:&quot;Times New Roman&quot;;mso-bidi-font-family:&quot;Times New Roman&quot;\">Ra
+  </span><span style=\"font-size:9.0pt;font-family:&quot;MS Shell Dlg 2&quot;,sans-serif;
+  mso-bidi-font-family:&quot;Times New Roman&quot;;mso-bidi-theme-font:minor-bidi;
+  color:black\">≥ 0 </span><span style=\"font-size:9.0pt;font-family:&quot;MS Shell Dlg 2&quot;,sans-serif;
+  mso-fareast-font-family:&quot;Times New Roman&quot;\">Ω</span><span style=\"font-size:
+  9.0pt;font-family:&quot;MS Shell Dlg 2&quot;,sans-serif;mso-fareast-font-family:&quot;Times New Roman&quot;;
+  mso-bidi-font-family:&quot;Times New Roman&quot;\"><o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style=\"mso-yfti-irow:2;height:21.5pt\">
+  <td width=\"163\" style=\"width:122.25pt;border:solid windowtext 1.0pt;border-top:
+  none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt;height:21.5pt\">
+  <p class=\"MsoNormal\" style=\"mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+  line-height:normal\"><span lang=\"EN-US\" style=\"font-size:9.0pt;mso-bidi-font-size:
+  11.0pt;font-family:&quot;MS Shell Dlg 2&quot;,sans-serif;mso-ansi-language:EN-US\">Drehmomentkonstante</span><span style=\"font-size:9.0pt;font-family:&quot;MS Shell Dlg 2&quot;,sans-serif;mso-fareast-font-family:
+  &quot;Times New Roman&quot;;mso-bidi-font-family:&quot;Times New Roman&quot;\"><o:p></o:p></span></p>
+  </td>
+  <td width=\"102\" style=\"width:76.55pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt;height:21.5pt\">
+  <p class=\"MsoNormal\" style=\"mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+  line-height:normal\"><span style=\"font-size:9.0pt;font-family:&quot;MS Shell Dlg 2&quot;,sans-serif;
+  mso-fareast-font-family:&quot;Times New Roman&quot;;mso-bidi-font-family:&quot;Times New Roman&quot;\">kt<o:p></o:p></span></p>
+  </td>
+  <td width=\"57\" style=\"width:42.4pt;border-top:none;border-left:none;border-bottom:
+  solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;mso-border-top-alt:
+  solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;mso-border-alt:
+  solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt;height:21.5pt\">
+  <p class=\"MsoNormal\" style=\"mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+  line-height:normal\"><span style=\"font-size:9.0pt;font-family:&quot;MS Shell Dlg 2&quot;,sans-serif;
+  mso-fareast-font-family:&quot;Times New Roman&quot;;mso-bidi-font-family:&quot;Times New Roman&quot;\">Nm/A<o:p></o:p></span></p>
+  </td>
+  <td width=\"97\" style=\"width:73.05pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt;height:21.5pt\">
+  <p class=\"MsoNormal\" style=\"mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+  line-height:normal\"><span style=\"font-size:9.0pt;font-family:&quot;MS Shell Dlg 2&quot;,sans-serif;
+  mso-fareast-font-family:&quot;Times New Roman&quot;;mso-bidi-font-family:&quot;Times New Roman&quot;\">0.1
+  Nm/A<o:p></o:p></span></p>
+  </td>
+  <td width=\"118\" style=\"width:88.75pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt;height:21.5pt\">
+  <p class=\"MsoNormal\" style=\"mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+  line-height:normal\"><span style=\"font-size:9.0pt;font-family:&quot;MS Shell Dlg 2&quot;,sans-serif;
+  mso-bidi-font-family:&quot;Times New Roman&quot;;mso-bidi-theme-font:minor-bidi;
+  color:black\">kt ≥ 0</span><span style=\"font-size:9.0pt;font-family:&quot;MS Shell Dlg 2&quot;,sans-serif;
+  mso-fareast-font-family:&quot;Times New Roman&quot;;mso-bidi-font-family:&quot;Times New Roman&quot;\"><o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style=\"mso-yfti-irow:3;height:21.5pt\">
+  <td width=\"163\" style=\"width:122.25pt;border:solid windowtext 1.0pt;border-top:
+  none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt;height:21.5pt\">
+  <p class=\"MsoNormal\" style=\"mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+  line-height:normal\"><span style=\"font-size:9.0pt;mso-bidi-font-size:11.0pt;
+  font-family:&quot;MS Shell Dlg 2&quot;,sans-serif\">Reibungsverlustkonstante</span><span style=\"font-size:9.0pt;font-family:&quot;MS Shell Dlg 2&quot;,sans-serif;mso-fareast-font-family:
+  &quot;Times New Roman&quot;;mso-bidi-font-family:&quot;Times New Roman&quot;\"><o:p></o:p></span></p>
+  </td>
+  <td width=\"102\" style=\"width:76.55pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt;height:21.5pt\">
+  <p class=\"MsoNormal\" style=\"mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+  line-height:normal\"><span style=\"font-size:9.0pt;font-family:&quot;MS Shell Dlg 2&quot;,sans-serif;
+  mso-fareast-font-family:&quot;Times New Roman&quot;;mso-bidi-font-family:&quot;Times New Roman&quot;\">cf<o:p></o:p></span></p>
+  </td>
+  <td width=\"57\" style=\"width:42.4pt;border-top:none;border-left:none;border-bottom:
+  solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;mso-border-top-alt:
+  solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;mso-border-alt:
+  solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt;height:21.5pt\">
+  <p class=\"MsoNormal\" style=\"mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+  line-height:normal\"><span style=\"font-size:9.0pt;font-family:&quot;MS Shell Dlg 2&quot;,sans-serif;
+  mso-fareast-font-family:&quot;Times New Roman&quot;;mso-bidi-font-family:&quot;Times New Roman&quot;\">Nms<o:p></o:p></span></p>
+  </td>
+  <td width=\"97\" style=\"width:73.05pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt;height:21.5pt\">
+  <p class=\"MsoNormal\" style=\"mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+  line-height:normal\"><span style=\"font-size:9.0pt;font-family:&quot;MS Shell Dlg 2&quot;,sans-serif;
+  mso-fareast-font-family:&quot;Times New Roman&quot;;mso-bidi-font-family:&quot;Times New Roman&quot;\">0.0025
+  Nms<o:p></o:p></span></p>
+  </td>
+  <td width=\"118\" style=\"width:88.75pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt;height:21.5pt\">
+  <p class=\"MsoNormal\" style=\"mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+  line-height:normal\"><span style=\"font-size:9.0pt;font-family:&quot;MS Shell Dlg 2&quot;,sans-serif;
+  mso-bidi-font-family:&quot;Times New Roman&quot;;mso-bidi-theme-font:minor-bidi;
+  color:black\">cf ≥ 0</span><span style=\"font-size:9.0pt;font-family:&quot;MS Shell Dlg 2&quot;,sans-serif;
+  mso-fareast-font-family:&quot;Times New Roman&quot;;mso-bidi-font-family:&quot;Times New Roman&quot;\"><o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style=\"mso-yfti-irow:4;height:21.5pt\">
+  <td width=\"163\" style=\"width:122.25pt;border:solid windowtext 1.0pt;border-top:
+  none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt;height:21.5pt\">
+  <p class=\"MsoNormal\" style=\"mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+  line-height:normal\"><span lang=\"EN-US\" style=\"font-size:9.0pt;mso-bidi-font-size:
+  11.0pt;font-family:&quot;MS Shell Dlg 2&quot;,sans-serif;mso-ansi-language:EN-US\">Ventilationsverlustkonstante</span><span style=\"font-size:9.0pt;font-family:&quot;MS Shell Dlg 2&quot;,sans-serif;mso-fareast-font-family:
+  &quot;Times New Roman&quot;;mso-bidi-font-family:&quot;Times New Roman&quot;\"><o:p></o:p></span></p>
+  </td>
+  <td width=\"102\" style=\"width:76.55pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt;height:21.5pt\">
+  <p class=\"MsoNormal\" style=\"mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+  line-height:normal\"><span style=\"font-size:9.0pt;font-family:&quot;MS Shell Dlg 2&quot;,sans-serif;
+  mso-fareast-font-family:&quot;Times New Roman&quot;;mso-bidi-font-family:&quot;Times New Roman&quot;\">cv<o:p></o:p></span></p>
+  </td>
+  <td width=\"57\" style=\"width:42.4pt;border-top:none;border-left:none;border-bottom:
+  solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;mso-border-top-alt:
+  solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;mso-border-alt:
+  solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt;height:21.5pt\">
+  <p class=\"MsoNormal\" style=\"mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+  line-height:normal\"><span style=\"font-size:9.0pt;font-family:&quot;MS Shell Dlg 2&quot;,sans-serif;
+  mso-fareast-font-family:&quot;Times New Roman&quot;;mso-bidi-font-family:&quot;Times New Roman&quot;\">Nms²<o:p></o:p></span></p>
+  </td>
+  <td width=\"97\" style=\"width:73.05pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt;height:21.5pt\">
+  <p class=\"MsoNormal\" style=\"mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+  line-height:normal\"><span style=\"font-size:9.0pt;font-family:&quot;MS Shell Dlg 2&quot;,sans-serif;
+  mso-fareast-font-family:&quot;Times New Roman&quot;;mso-bidi-font-family:&quot;Times New Roman&quot;\">0.000104
+  Nms²<o:p></o:p></span></p>
+  </td>
+  <td width=\"118\" style=\"width:88.75pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt;height:21.5pt\">
+  <p class=\"MsoNormal\" style=\"mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+  line-height:normal\"><span style=\"font-size:9.0pt;font-family:&quot;MS Shell Dlg 2&quot;,sans-serif;
+  mso-bidi-font-family:&quot;Times New Roman&quot;;mso-bidi-theme-font:minor-bidi;
+  color:black\">cv ≥ 0</span><span style=\"font-size:9.0pt;font-family:&quot;MS Shell Dlg 2&quot;,sans-serif;
+  mso-fareast-font-family:&quot;Times New Roman&quot;;mso-bidi-font-family:&quot;Times New Roman&quot;\"><o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style=\"mso-yfti-irow:5;mso-yfti-lastrow:yes;height:21.5pt\">
+  <td width=\"163\" style=\"width:122.25pt;border:solid windowtext 1.0pt;border-top:
+  none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt;height:21.5pt\">
+  <p class=\"MsoNormal\" style=\"mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+  line-height:normal\"><span style=\"font-size:9.0pt;mso-bidi-font-size:11.0pt;
+  font-family:&quot;MS Shell Dlg 2&quot;,sans-serif\">Massentraegheit</span><span style=\"font-size:9.0pt;font-family:&quot;MS Shell Dlg 2&quot;,sans-serif;mso-fareast-font-family:
+  &quot;Times New Roman&quot;;mso-bidi-font-family:&quot;Times New Roman&quot;\"><o:p></o:p></span></p>
+  </td>
+  <td width=\"102\" style=\"width:76.55pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt;height:21.5pt\">
+  <p class=\"MsoNormal\" style=\"mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+  line-height:normal\"><span style=\"font-size:9.0pt;font-family:&quot;MS Shell Dlg 2&quot;,sans-serif;
+  mso-fareast-font-family:&quot;Times New Roman&quot;;mso-bidi-font-family:&quot;Times New Roman&quot;\">Jtot<o:p></o:p></span></p>
+  </td>
+  <td width=\"57\" style=\"width:42.4pt;border-top:none;border-left:none;border-bottom:
+  solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;mso-border-top-alt:
+  solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;mso-border-alt:
+  solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt;height:21.5pt\">
+  <p class=\"MsoNormal\" style=\"mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+  line-height:normal\"><span style=\"font-size:9.0pt;font-family:&quot;MS Shell Dlg 2&quot;,sans-serif;
+  mso-fareast-font-family:&quot;Times New Roman&quot;;mso-bidi-font-family:&quot;Times New Roman&quot;\">kgm²<o:p></o:p></span></p>
+  </td>
+  <td width=\"97\" style=\"width:73.05pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt;height:21.5pt\">
+  <p class=\"MsoNormal\" style=\"mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+  line-height:normal\"><span style=\"font-size:9.0pt;font-family:&quot;MS Shell Dlg 2&quot;,sans-serif;
+  mso-fareast-font-family:&quot;Times New Roman&quot;;mso-bidi-font-family:&quot;Times New Roman&quot;\">0.005
+  kgm²<o:p></o:p></span></p>
+  </td>
+  <td width=\"118\" style=\"width:88.75pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt;height:21.5pt\">
+  <p class=\"MsoNormal\" style=\"mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+  line-height:normal\"><span style=\"font-size:9.0pt;font-family:&quot;MS Shell Dlg 2&quot;,sans-serif;
+  mso-bidi-font-family:&quot;Times New Roman&quot;;mso-bidi-theme-font:minor-bidi;
+  color:black\">Jtot ≥ 0</span></p></td></tr></tbody></table><p class=\"MsoNormal\"><u><span style=\"font-size: 9pt; font-family: 'MS Shell Dlg 2', sans-serif;\"><br>Connectoren:</span></u><span style=\"font-size: 9pt; font-family: 'MS Shell Dlg 2', sans-serif;\"><o:p></o:p></span></p><table class=\"MsoNormalTable\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\" style=\"border-collapse: collapse;\"><tbody><tr style=\"height: 25.65pt;\"><td width=\"88\" style=\"width: 66pt; border: 1pt solid windowtext; padding: 0cm 5.4pt; height: 25.65pt;\"><p class=\"MsoNormal\"><b><span style=\"font-size: 9pt; font-family: 'MS Shell Dlg 2', sans-serif;\">Name</span></b><span style=\"font-size: 9pt; font-family: 'Times New Roman', serif;\"><o:p></o:p></span></p></td><td width=\"132\" style=\"width: 98.7pt; border-style: solid solid solid none; border-top-color: windowtext; border-right-color: windowtext; border-bottom-color: windowtext; border-top-width: 1pt; border-right-width: 1pt; border-bottom-width: 1pt; padding: 0cm 5.4pt; height: 25.65pt;\"><p class=\"MsoNormal\"><b><span style=\"font-size: 9pt; font-family: 'MS Shell Dlg 2', sans-serif;\">Typ</span></b><span style=\"font-size: 9pt; font-family: 'Times New Roman', serif;\"><o:p></o:p></span></p></td><td width=\"66\" style=\"width: 49.55pt; border-style: solid solid solid none; border-top-color: windowtext; border-right-color: windowtext; border-bottom-color: windowtext; border-top-width: 1pt; border-right-width: 1pt; border-bottom-width: 1pt; padding: 0cm 5.4pt; height: 25.65pt;\"><p class=\"MsoNormal\"><b><span style=\"font-size: 9pt; font-family: 'MS Shell Dlg 2', sans-serif;\">Variablen</span></b><span style=\"font-size: 9pt; font-family: 'Times New Roman', serif;\"><o:p></o:p></span></p></td><td width=\"111\" style=\"width: 83.35pt; border-style: solid solid solid none; border-top-color: windowtext; border-right-color: windowtext; border-bottom-color: windowtext; border-top-width: 1pt; border-right-width: 1pt; border-bottom-width: 1pt; padding: 0cm 5.4pt; height: 25.65pt;\"><p class=\"MsoNormal\"><b><span style=\"font-size: 9pt; font-family: 'MS Shell Dlg 2', sans-serif;\">Verwendungszweck</span></b><span style=\"font-size: 9pt; font-family: 'Times New Roman', serif;\"><o:p></o:p></span></p></td></tr><tr style=\"height: 25.65pt;\"><td width=\"88\" style=\"width: 66pt; border-style: none solid solid; border-right-color: windowtext; border-bottom-color: windowtext; border-left-color: windowtext; border-right-width: 1pt; border-bottom-width: 1pt; border-left-width: 1pt; padding: 0cm 5.4pt; height: 25.65pt;\"><p class=\"MsoNormal\"><span style=\"font-size: 9pt; font-family: 'MS Shell Dlg 2', sans-serif;\">U_I_Connector</span><span style=\"font-size: 9pt; font-family: 'Times New Roman', serif;\"><o:p></o:p></span></p></td><td width=\"132\" style=\"width: 98.7pt; border-style: none solid solid none; border-bottom-color: windowtext; border-bottom-width: 1pt; border-right-color: windowtext; border-right-width: 1pt; padding: 0cm 5.4pt; height: 25.65pt;\"><p class=\"MsoNormal\"><span style=\"font-size: 9pt; font-family: 'MS Shell Dlg 2', sans-serif;\">Spannung_Strom_Connector</span><span style=\"font-size: 9pt; font-family: 'Times New Roman', serif;\"><o:p></o:p></span></p></td><td width=\"66\" style=\"width: 49.55pt; border-style: none solid solid none; border-bottom-color: windowtext; border-bottom-width: 1pt; border-right-color: windowtext; border-right-width: 1pt; padding: 0cm 5.4pt; height: 25.65pt;\"><p class=\"MsoNormal\"><span style=\"font-size: 9pt; font-family: 'MS Shell Dlg 2', sans-serif;\">U und I</span><span style=\"font-size: 9pt; font-family: 'Times New Roman', serif;\"><o:p></o:p></span></p></td><td width=\"111\" style=\"width: 83.35pt; border-style: none solid solid none; border-bottom-color: windowtext; border-bottom-width: 1pt; border-right-color: windowtext; border-right-width: 1pt; padding: 0cm 5.4pt; height: 25.65pt;\"><p class=\"MsoNormal\"><span style=\"font-size: 9pt; font-family: 'MS Shell Dlg 2', sans-serif;\">Anbindung der Spannungsquelle</span><span style=\"font-size: 9pt; font-family: 'Times New Roman', serif;\"><o:p></o:p></span></p></td></tr><tr style=\"height: 25.65pt;\"><td width=\"88\" style=\"width: 66pt; border-style: none solid solid; border-right-color: windowtext; border-bottom-color: windowtext; border-left-color: windowtext; border-right-width: 1pt; border-bottom-width: 1pt; border-left-width: 1pt; padding: 0cm 5.4pt; height: 25.65pt;\"><p class=\"MsoNormal\"><span style=\"font-size: 9pt; font-family: 'MS Shell Dlg 2', sans-serif;\">phi_M_Connector</span><span style=\"font-size: 9pt; font-family: 'Times New Roman', serif;\"><o:p></o:p></span></p></td><td width=\"132\" style=\"width: 98.7pt; border-style: none solid solid none; border-bottom-color: windowtext; border-bottom-width: 1pt; border-right-color: windowtext; border-right-width: 1pt; padding: 0cm 5.4pt; height: 25.65pt;\"><p class=\"MsoNormal\"><span style=\"font-size: 9pt; font-family: 'MS Shell Dlg 2', sans-serif;\">Winkel_Moment_Connector</span><span style=\"font-size: 9pt; font-family: 'Times New Roman', serif;\"><o:p></o:p></span></p></td><td width=\"66\" style=\"width: 49.55pt; border-style: none solid solid none; border-bottom-color: windowtext; border-bottom-width: 1pt; border-right-color: windowtext; border-right-width: 1pt; padding: 0cm 5.4pt; height: 25.65pt;\"><p class=\"MsoNormal\"><span style=\"font-size: 9pt; font-family: 'MS Shell Dlg 2', sans-serif;\">phi und M</span><span style=\"font-size: 9pt; font-family: 'Times New Roman', serif;\"><o:p></o:p></span></p></td><td width=\"111\" style=\"width: 83.35pt; border-style: none solid solid none; border-bottom-color: windowtext; border-bottom-width: 1pt; border-right-color: windowtext; border-right-width: 1pt; padding: 0cm 5.4pt; height: 25.65pt;\"><p class=\"MsoNormal\"><span style=\"font-size: 9pt; font-family: 'MS Shell Dlg 2', sans-serif;\">Anbindung einer (rotierenden) Welle</span><span style=\"font-size: 9pt; font-family: 'Times New Roman', serif;\"><o:p></o:p></span></p></td></tr></tbody></table></div><!--EndFragment--></body></html>"));
     end Einphasen_Gleichstrommotor;
     
     model Bremse "Sicherheitsbremse, welche im stromlosen Zustand die verbundene Welle blockiert"
@@ -4140,8 +5835,8 @@ table.MsoTableGrid
       parameter SI.Time T1 = 1 "Zeitpunkt des Wechsels von U1 auf U2";
       parameter SI.Time T2 = 10 "Zeitpunkt des Wechsels von U2 auf U3";
       // Variables --------------------
-      SI.ElectricCurrent I "Strom";
-      SI.Voltage U "Spannung";
+      SI.ElectricCurrent I "Fliessender Strom";
+      SI.Voltage U "Ausgegebene Spannung";
       // Equations --------------------
     equation
       U_I_Connector.U = U;
@@ -4160,7 +5855,743 @@ table.MsoTableGrid
         Documentation(info = "<html><head></head><body><div><!--StartFragment--><div><p class=\"MsoNormal\"><u><span style=\"font-size: 9pt; font-family: 'MS Shell Dlg 2', sans-serif;\">Beschreibung:</span></u><span style=\"font-size: 9pt; font-family: 'MS Shell Dlg 2', sans-serif;\"><o:p></o:p></span></p><p class=\"MsoNormal\"><span style=\"font-size: 9pt; font-family: 'MS Shell Dlg 2', sans-serif;\">Dieses Modell beschreibt eine Spannungsquelle, welche zeitbasiert drei verschiedene Spannungslevel ausgeben kann.<br>Um dieses Verhalten zu steuern, werden 3 Spannungsparameter und 2 Zeitparameter angegeben.&nbsp;Über die drei Spannungsparameter U1, U2 und U3 werden die einzelnen Spannungsniveaus festgelegt. Über die Zeitparameter T1 und T2 werden die Umschaltzeitpunkte von U1 auf U2 bzw. von U2 auf U3 definiert.</span></p><p class=\"MsoNormal\"><span style=\"font-size: 9pt; font-family: 'MS Shell Dlg 2', sans-serif;\">Somit ergibt sich folgende Logik für den Wert der ausgegebenen Spannung:</span></p><p class=\"MsoNormal\"><font face=\"MS Shell Dlg 2, sans-serif\">Von t = 0s bis t = T1:<span class=\"Apple-tab-span\" style=\"white-space: pre;\">		</span>U = U1<br></font>Von t = T1 bis t = T2:<span class=\"Apple-tab-span\" style=\"white-space: pre;\">		</span>U = U2<br>Von t = T2 bis t -&gt;&nbsp;<span style=\"font-size: 9pt; font-family: 'MS Shell Dlg 2', sans-serif;\">∞</span>:<span class=\"Apple-tab-span\" style=\"white-space: pre;\">		</span>U = U3</p><p class=\"MsoNormal\">Diese Modellierung wurde gewählt, um die Verwendung mehrerer Spannungslevel in einem Simulationsdurchlauf zu ermöglichen.<br>Mit der Standardparametrisierung der Werte liegt also von 0s bis T1=1s eine Spannung 0V an, daraufhin springt der Wert auf 48V und sinkt nach T2=10s wieder auf 0V ab. Zu beachten ist hierbei, dass T1 und T2 keine Delta-Werte beschreiben, sondern absolute Zeitpunkte. Daher sollte T2 immer höher als T1 gewählt werden.</p><p class=\"MsoNormal\">Die Spannung wird über einen Spannung_Strom_Connector ausgegeben.</p><p class=\"MsoNormal\"></p><p class=\"MsoNormal\"><u><span style=\"font-size: 9pt; font-family: 'MS Shell Dlg 2', sans-serif;\">Parameter:</span></u><span style=\"font-size: 9pt; font-family: 'MS Shell Dlg 2', sans-serif;\"><o:p></o:p></span></p><p class=\"MsoNormal\"></p><table class=\"MsoNormalTable\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\" style=\"border-collapse: collapse;\"><tbody><tr style=\"height: 21.5pt;\"><td width=\"163\" style=\"width: 122.25pt; border: 1pt solid windowtext; padding: 0cm 5.4pt; height: 21.5pt;\"><p class=\"MsoNormal\"><b><span style=\"font-size: 9pt; font-family: 'MS Shell Dlg 2', sans-serif;\">Name</span></b><span style=\"font-size: 9pt; font-family: 'MS Shell Dlg 2', sans-serif;\"><o:p></o:p></span></p></td><td width=\"102\" style=\"width: 76.55pt; border-style: solid solid solid none; border-top-color: windowtext; border-right-color: windowtext; border-bottom-color: windowtext; border-top-width: 1pt; border-right-width: 1pt; border-bottom-width: 1pt; padding: 0cm 5.4pt; height: 21.5pt;\"><p class=\"MsoNormal\"><b><span style=\"font-size: 9pt; font-family: 'MS Shell Dlg 2', sans-serif;\">Formelzeichen</span></b><span style=\"font-size: 9pt; font-family: 'MS Shell Dlg 2', sans-serif;\"><o:p></o:p></span></p></td><td width=\"57\" style=\"width: 42.4pt; border-style: solid solid solid none; border-top-color: windowtext; border-right-color: windowtext; border-bottom-color: windowtext; border-top-width: 1pt; border-right-width: 1pt; border-bottom-width: 1pt; padding: 0cm 5.4pt; height: 21.5pt;\"><p class=\"MsoNormal\"><b><span style=\"font-size: 9pt; font-family: 'MS Shell Dlg 2', sans-serif;\">Einheit</span></b><span style=\"font-size: 9pt; font-family: 'MS Shell Dlg 2', sans-serif;\"><o:p></o:p></span></p></td><td width=\"97\" style=\"width: 73.05pt; border-style: solid solid solid none; border-top-color: windowtext; border-right-color: windowtext; border-bottom-color: windowtext; border-top-width: 1pt; border-right-width: 1pt; border-bottom-width: 1pt; padding: 0cm 5.4pt; height: 21.5pt;\"><p class=\"MsoNormal\"><b><span style=\"font-size: 9pt; font-family: 'MS Shell Dlg 2', sans-serif;\">Standardwert</span></b><span style=\"font-size: 9pt; font-family: 'MS Shell Dlg 2', sans-serif;\"><o:p></o:p></span></p></td><td width=\"118\" style=\"width: 88.75pt; border-style: solid solid solid none; border-top-color: windowtext; border-right-color: windowtext; border-bottom-color: windowtext; border-top-width: 1pt; border-right-width: 1pt; border-bottom-width: 1pt; padding: 0cm 5.4pt; height: 21.5pt;\"><p class=\"MsoNormal\"><b><span style=\"font-size: 9pt; font-family: 'MS Shell Dlg 2', sans-serif;\">Einschränkungen</span></b><span style=\"font-size: 9pt; font-family: 'MS Shell Dlg 2', sans-serif;\"><o:p></o:p></span></p></td></tr><tr style=\"height: 21.5pt;\"><td width=\"163\" style=\"width: 122.25pt; border-style: none solid solid; border-right-color: windowtext; border-bottom-color: windowtext; border-left-color: windowtext; border-right-width: 1pt; border-bottom-width: 1pt; border-left-width: 1pt; padding: 0cm 5.4pt; height: 21.5pt;\"><p class=\"MsoNormal\"><span style=\"font-size: 9pt; font-family: 'MS Shell Dlg 2', sans-serif;\">Spannung ab t=0s bis t=T1</span><span style=\"font-size: 9pt; font-family: 'MS Shell Dlg 2', sans-serif;\"><o:p></o:p></span></p></td><td width=\"102\" style=\"width: 76.55pt; border-style: none solid solid none; border-bottom-color: windowtext; border-bottom-width: 1pt; border-right-color: windowtext; border-right-width: 1pt; padding: 0cm 5.4pt; height: 21.5pt;\"><p class=\"MsoNormal\"><span style=\"font-size: 9pt; font-family: 'MS Shell Dlg 2', sans-serif;\">U1<o:p></o:p></span></p></td><td width=\"57\" style=\"width: 42.4pt; border-style: none solid solid none; border-bottom-color: windowtext; border-bottom-width: 1pt; border-right-color: windowtext; border-right-width: 1pt; padding: 0cm 5.4pt; height: 21.5pt;\"><p class=\"MsoNormal\"><span style=\"font-size: 9pt; font-family: 'MS Shell Dlg 2', sans-serif;\">V<o:p></o:p></span></p></td><td width=\"97\" style=\"width: 73.05pt; border-style: none solid solid none; border-bottom-color: windowtext; border-bottom-width: 1pt; border-right-color: windowtext; border-right-width: 1pt; padding: 0cm 5.4pt; height: 21.5pt;\"><p class=\"MsoNormal\"><span style=\"font-size: 9pt; font-family: 'MS Shell Dlg 2', sans-serif;\">0 V<o:p></o:p></span></p></td><td width=\"118\" style=\"width: 88.75pt; border-style: none solid solid none; border-bottom-color: windowtext; border-bottom-width: 1pt; border-right-color: windowtext; border-right-width: 1pt; padding: 0cm 5.4pt; height: 21.5pt;\"><p class=\"MsoNormal\"><span style=\"font-size: 9pt; font-family: 'MS Shell Dlg 2', sans-serif;\">-<o:p></o:p></span></p></td></tr><tr style=\"height: 21.5pt;\"><td width=\"163\" style=\"width: 122.25pt; border-style: none solid solid; border-right-color: windowtext; border-bottom-color: windowtext; border-left-color: windowtext; border-right-width: 1pt; border-bottom-width: 1pt; border-left-width: 1pt; padding: 0cm 5.4pt; height: 21.5pt;\"><p class=\"MsoNormal\"><span style=\"font-size: 9pt; font-family: 'MS Shell Dlg 2', sans-serif;\">Spannung ab t=T1 bis t=T2</span><span style=\"font-size: 9pt; font-family: 'MS Shell Dlg 2', sans-serif;\"><o:p></o:p></span></p></td><td width=\"102\" style=\"width: 76.55pt; border-style: none solid solid none; border-bottom-color: windowtext; border-bottom-width: 1pt; border-right-color: windowtext; border-right-width: 1pt; padding: 0cm 5.4pt; height: 21.5pt;\"><p class=\"MsoNormal\"><span style=\"font-size: 9pt; font-family: 'MS Shell Dlg 2', sans-serif;\">U2<o:p></o:p></span></p></td><td width=\"57\" style=\"width: 42.4pt; border-style: none solid solid none; border-bottom-color: windowtext; border-bottom-width: 1pt; border-right-color: windowtext; border-right-width: 1pt; padding: 0cm 5.4pt; height: 21.5pt;\"><p class=\"MsoNormal\"><span style=\"font-size: 9pt; font-family: 'MS Shell Dlg 2', sans-serif;\">V<o:p></o:p></span></p></td><td width=\"97\" style=\"width: 73.05pt; border-style: none solid solid none; border-bottom-color: windowtext; border-bottom-width: 1pt; border-right-color: windowtext; border-right-width: 1pt; padding: 0cm 5.4pt; height: 21.5pt;\"><p class=\"MsoNormal\"><span style=\"font-size: 9pt; font-family: 'MS Shell Dlg 2', sans-serif;\">48 V<o:p></o:p></span></p></td><td width=\"118\" style=\"width: 88.75pt; border-style: none solid solid none; border-bottom-color: windowtext; border-bottom-width: 1pt; border-right-color: windowtext; border-right-width: 1pt; padding: 0cm 5.4pt; height: 21.5pt;\"><p class=\"MsoNormal\"><span style=\"font-size: 9pt; font-family: 'MS Shell Dlg 2', sans-serif;\">-<o:p></o:p></span></p></td></tr><tr style=\"height: 21.5pt;\"><td width=\"163\" style=\"width: 122.25pt; border-style: none solid solid; border-right-color: windowtext; border-bottom-color: windowtext; border-left-color: windowtext; border-right-width: 1pt; border-bottom-width: 1pt; border-left-width: 1pt; padding: 0cm 5.4pt; height: 21.5pt;\"><p class=\"MsoNormal\"><span style=\"font-size: 9pt; font-family: 'MS Shell Dlg 2', sans-serif;\">Spannung ab t=T2</span><span style=\"font-size: 9pt; font-family: 'MS Shell Dlg 2', sans-serif;\"><o:p></o:p></span></p></td><td width=\"102\" style=\"width: 76.55pt; border-style: none solid solid none; border-bottom-color: windowtext; border-bottom-width: 1pt; border-right-color: windowtext; border-right-width: 1pt; padding: 0cm 5.4pt; height: 21.5pt;\"><p class=\"MsoNormal\"><span style=\"font-size: 9pt; font-family: 'MS Shell Dlg 2', sans-serif;\">U3<o:p></o:p></span></p></td><td width=\"57\" style=\"width: 42.4pt; border-style: none solid solid none; border-bottom-color: windowtext; border-bottom-width: 1pt; border-right-color: windowtext; border-right-width: 1pt; padding: 0cm 5.4pt; height: 21.5pt;\"><p class=\"MsoNormal\"><span style=\"font-size: 9pt; font-family: 'MS Shell Dlg 2', sans-serif;\">V<o:p></o:p></span></p></td><td width=\"97\" style=\"width: 73.05pt; border-style: none solid solid none; border-bottom-color: windowtext; border-bottom-width: 1pt; border-right-color: windowtext; border-right-width: 1pt; padding: 0cm 5.4pt; height: 21.5pt;\"><p class=\"MsoNormal\"><span style=\"font-size: 9pt; font-family: 'MS Shell Dlg 2', sans-serif;\">0 V<o:p></o:p></span></p></td><td width=\"118\" style=\"width: 88.75pt; border-style: none solid solid none; border-bottom-color: windowtext; border-bottom-width: 1pt; border-right-color: windowtext; border-right-width: 1pt; padding: 0cm 5.4pt; height: 21.5pt;\"><p class=\"MsoNormal\"><span style=\"font-size: 9pt; font-family: 'MS Shell Dlg 2', sans-serif;\">-<o:p></o:p></span></p></td></tr><tr style=\"height: 21.5pt;\"><td width=\"163\" style=\"width: 122.25pt; border-style: none solid solid; border-right-color: windowtext; border-bottom-color: windowtext; border-left-color: windowtext; border-right-width: 1pt; border-bottom-width: 1pt; border-left-width: 1pt; padding: 0cm 5.4pt; height: 21.5pt;\"><p class=\"MsoNormal\"><span style=\"font-size: 9pt; font-family: 'MS Shell Dlg 2', sans-serif;\">Zeitpunkt des Wechsels von U1 auf U2</span><span style=\"font-size: 9pt; font-family: 'MS Shell Dlg 2', sans-serif;\"><o:p></o:p></span></p></td><td width=\"102\" style=\"width: 76.55pt; border-style: none solid solid none; border-bottom-color: windowtext; border-bottom-width: 1pt; border-right-color: windowtext; border-right-width: 1pt; padding: 0cm 5.4pt; height: 21.5pt;\"><p class=\"MsoNormal\"><span style=\"font-size: 9pt; font-family: 'MS Shell Dlg 2', sans-serif;\">T1<o:p></o:p></span></p></td><td width=\"57\" style=\"width: 42.4pt; border-style: none solid solid none; border-bottom-color: windowtext; border-bottom-width: 1pt; border-right-color: windowtext; border-right-width: 1pt; padding: 0cm 5.4pt; height: 21.5pt;\"><p class=\"MsoNormal\"><span style=\"font-size: 9pt; font-family: 'MS Shell Dlg 2', sans-serif;\">s<o:p></o:p></span></p></td><td width=\"97\" style=\"width: 73.05pt; border-style: none solid solid none; border-bottom-color: windowtext; border-bottom-width: 1pt; border-right-color: windowtext; border-right-width: 1pt; padding: 0cm 5.4pt; height: 21.5pt;\"><p class=\"MsoNormal\"><span style=\"font-size: 9pt; font-family: 'MS Shell Dlg 2', sans-serif;\">1 s<o:p></o:p></span></p></td><td width=\"118\" style=\"width: 88.75pt; border-style: none solid solid none; border-bottom-color: windowtext; border-bottom-width: 1pt; border-right-color: windowtext; border-right-width: 1pt; padding: 0cm 5.4pt; height: 21.5pt;\"><p class=\"MsoNormal\"><span style=\"font-size: 9pt; font-family: 'MS Shell Dlg 2', sans-serif;\">T1 &lt; T2</span><span style=\"font-size: 9pt; font-family: 'MS Shell Dlg 2', sans-serif;\"><o:p></o:p></span></p></td></tr><tr style=\"height: 21.5pt;\"><td width=\"163\" style=\"width: 122.25pt; border-style: none solid solid; border-right-color: windowtext; border-bottom-color: windowtext; border-left-color: windowtext; border-right-width: 1pt; border-bottom-width: 1pt; border-left-width: 1pt; padding: 0cm 5.4pt; height: 21.5pt;\"><p class=\"MsoNormal\"><span style=\"font-size: 9pt; font-family: 'MS Shell Dlg 2', sans-serif;\">Zeitpunkt des Wechsels von U2 auf U3</span><span style=\"font-size: 9pt; font-family: 'MS Shell Dlg 2', sans-serif;\"><o:p></o:p></span></p></td><td width=\"102\" style=\"width: 76.55pt; border-style: none solid solid none; border-bottom-color: windowtext; border-bottom-width: 1pt; border-right-color: windowtext; border-right-width: 1pt; padding: 0cm 5.4pt; height: 21.5pt;\"><p class=\"MsoNormal\"><span style=\"font-size: 9pt; font-family: 'MS Shell Dlg 2', sans-serif;\">T2<o:p></o:p></span></p></td><td width=\"57\" style=\"width: 42.4pt; border-style: none solid solid none; border-bottom-color: windowtext; border-bottom-width: 1pt; border-right-color: windowtext; border-right-width: 1pt; padding: 0cm 5.4pt; height: 21.5pt;\"><p class=\"MsoNormal\"><span style=\"font-size: 9pt; font-family: 'MS Shell Dlg 2', sans-serif;\">s<o:p></o:p></span></p></td><td width=\"97\" style=\"width: 73.05pt; border-style: none solid solid none; border-bottom-color: windowtext; border-bottom-width: 1pt; border-right-color: windowtext; border-right-width: 1pt; padding: 0cm 5.4pt; height: 21.5pt;\"><p class=\"MsoNormal\"><span style=\"font-size: 9pt; font-family: 'MS Shell Dlg 2', sans-serif;\">10 s<o:p></o:p></span></p></td><td width=\"118\" style=\"width: 88.75pt; border-style: none solid solid none; border-bottom-color: windowtext; border-bottom-width: 1pt; border-right-color: windowtext; border-right-width: 1pt; padding: 0cm 5.4pt; height: 21.5pt;\"><p class=\"MsoNormal\"><span style=\"font-size: 9pt; font-family: 'MS Shell Dlg 2', sans-serif;\">T2 &gt; T1</span><span style=\"font-size: 9pt; font-family: 'MS Shell Dlg 2', sans-serif;\"><o:p></o:p></span></p></td></tr></tbody></table></div><div><p class=\"MsoNormal\"><u><span style=\"font-size: 9pt; font-family: 'MS Shell Dlg 2', sans-serif;\"><br>Connectoren:</span></u><span style=\"font-size: 9pt; font-family: 'MS Shell Dlg 2', sans-serif;\"><o:p></o:p></span></p></div><div><table class=\"MsoNormalTable\" border=\"1\" cellspacing=\"0\" cellpadding=\"0\" style=\"border-collapse: collapse; border: none;\"><tbody><tr style=\"height: 25.65pt;\"><td width=\"107\" style=\"width: 80pt; border: 1pt solid windowtext; padding: 0cm 5.4pt; height: 25.65pt;\"><p class=\"MsoNormal\"><b><span style=\"font-size: 9pt; font-family: 'MS Shell Dlg 2', sans-serif;\">Name</span></b><span style=\"font-size: 9pt; font-family: 'Times New Roman', serif;\"><o:p></o:p></span></p></td><td width=\"166\" style=\"width: 124.5pt; border-style: solid solid solid none; border-top-color: windowtext; border-right-color: windowtext; border-bottom-color: windowtext; border-top-width: 1pt; border-right-width: 1pt; border-bottom-width: 1pt; padding: 0cm 5.4pt; height: 25.65pt;\"><p class=\"MsoNormal\"><b><span style=\"font-size: 9pt; font-family: 'MS Shell Dlg 2', sans-serif;\">Typ</span></b><span style=\"font-size: 9pt; font-family: 'Times New Roman', serif;\"><o:p></o:p></span></p></td><td width=\"72\" style=\"width: 53.8pt; border-style: solid solid solid none; border-top-color: windowtext; border-right-color: windowtext; border-bottom-color: windowtext; border-top-width: 1pt; border-right-width: 1pt; border-bottom-width: 1pt; padding: 0cm 5.4pt; height: 25.65pt;\"><p class=\"MsoNormal\"><b><span style=\"font-size: 9pt; font-family: 'MS Shell Dlg 2', sans-serif;\">Variablen</span></b><span style=\"font-size: 9pt; font-family: 'Times New Roman', serif;\"><o:p></o:p></span></p></td><td width=\"135\" style=\"width: 101pt; border-style: solid solid solid none; border-top-color: windowtext; border-right-color: windowtext; border-bottom-color: windowtext; border-top-width: 1pt; border-right-width: 1pt; border-bottom-width: 1pt; padding: 0cm 5.4pt; height: 25.65pt;\"><p class=\"MsoNormal\"><b><span style=\"font-size: 9pt; font-family: 'MS Shell Dlg 2', sans-serif;\">Verwendungszweck</span></b><span style=\"font-size: 9pt; font-family: 'Times New Roman', serif;\"><o:p></o:p></span></p></td></tr><tr style=\"height: 25.65pt;\"><td width=\"107\" style=\"width: 80pt; border-style: none solid solid; border-right-color: windowtext; border-bottom-color: windowtext; border-left-color: windowtext; border-right-width: 1pt; border-bottom-width: 1pt; border-left-width: 1pt; padding: 0cm 5.4pt; height: 25.65pt;\"><p class=\"MsoNormal\"><span style=\"font-size: 9pt; font-family: 'MS Shell Dlg 2', sans-serif;\">U_I_Connector</span><span style=\"font-size: 9pt; font-family: 'Times New Roman', serif;\"><o:p></o:p></span></p></td><td width=\"166\" style=\"width: 124.5pt; border-style: none solid solid none; border-bottom-color: windowtext; border-bottom-width: 1pt; border-right-color: windowtext; border-right-width: 1pt; padding: 0cm 5.4pt; height: 25.65pt;\"><p class=\"MsoNormal\"><span style=\"font-size: 9pt; font-family: 'MS Shell Dlg 2', sans-serif;\">Spannung_Strom_Connector</span><span style=\"font-size: 9pt; font-family: 'Times New Roman', serif;\"><o:p></o:p></span></p></td><td width=\"72\" style=\"width: 53.8pt; border-style: none solid solid none; border-bottom-color: windowtext; border-bottom-width: 1pt; border-right-color: windowtext; border-right-width: 1pt; padding: 0cm 5.4pt; height: 25.65pt;\"><p class=\"MsoNormal\"><span style=\"font-size: 9pt; font-family: 'MS Shell Dlg 2', sans-serif;\">U und I</span><span style=\"font-size: 9pt; font-family: 'Times New Roman', serif;\"><o:p></o:p></span></p></td><td width=\"135\" style=\"width: 101pt; border-style: none solid solid none; border-bottom-color: windowtext; border-bottom-width: 1pt; border-right-color: windowtext; border-right-width: 1pt; padding: 0cm 5.4pt; height: 25.65pt;\"><p class=\"MsoNormal\"><span style=\"font-size: 9pt; font-family: 'MS Shell Dlg 2', sans-serif;\">Anbindung an zu versorgendes Bauteil</span><span style=\"font-size: 9pt; font-family: 'Times New Roman', serif;\"><o:p></o:p></span></p></td></tr></tbody></table></div><div><br></div><div><br></div><br class=\"Apple-interchange-newline\"><!--EndFragment--></div></body></html>"));
     end Spannungsquelle;
   annotation(
-      Icon(coordinateSystem(initialScale = 0.1), graphics = {Rectangle(origin = {-1, 0}, fillColor = {255, 255, 255}, fillPattern = FillPattern.Solid, lineThickness = 3, extent = {{-99, 100}, {101, -100}}), Text(origin = {-42, 1}, extent = {{-36, 25}, {36, -25}}, textString = "M"), Polygon(origin = {-42, -1}, lineColor = {255, 255, 255}, fillColor = {255, 255, 255}, fillPattern = FillPattern.Solid, points = {{-26, 31}, {-26, 9}, {-22, 9}, {-22, -11}, {-26, -11}, {-26, -29}, {-2, -41}, {24, -31}, {24, -11}, {20, -11}, {20, 9}, {24, 9}, {24, 33}, {-4, 41}, {-6, 41}, {-26, 31}}), Ellipse(origin = {-36, 1}, fillPattern = FillPattern.Solid, extent = {{-44, 35}, {30, -39}}, endAngle = 360), Ellipse(origin = {-43, -5}, lineThickness = 3, extent = {{-45, 49}, {45, -41}}, endAngle = 360), Line(origin = {16.2913, 27.7741}, points = {{-52, 16}, {52, -16}}, thickness = 1.5), Line(origin = {12.8233, -62.7626}, points = {{-52, 16}, {52, 18}}, thickness = 1.5), Ellipse(origin = {45, -1}, lineThickness = 3, extent = {{-11, 13}, {45, -43}}, endAngle = 360), Polygon(origin = {-42, -1}, lineColor = {255, 255, 255}, fillColor = {255, 255, 255}, fillPattern = FillPattern.Solid, points = {{-26, 31}, {-26, 9}, {-22, 9}, {-22, -11}, {-26, -11}, {-26, -29}, {-2, -41}, {24, -31}, {24, -11}, {20, -11}, {20, 9}, {24, 9}, {24, 33}, {-4, 41}, {-6, 41}, {-26, 31}}), Text(origin = {-42, -1}, extent = {{-36, 25}, {36, -25}}, textString = "M")}));
+      Icon(coordinateSystem(initialScale = 0.1), graphics = {Rectangle(origin = {-1, 0}, fillColor = {255, 255, 255}, fillPattern = FillPattern.Solid, lineThickness = 3, extent = {{-99, 100}, {101, -100}}), Text(origin = {-42, 1}, extent = {{-36, 25}, {36, -25}}, textString = "M"), Polygon(origin = {-42, -1}, lineColor = {255, 255, 255}, fillColor = {255, 255, 255}, fillPattern = FillPattern.Solid, points = {{-26, 31}, {-26, 9}, {-22, 9}, {-22, -11}, {-26, -11}, {-26, -29}, {-2, -41}, {24, -31}, {24, -11}, {20, -11}, {20, 9}, {24, 9}, {24, 33}, {-4, 41}, {-6, 41}, {-26, 31}}), Ellipse(origin = {-36, 1}, fillPattern = FillPattern.Solid, extent = {{-44, 35}, {30, -39}}, endAngle = 360), Ellipse(origin = {-43, -5}, lineThickness = 3, extent = {{-45, 49}, {45, -41}}, endAngle = 360), Line(origin = {16.2913, 27.7741}, points = {{-52, 16}, {52, -16}}, thickness = 1.5), Line(origin = {12.8233, -62.7626}, points = {{-52, 16}, {52, 18}}, thickness = 1.5), Ellipse(origin = {45, -1}, lineThickness = 3, extent = {{-11, 13}, {45, -43}}, endAngle = 360), Polygon(origin = {-42, -1}, lineColor = {255, 255, 255}, fillColor = {255, 255, 255}, fillPattern = FillPattern.Solid, points = {{-26, 31}, {-26, 9}, {-22, 9}, {-22, -11}, {-26, -11}, {-26, -29}, {-2, -41}, {24, -31}, {24, -11}, {20, -11}, {20, 9}, {24, 9}, {24, 33}, {-4, 41}, {-6, 41}, {-26, 31}}), Text(origin = {-42, -1}, extent = {{-36, 25}, {36, -25}}, textString = "M")}),
+      Documentation(info = "<html><head></head><body>Dieses Package beinhaltet alle Bauteile des Antriebsstrang in der Bibliothek.<div>Dies beinhaltet einen einphasigen permanenterregten Gleichstrommotor, eine Bremse und eine Spannungsquelle.</div><div>In der folgenden Tabelle sind die Kurzbeschreibungen der einzelnen Komponenten angegeben:<br><div><br></div><div>
+
+
+
+
+<!--[if gte mso 9]><xml>
+ <o:OfficeDocumentSettings>
+  <o:AllowPNG/>
+ </o:OfficeDocumentSettings>
+</xml><![endif]-->
+
+
+<!--[if gte mso 9]><xml>
+ <w:WordDocument>
+  <w:View>Normal</w:View>
+  <w:Zoom>0</w:Zoom>
+  <w:TrackMoves/>
+  <w:TrackFormatting/>
+  <w:HyphenationZone>21</w:HyphenationZone>
+  <w:PunctuationKerning/>
+  <w:ValidateAgainstSchemas/>
+  <w:SaveIfXMLInvalid>false</w:SaveIfXMLInvalid>
+  <w:IgnoreMixedContent>false</w:IgnoreMixedContent>
+  <w:AlwaysShowPlaceholderText>false</w:AlwaysShowPlaceholderText>
+  <w:DoNotPromoteQF/>
+  <w:LidThemeOther>DE</w:LidThemeOther>
+  <w:LidThemeAsian>JA</w:LidThemeAsian>
+  <w:LidThemeComplexScript>X-NONE</w:LidThemeComplexScript>
+  <w:Compatibility>
+   <w:BreakWrappedTables/>
+   <w:SnapToGridInCell/>
+   <w:WrapTextWithPunct/>
+   <w:UseAsianBreakRules/>
+   <w:DontGrowAutofit/>
+   <w:SplitPgBreakAndParaMark/>
+   <w:EnableOpenTypeKerning/>
+   <w:DontFlipMirrorIndents/>
+   <w:OverrideTableStyleHps/>
+   <w:UseFELayout/>
+  </w:Compatibility>
+  <m:mathPr>
+   <m:mathFont m:val=\"Cambria Math\"/>
+   <m:brkBin m:val=\"before\"/>
+   <m:brkBinSub m:val=\"&#45;-\"/>
+   <m:smallFrac m:val=\"off\"/>
+   <m:dispDef/>
+   <m:lMargin m:val=\"0\"/>
+   <m:rMargin m:val=\"0\"/>
+   <m:defJc m:val=\"centerGroup\"/>
+   <m:wrapIndent m:val=\"1440\"/>
+   <m:intLim m:val=\"subSup\"/>
+   <m:naryLim m:val=\"undOvr\"/>
+  </m:mathPr></w:WordDocument>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <w:LatentStyles DefLockedState=\"false\" DefUnhideWhenUsed=\"false\"
+  DefSemiHidden=\"false\" DefQFormat=\"false\" DefPriority=\"99\"
+  LatentStyleCount=\"375\">
+  <w:LsdException Locked=\"false\" Priority=\"0\" QFormat=\"true\" Name=\"Normal\"/>
+  <w:LsdException Locked=\"false\" Priority=\"9\" QFormat=\"true\" Name=\"heading 1\"/>
+  <w:LsdException Locked=\"false\" Priority=\"9\" SemiHidden=\"true\"
+   UnhideWhenUsed=\"true\" QFormat=\"true\" Name=\"heading 2\"/>
+  <w:LsdException Locked=\"false\" Priority=\"9\" SemiHidden=\"true\"
+   UnhideWhenUsed=\"true\" QFormat=\"true\" Name=\"heading 3\"/>
+  <w:LsdException Locked=\"false\" Priority=\"9\" SemiHidden=\"true\"
+   UnhideWhenUsed=\"true\" QFormat=\"true\" Name=\"heading 4\"/>
+  <w:LsdException Locked=\"false\" Priority=\"9\" SemiHidden=\"true\"
+   UnhideWhenUsed=\"true\" QFormat=\"true\" Name=\"heading 5\"/>
+  <w:LsdException Locked=\"false\" Priority=\"9\" SemiHidden=\"true\"
+   UnhideWhenUsed=\"true\" QFormat=\"true\" Name=\"heading 6\"/>
+  <w:LsdException Locked=\"false\" Priority=\"9\" SemiHidden=\"true\"
+   UnhideWhenUsed=\"true\" QFormat=\"true\" Name=\"heading 7\"/>
+  <w:LsdException Locked=\"false\" Priority=\"9\" SemiHidden=\"true\"
+   UnhideWhenUsed=\"true\" QFormat=\"true\" Name=\"heading 8\"/>
+  <w:LsdException Locked=\"false\" Priority=\"9\" SemiHidden=\"true\"
+   UnhideWhenUsed=\"true\" QFormat=\"true\" Name=\"heading 9\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"index 1\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"index 2\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"index 3\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"index 4\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"index 5\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"index 6\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"index 7\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"index 8\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"index 9\"/>
+  <w:LsdException Locked=\"false\" Priority=\"39\" SemiHidden=\"true\"
+   UnhideWhenUsed=\"true\" Name=\"toc 1\"/>
+  <w:LsdException Locked=\"false\" Priority=\"39\" SemiHidden=\"true\"
+   UnhideWhenUsed=\"true\" Name=\"toc 2\"/>
+  <w:LsdException Locked=\"false\" Priority=\"39\" SemiHidden=\"true\"
+   UnhideWhenUsed=\"true\" Name=\"toc 3\"/>
+  <w:LsdException Locked=\"false\" Priority=\"39\" SemiHidden=\"true\"
+   UnhideWhenUsed=\"true\" Name=\"toc 4\"/>
+  <w:LsdException Locked=\"false\" Priority=\"39\" SemiHidden=\"true\"
+   UnhideWhenUsed=\"true\" Name=\"toc 5\"/>
+  <w:LsdException Locked=\"false\" Priority=\"39\" SemiHidden=\"true\"
+   UnhideWhenUsed=\"true\" Name=\"toc 6\"/>
+  <w:LsdException Locked=\"false\" Priority=\"39\" SemiHidden=\"true\"
+   UnhideWhenUsed=\"true\" Name=\"toc 7\"/>
+  <w:LsdException Locked=\"false\" Priority=\"39\" SemiHidden=\"true\"
+   UnhideWhenUsed=\"true\" Name=\"toc 8\"/>
+  <w:LsdException Locked=\"false\" Priority=\"39\" SemiHidden=\"true\"
+   UnhideWhenUsed=\"true\" Name=\"toc 9\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Normal Indent\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"footnote text\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"annotation text\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"header\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"footer\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"index heading\"/>
+  <w:LsdException Locked=\"false\" Priority=\"35\" SemiHidden=\"true\"
+   UnhideWhenUsed=\"true\" QFormat=\"true\" Name=\"caption\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"table of figures\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"envelope address\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"envelope return\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"footnote reference\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"annotation reference\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"line number\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"page number\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"endnote reference\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"endnote text\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"table of authorities\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"macro\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"toa heading\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"List\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"List Bullet\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"List Number\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"List 2\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"List 3\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"List 4\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"List 5\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"List Bullet 2\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"List Bullet 3\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"List Bullet 4\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"List Bullet 5\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"List Number 2\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"List Number 3\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"List Number 4\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"List Number 5\"/>
+  <w:LsdException Locked=\"false\" Priority=\"10\" QFormat=\"true\" Name=\"Title\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Closing\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Signature\"/>
+  <w:LsdException Locked=\"false\" Priority=\"1\" SemiHidden=\"true\"
+   UnhideWhenUsed=\"true\" Name=\"Default Paragraph Font\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Body Text\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Body Text Indent\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"List Continue\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"List Continue 2\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"List Continue 3\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"List Continue 4\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"List Continue 5\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Message Header\"/>
+  <w:LsdException Locked=\"false\" Priority=\"11\" QFormat=\"true\" Name=\"Subtitle\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Salutation\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Date\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Body Text First Indent\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Body Text First Indent 2\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Note Heading\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Body Text 2\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Body Text 3\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Body Text Indent 2\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Body Text Indent 3\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Block Text\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Hyperlink\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"FollowedHyperlink\"/>
+  <w:LsdException Locked=\"false\" Priority=\"22\" QFormat=\"true\" Name=\"Strong\"/>
+  <w:LsdException Locked=\"false\" Priority=\"20\" QFormat=\"true\" Name=\"Emphasis\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Document Map\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Plain Text\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"E-mail Signature\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"HTML Top of Form\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"HTML Bottom of Form\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Normal (Web)\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"HTML Acronym\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"HTML Address\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"HTML Cite\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"HTML Code\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"HTML Definition\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"HTML Keyboard\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"HTML Preformatted\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"HTML Sample\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"HTML Typewriter\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"HTML Variable\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Normal Table\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"annotation subject\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"No List\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Outline List 1\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Outline List 2\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Outline List 3\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Table Simple 1\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Table Simple 2\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Table Simple 3\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Table Classic 1\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Table Classic 2\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Table Classic 3\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Table Classic 4\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Table Colorful 1\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Table Colorful 2\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Table Colorful 3\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Table Columns 1\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Table Columns 2\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Table Columns 3\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Table Columns 4\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Table Columns 5\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Table Grid 1\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Table Grid 2\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Table Grid 3\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Table Grid 4\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Table Grid 5\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Table Grid 6\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Table Grid 7\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Table Grid 8\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Table List 1\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Table List 2\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Table List 3\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Table List 4\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Table List 5\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Table List 6\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Table List 7\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Table List 8\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Table 3D effects 1\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Table 3D effects 2\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Table 3D effects 3\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Table Contemporary\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Table Elegant\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Table Professional\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Table Subtle 1\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Table Subtle 2\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Table Web 1\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Table Web 2\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Table Web 3\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Balloon Text\"/>
+  <w:LsdException Locked=\"false\" Priority=\"39\" Name=\"Table Grid\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Table Theme\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" Name=\"Placeholder Text\"/>
+  <w:LsdException Locked=\"false\" Priority=\"1\" QFormat=\"true\" Name=\"No Spacing\"/>
+  <w:LsdException Locked=\"false\" Priority=\"60\" Name=\"Light Shading\"/>
+  <w:LsdException Locked=\"false\" Priority=\"61\" Name=\"Light List\"/>
+  <w:LsdException Locked=\"false\" Priority=\"62\" Name=\"Light Grid\"/>
+  <w:LsdException Locked=\"false\" Priority=\"63\" Name=\"Medium Shading 1\"/>
+  <w:LsdException Locked=\"false\" Priority=\"64\" Name=\"Medium Shading 2\"/>
+  <w:LsdException Locked=\"false\" Priority=\"65\" Name=\"Medium List 1\"/>
+  <w:LsdException Locked=\"false\" Priority=\"66\" Name=\"Medium List 2\"/>
+  <w:LsdException Locked=\"false\" Priority=\"67\" Name=\"Medium Grid 1\"/>
+  <w:LsdException Locked=\"false\" Priority=\"68\" Name=\"Medium Grid 2\"/>
+  <w:LsdException Locked=\"false\" Priority=\"69\" Name=\"Medium Grid 3\"/>
+  <w:LsdException Locked=\"false\" Priority=\"70\" Name=\"Dark List\"/>
+  <w:LsdException Locked=\"false\" Priority=\"71\" Name=\"Colorful Shading\"/>
+  <w:LsdException Locked=\"false\" Priority=\"72\" Name=\"Colorful List\"/>
+  <w:LsdException Locked=\"false\" Priority=\"73\" Name=\"Colorful Grid\"/>
+  <w:LsdException Locked=\"false\" Priority=\"60\" Name=\"Light Shading Accent 1\"/>
+  <w:LsdException Locked=\"false\" Priority=\"61\" Name=\"Light List Accent 1\"/>
+  <w:LsdException Locked=\"false\" Priority=\"62\" Name=\"Light Grid Accent 1\"/>
+  <w:LsdException Locked=\"false\" Priority=\"63\" Name=\"Medium Shading 1 Accent 1\"/>
+  <w:LsdException Locked=\"false\" Priority=\"64\" Name=\"Medium Shading 2 Accent 1\"/>
+  <w:LsdException Locked=\"false\" Priority=\"65\" Name=\"Medium List 1 Accent 1\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" Name=\"Revision\"/>
+  <w:LsdException Locked=\"false\" Priority=\"34\" QFormat=\"true\"
+   Name=\"List Paragraph\"/>
+  <w:LsdException Locked=\"false\" Priority=\"29\" QFormat=\"true\" Name=\"Quote\"/>
+  <w:LsdException Locked=\"false\" Priority=\"30\" QFormat=\"true\"
+   Name=\"Intense Quote\"/>
+  <w:LsdException Locked=\"false\" Priority=\"66\" Name=\"Medium List 2 Accent 1\"/>
+  <w:LsdException Locked=\"false\" Priority=\"67\" Name=\"Medium Grid 1 Accent 1\"/>
+  <w:LsdException Locked=\"false\" Priority=\"68\" Name=\"Medium Grid 2 Accent 1\"/>
+  <w:LsdException Locked=\"false\" Priority=\"69\" Name=\"Medium Grid 3 Accent 1\"/>
+  <w:LsdException Locked=\"false\" Priority=\"70\" Name=\"Dark List Accent 1\"/>
+  <w:LsdException Locked=\"false\" Priority=\"71\" Name=\"Colorful Shading Accent 1\"/>
+  <w:LsdException Locked=\"false\" Priority=\"72\" Name=\"Colorful List Accent 1\"/>
+  <w:LsdException Locked=\"false\" Priority=\"73\" Name=\"Colorful Grid Accent 1\"/>
+  <w:LsdException Locked=\"false\" Priority=\"60\" Name=\"Light Shading Accent 2\"/>
+  <w:LsdException Locked=\"false\" Priority=\"61\" Name=\"Light List Accent 2\"/>
+  <w:LsdException Locked=\"false\" Priority=\"62\" Name=\"Light Grid Accent 2\"/>
+  <w:LsdException Locked=\"false\" Priority=\"63\" Name=\"Medium Shading 1 Accent 2\"/>
+  <w:LsdException Locked=\"false\" Priority=\"64\" Name=\"Medium Shading 2 Accent 2\"/>
+  <w:LsdException Locked=\"false\" Priority=\"65\" Name=\"Medium List 1 Accent 2\"/>
+  <w:LsdException Locked=\"false\" Priority=\"66\" Name=\"Medium List 2 Accent 2\"/>
+  <w:LsdException Locked=\"false\" Priority=\"67\" Name=\"Medium Grid 1 Accent 2\"/>
+  <w:LsdException Locked=\"false\" Priority=\"68\" Name=\"Medium Grid 2 Accent 2\"/>
+  <w:LsdException Locked=\"false\" Priority=\"69\" Name=\"Medium Grid 3 Accent 2\"/>
+  <w:LsdException Locked=\"false\" Priority=\"70\" Name=\"Dark List Accent 2\"/>
+  <w:LsdException Locked=\"false\" Priority=\"71\" Name=\"Colorful Shading Accent 2\"/>
+  <w:LsdException Locked=\"false\" Priority=\"72\" Name=\"Colorful List Accent 2\"/>
+  <w:LsdException Locked=\"false\" Priority=\"73\" Name=\"Colorful Grid Accent 2\"/>
+  <w:LsdException Locked=\"false\" Priority=\"60\" Name=\"Light Shading Accent 3\"/>
+  <w:LsdException Locked=\"false\" Priority=\"61\" Name=\"Light List Accent 3\"/>
+  <w:LsdException Locked=\"false\" Priority=\"62\" Name=\"Light Grid Accent 3\"/>
+  <w:LsdException Locked=\"false\" Priority=\"63\" Name=\"Medium Shading 1 Accent 3\"/>
+  <w:LsdException Locked=\"false\" Priority=\"64\" Name=\"Medium Shading 2 Accent 3\"/>
+  <w:LsdException Locked=\"false\" Priority=\"65\" Name=\"Medium List 1 Accent 3\"/>
+  <w:LsdException Locked=\"false\" Priority=\"66\" Name=\"Medium List 2 Accent 3\"/>
+  <w:LsdException Locked=\"false\" Priority=\"67\" Name=\"Medium Grid 1 Accent 3\"/>
+  <w:LsdException Locked=\"false\" Priority=\"68\" Name=\"Medium Grid 2 Accent 3\"/>
+  <w:LsdException Locked=\"false\" Priority=\"69\" Name=\"Medium Grid 3 Accent 3\"/>
+  <w:LsdException Locked=\"false\" Priority=\"70\" Name=\"Dark List Accent 3\"/>
+  <w:LsdException Locked=\"false\" Priority=\"71\" Name=\"Colorful Shading Accent 3\"/>
+  <w:LsdException Locked=\"false\" Priority=\"72\" Name=\"Colorful List Accent 3\"/>
+  <w:LsdException Locked=\"false\" Priority=\"73\" Name=\"Colorful Grid Accent 3\"/>
+  <w:LsdException Locked=\"false\" Priority=\"60\" Name=\"Light Shading Accent 4\"/>
+  <w:LsdException Locked=\"false\" Priority=\"61\" Name=\"Light List Accent 4\"/>
+  <w:LsdException Locked=\"false\" Priority=\"62\" Name=\"Light Grid Accent 4\"/>
+  <w:LsdException Locked=\"false\" Priority=\"63\" Name=\"Medium Shading 1 Accent 4\"/>
+  <w:LsdException Locked=\"false\" Priority=\"64\" Name=\"Medium Shading 2 Accent 4\"/>
+  <w:LsdException Locked=\"false\" Priority=\"65\" Name=\"Medium List 1 Accent 4\"/>
+  <w:LsdException Locked=\"false\" Priority=\"66\" Name=\"Medium List 2 Accent 4\"/>
+  <w:LsdException Locked=\"false\" Priority=\"67\" Name=\"Medium Grid 1 Accent 4\"/>
+  <w:LsdException Locked=\"false\" Priority=\"68\" Name=\"Medium Grid 2 Accent 4\"/>
+  <w:LsdException Locked=\"false\" Priority=\"69\" Name=\"Medium Grid 3 Accent 4\"/>
+  <w:LsdException Locked=\"false\" Priority=\"70\" Name=\"Dark List Accent 4\"/>
+  <w:LsdException Locked=\"false\" Priority=\"71\" Name=\"Colorful Shading Accent 4\"/>
+  <w:LsdException Locked=\"false\" Priority=\"72\" Name=\"Colorful List Accent 4\"/>
+  <w:LsdException Locked=\"false\" Priority=\"73\" Name=\"Colorful Grid Accent 4\"/>
+  <w:LsdException Locked=\"false\" Priority=\"60\" Name=\"Light Shading Accent 5\"/>
+  <w:LsdException Locked=\"false\" Priority=\"61\" Name=\"Light List Accent 5\"/>
+  <w:LsdException Locked=\"false\" Priority=\"62\" Name=\"Light Grid Accent 5\"/>
+  <w:LsdException Locked=\"false\" Priority=\"63\" Name=\"Medium Shading 1 Accent 5\"/>
+  <w:LsdException Locked=\"false\" Priority=\"64\" Name=\"Medium Shading 2 Accent 5\"/>
+  <w:LsdException Locked=\"false\" Priority=\"65\" Name=\"Medium List 1 Accent 5\"/>
+  <w:LsdException Locked=\"false\" Priority=\"66\" Name=\"Medium List 2 Accent 5\"/>
+  <w:LsdException Locked=\"false\" Priority=\"67\" Name=\"Medium Grid 1 Accent 5\"/>
+  <w:LsdException Locked=\"false\" Priority=\"68\" Name=\"Medium Grid 2 Accent 5\"/>
+  <w:LsdException Locked=\"false\" Priority=\"69\" Name=\"Medium Grid 3 Accent 5\"/>
+  <w:LsdException Locked=\"false\" Priority=\"70\" Name=\"Dark List Accent 5\"/>
+  <w:LsdException Locked=\"false\" Priority=\"71\" Name=\"Colorful Shading Accent 5\"/>
+  <w:LsdException Locked=\"false\" Priority=\"72\" Name=\"Colorful List Accent 5\"/>
+  <w:LsdException Locked=\"false\" Priority=\"73\" Name=\"Colorful Grid Accent 5\"/>
+  <w:LsdException Locked=\"false\" Priority=\"60\" Name=\"Light Shading Accent 6\"/>
+  <w:LsdException Locked=\"false\" Priority=\"61\" Name=\"Light List Accent 6\"/>
+  <w:LsdException Locked=\"false\" Priority=\"62\" Name=\"Light Grid Accent 6\"/>
+  <w:LsdException Locked=\"false\" Priority=\"63\" Name=\"Medium Shading 1 Accent 6\"/>
+  <w:LsdException Locked=\"false\" Priority=\"64\" Name=\"Medium Shading 2 Accent 6\"/>
+  <w:LsdException Locked=\"false\" Priority=\"65\" Name=\"Medium List 1 Accent 6\"/>
+  <w:LsdException Locked=\"false\" Priority=\"66\" Name=\"Medium List 2 Accent 6\"/>
+  <w:LsdException Locked=\"false\" Priority=\"67\" Name=\"Medium Grid 1 Accent 6\"/>
+  <w:LsdException Locked=\"false\" Priority=\"68\" Name=\"Medium Grid 2 Accent 6\"/>
+  <w:LsdException Locked=\"false\" Priority=\"69\" Name=\"Medium Grid 3 Accent 6\"/>
+  <w:LsdException Locked=\"false\" Priority=\"70\" Name=\"Dark List Accent 6\"/>
+  <w:LsdException Locked=\"false\" Priority=\"71\" Name=\"Colorful Shading Accent 6\"/>
+  <w:LsdException Locked=\"false\" Priority=\"72\" Name=\"Colorful List Accent 6\"/>
+  <w:LsdException Locked=\"false\" Priority=\"73\" Name=\"Colorful Grid Accent 6\"/>
+  <w:LsdException Locked=\"false\" Priority=\"19\" QFormat=\"true\"
+   Name=\"Subtle Emphasis\"/>
+  <w:LsdException Locked=\"false\" Priority=\"21\" QFormat=\"true\"
+   Name=\"Intense Emphasis\"/>
+  <w:LsdException Locked=\"false\" Priority=\"31\" QFormat=\"true\"
+   Name=\"Subtle Reference\"/>
+  <w:LsdException Locked=\"false\" Priority=\"32\" QFormat=\"true\"
+   Name=\"Intense Reference\"/>
+  <w:LsdException Locked=\"false\" Priority=\"33\" QFormat=\"true\" Name=\"Book Title\"/>
+  <w:LsdException Locked=\"false\" Priority=\"37\" SemiHidden=\"true\"
+   UnhideWhenUsed=\"true\" Name=\"Bibliography\"/>
+  <w:LsdException Locked=\"false\" Priority=\"39\" SemiHidden=\"true\"
+   UnhideWhenUsed=\"true\" QFormat=\"true\" Name=\"TOC Heading\"/>
+  <w:LsdException Locked=\"false\" Priority=\"41\" Name=\"Plain Table 1\"/>
+  <w:LsdException Locked=\"false\" Priority=\"42\" Name=\"Plain Table 2\"/>
+  <w:LsdException Locked=\"false\" Priority=\"43\" Name=\"Plain Table 3\"/>
+  <w:LsdException Locked=\"false\" Priority=\"44\" Name=\"Plain Table 4\"/>
+  <w:LsdException Locked=\"false\" Priority=\"45\" Name=\"Plain Table 5\"/>
+  <w:LsdException Locked=\"false\" Priority=\"40\" Name=\"Grid Table Light\"/>
+  <w:LsdException Locked=\"false\" Priority=\"46\" Name=\"Grid Table 1 Light\"/>
+  <w:LsdException Locked=\"false\" Priority=\"47\" Name=\"Grid Table 2\"/>
+  <w:LsdException Locked=\"false\" Priority=\"48\" Name=\"Grid Table 3\"/>
+  <w:LsdException Locked=\"false\" Priority=\"49\" Name=\"Grid Table 4\"/>
+  <w:LsdException Locked=\"false\" Priority=\"50\" Name=\"Grid Table 5 Dark\"/>
+  <w:LsdException Locked=\"false\" Priority=\"51\" Name=\"Grid Table 6 Colorful\"/>
+  <w:LsdException Locked=\"false\" Priority=\"52\" Name=\"Grid Table 7 Colorful\"/>
+  <w:LsdException Locked=\"false\" Priority=\"46\"
+   Name=\"Grid Table 1 Light Accent 1\"/>
+  <w:LsdException Locked=\"false\" Priority=\"47\" Name=\"Grid Table 2 Accent 1\"/>
+  <w:LsdException Locked=\"false\" Priority=\"48\" Name=\"Grid Table 3 Accent 1\"/>
+  <w:LsdException Locked=\"false\" Priority=\"49\" Name=\"Grid Table 4 Accent 1\"/>
+  <w:LsdException Locked=\"false\" Priority=\"50\" Name=\"Grid Table 5 Dark Accent 1\"/>
+  <w:LsdException Locked=\"false\" Priority=\"51\"
+   Name=\"Grid Table 6 Colorful Accent 1\"/>
+  <w:LsdException Locked=\"false\" Priority=\"52\"
+   Name=\"Grid Table 7 Colorful Accent 1\"/>
+  <w:LsdException Locked=\"false\" Priority=\"46\"
+   Name=\"Grid Table 1 Light Accent 2\"/>
+  <w:LsdException Locked=\"false\" Priority=\"47\" Name=\"Grid Table 2 Accent 2\"/>
+  <w:LsdException Locked=\"false\" Priority=\"48\" Name=\"Grid Table 3 Accent 2\"/>
+  <w:LsdException Locked=\"false\" Priority=\"49\" Name=\"Grid Table 4 Accent 2\"/>
+  <w:LsdException Locked=\"false\" Priority=\"50\" Name=\"Grid Table 5 Dark Accent 2\"/>
+  <w:LsdException Locked=\"false\" Priority=\"51\"
+   Name=\"Grid Table 6 Colorful Accent 2\"/>
+  <w:LsdException Locked=\"false\" Priority=\"52\"
+   Name=\"Grid Table 7 Colorful Accent 2\"/>
+  <w:LsdException Locked=\"false\" Priority=\"46\"
+   Name=\"Grid Table 1 Light Accent 3\"/>
+  <w:LsdException Locked=\"false\" Priority=\"47\" Name=\"Grid Table 2 Accent 3\"/>
+  <w:LsdException Locked=\"false\" Priority=\"48\" Name=\"Grid Table 3 Accent 3\"/>
+  <w:LsdException Locked=\"false\" Priority=\"49\" Name=\"Grid Table 4 Accent 3\"/>
+  <w:LsdException Locked=\"false\" Priority=\"50\" Name=\"Grid Table 5 Dark Accent 3\"/>
+  <w:LsdException Locked=\"false\" Priority=\"51\"
+   Name=\"Grid Table 6 Colorful Accent 3\"/>
+  <w:LsdException Locked=\"false\" Priority=\"52\"
+   Name=\"Grid Table 7 Colorful Accent 3\"/>
+  <w:LsdException Locked=\"false\" Priority=\"46\"
+   Name=\"Grid Table 1 Light Accent 4\"/>
+  <w:LsdException Locked=\"false\" Priority=\"47\" Name=\"Grid Table 2 Accent 4\"/>
+  <w:LsdException Locked=\"false\" Priority=\"48\" Name=\"Grid Table 3 Accent 4\"/>
+  <w:LsdException Locked=\"false\" Priority=\"49\" Name=\"Grid Table 4 Accent 4\"/>
+  <w:LsdException Locked=\"false\" Priority=\"50\" Name=\"Grid Table 5 Dark Accent 4\"/>
+  <w:LsdException Locked=\"false\" Priority=\"51\"
+   Name=\"Grid Table 6 Colorful Accent 4\"/>
+  <w:LsdException Locked=\"false\" Priority=\"52\"
+   Name=\"Grid Table 7 Colorful Accent 4\"/>
+  <w:LsdException Locked=\"false\" Priority=\"46\"
+   Name=\"Grid Table 1 Light Accent 5\"/>
+  <w:LsdException Locked=\"false\" Priority=\"47\" Name=\"Grid Table 2 Accent 5\"/>
+  <w:LsdException Locked=\"false\" Priority=\"48\" Name=\"Grid Table 3 Accent 5\"/>
+  <w:LsdException Locked=\"false\" Priority=\"49\" Name=\"Grid Table 4 Accent 5\"/>
+  <w:LsdException Locked=\"false\" Priority=\"50\" Name=\"Grid Table 5 Dark Accent 5\"/>
+  <w:LsdException Locked=\"false\" Priority=\"51\"
+   Name=\"Grid Table 6 Colorful Accent 5\"/>
+  <w:LsdException Locked=\"false\" Priority=\"52\"
+   Name=\"Grid Table 7 Colorful Accent 5\"/>
+  <w:LsdException Locked=\"false\" Priority=\"46\"
+   Name=\"Grid Table 1 Light Accent 6\"/>
+  <w:LsdException Locked=\"false\" Priority=\"47\" Name=\"Grid Table 2 Accent 6\"/>
+  <w:LsdException Locked=\"false\" Priority=\"48\" Name=\"Grid Table 3 Accent 6\"/>
+  <w:LsdException Locked=\"false\" Priority=\"49\" Name=\"Grid Table 4 Accent 6\"/>
+  <w:LsdException Locked=\"false\" Priority=\"50\" Name=\"Grid Table 5 Dark Accent 6\"/>
+  <w:LsdException Locked=\"false\" Priority=\"51\"
+   Name=\"Grid Table 6 Colorful Accent 6\"/>
+  <w:LsdException Locked=\"false\" Priority=\"52\"
+   Name=\"Grid Table 7 Colorful Accent 6\"/>
+  <w:LsdException Locked=\"false\" Priority=\"46\" Name=\"List Table 1 Light\"/>
+  <w:LsdException Locked=\"false\" Priority=\"47\" Name=\"List Table 2\"/>
+  <w:LsdException Locked=\"false\" Priority=\"48\" Name=\"List Table 3\"/>
+  <w:LsdException Locked=\"false\" Priority=\"49\" Name=\"List Table 4\"/>
+  <w:LsdException Locked=\"false\" Priority=\"50\" Name=\"List Table 5 Dark\"/>
+  <w:LsdException Locked=\"false\" Priority=\"51\" Name=\"List Table 6 Colorful\"/>
+  <w:LsdException Locked=\"false\" Priority=\"52\" Name=\"List Table 7 Colorful\"/>
+  <w:LsdException Locked=\"false\" Priority=\"46\"
+   Name=\"List Table 1 Light Accent 1\"/>
+  <w:LsdException Locked=\"false\" Priority=\"47\" Name=\"List Table 2 Accent 1\"/>
+  <w:LsdException Locked=\"false\" Priority=\"48\" Name=\"List Table 3 Accent 1\"/>
+  <w:LsdException Locked=\"false\" Priority=\"49\" Name=\"List Table 4 Accent 1\"/>
+  <w:LsdException Locked=\"false\" Priority=\"50\" Name=\"List Table 5 Dark Accent 1\"/>
+  <w:LsdException Locked=\"false\" Priority=\"51\"
+   Name=\"List Table 6 Colorful Accent 1\"/>
+  <w:LsdException Locked=\"false\" Priority=\"52\"
+   Name=\"List Table 7 Colorful Accent 1\"/>
+  <w:LsdException Locked=\"false\" Priority=\"46\"
+   Name=\"List Table 1 Light Accent 2\"/>
+  <w:LsdException Locked=\"false\" Priority=\"47\" Name=\"List Table 2 Accent 2\"/>
+  <w:LsdException Locked=\"false\" Priority=\"48\" Name=\"List Table 3 Accent 2\"/>
+  <w:LsdException Locked=\"false\" Priority=\"49\" Name=\"List Table 4 Accent 2\"/>
+  <w:LsdException Locked=\"false\" Priority=\"50\" Name=\"List Table 5 Dark Accent 2\"/>
+  <w:LsdException Locked=\"false\" Priority=\"51\"
+   Name=\"List Table 6 Colorful Accent 2\"/>
+  <w:LsdException Locked=\"false\" Priority=\"52\"
+   Name=\"List Table 7 Colorful Accent 2\"/>
+  <w:LsdException Locked=\"false\" Priority=\"46\"
+   Name=\"List Table 1 Light Accent 3\"/>
+  <w:LsdException Locked=\"false\" Priority=\"47\" Name=\"List Table 2 Accent 3\"/>
+  <w:LsdException Locked=\"false\" Priority=\"48\" Name=\"List Table 3 Accent 3\"/>
+  <w:LsdException Locked=\"false\" Priority=\"49\" Name=\"List Table 4 Accent 3\"/>
+  <w:LsdException Locked=\"false\" Priority=\"50\" Name=\"List Table 5 Dark Accent 3\"/>
+  <w:LsdException Locked=\"false\" Priority=\"51\"
+   Name=\"List Table 6 Colorful Accent 3\"/>
+  <w:LsdException Locked=\"false\" Priority=\"52\"
+   Name=\"List Table 7 Colorful Accent 3\"/>
+  <w:LsdException Locked=\"false\" Priority=\"46\"
+   Name=\"List Table 1 Light Accent 4\"/>
+  <w:LsdException Locked=\"false\" Priority=\"47\" Name=\"List Table 2 Accent 4\"/>
+  <w:LsdException Locked=\"false\" Priority=\"48\" Name=\"List Table 3 Accent 4\"/>
+  <w:LsdException Locked=\"false\" Priority=\"49\" Name=\"List Table 4 Accent 4\"/>
+  <w:LsdException Locked=\"false\" Priority=\"50\" Name=\"List Table 5 Dark Accent 4\"/>
+  <w:LsdException Locked=\"false\" Priority=\"51\"
+   Name=\"List Table 6 Colorful Accent 4\"/>
+  <w:LsdException Locked=\"false\" Priority=\"52\"
+   Name=\"List Table 7 Colorful Accent 4\"/>
+  <w:LsdException Locked=\"false\" Priority=\"46\"
+   Name=\"List Table 1 Light Accent 5\"/>
+  <w:LsdException Locked=\"false\" Priority=\"47\" Name=\"List Table 2 Accent 5\"/>
+  <w:LsdException Locked=\"false\" Priority=\"48\" Name=\"List Table 3 Accent 5\"/>
+  <w:LsdException Locked=\"false\" Priority=\"49\" Name=\"List Table 4 Accent 5\"/>
+  <w:LsdException Locked=\"false\" Priority=\"50\" Name=\"List Table 5 Dark Accent 5\"/>
+  <w:LsdException Locked=\"false\" Priority=\"51\"
+   Name=\"List Table 6 Colorful Accent 5\"/>
+  <w:LsdException Locked=\"false\" Priority=\"52\"
+   Name=\"List Table 7 Colorful Accent 5\"/>
+  <w:LsdException Locked=\"false\" Priority=\"46\"
+   Name=\"List Table 1 Light Accent 6\"/>
+  <w:LsdException Locked=\"false\" Priority=\"47\" Name=\"List Table 2 Accent 6\"/>
+  <w:LsdException Locked=\"false\" Priority=\"48\" Name=\"List Table 3 Accent 6\"/>
+  <w:LsdException Locked=\"false\" Priority=\"49\" Name=\"List Table 4 Accent 6\"/>
+  <w:LsdException Locked=\"false\" Priority=\"50\" Name=\"List Table 5 Dark Accent 6\"/>
+  <w:LsdException Locked=\"false\" Priority=\"51\"
+   Name=\"List Table 6 Colorful Accent 6\"/>
+  <w:LsdException Locked=\"false\" Priority=\"52\"
+   Name=\"List Table 7 Colorful Accent 6\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Mention\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Smart Hyperlink\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Hashtag\"/>
+  <w:LsdException Locked=\"false\" SemiHidden=\"true\" UnhideWhenUsed=\"true\"
+   Name=\"Unresolved Mention\"/>
+ </w:LatentStyles>
+</xml><![endif]-->
+
+<!--[if gte mso 10]>
+<style>
+ /* Style Definitions */
+ table.MsoNormalTable
+	{mso-style-name:\"Normale Tabelle\";
+	mso-tstyle-rowband-size:0;
+	mso-tstyle-colband-size:0;
+	mso-style-noshow:yes;
+	mso-style-priority:99;
+	mso-style-parent:\"\";
+	mso-padding-alt:0cm 5.4pt 0cm 5.4pt;
+	mso-para-margin-top:0cm;
+	mso-para-margin-right:0cm;
+	mso-para-margin-bottom:8.0pt;
+	mso-para-margin-left:0cm;
+	line-height:107%;
+	mso-pagination:widow-orphan;
+	font-size:11.0pt;
+	font-family:\"Calibri\",sans-serif;
+	mso-ascii-font-family:Calibri;
+	mso-ascii-theme-font:minor-latin;
+	mso-hansi-font-family:Calibri;
+	mso-hansi-theme-font:minor-latin;
+	mso-bidi-font-family:\"Times New Roman\";
+	mso-bidi-theme-font:minor-bidi;}
+</style>
+<![endif]-->
+
+
+
+<!--StartFragment-->
+
+<table class=\"MsoNormalTable\" border=\"1\" cellspacing=\"0\" cellpadding=\"0\" width=\"561\" style=\"width:420.45pt;border-collapse:collapse;border:none;mso-border-alt:
+ solid windowtext .5pt;mso-yfti-tbllook:1184;mso-padding-alt:0cm 0cm 0cm 0cm;
+ mso-border-insideh:.5pt solid windowtext;mso-border-insidev:.5pt solid windowtext\">
+ <tbody><tr style=\"mso-yfti-irow:0;mso-yfti-firstrow:yes;height:24.4pt\">
+  <td width=\"193\" style=\"width:144.8pt;border:solid windowtext 1.0pt;mso-border-alt:
+  solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt;height:24.4pt\">
+  <p class=\"MsoNormal\"><b><span style=\"font-size:9.0pt;font-family:&quot;MS Shell Dlg 2&quot;,sans-serif;
+  mso-fareast-font-family:&quot;Times New Roman&quot;\">Name</span></b><span style=\"font-size:12.0pt;font-family:&quot;MS Shell Dlg 2&quot;,sans-serif;mso-fareast-font-family:
+  &quot;Times New Roman&quot;\"><o:p></o:p></span></p>
+  </td>
+  <td width=\"368\" style=\"width:275.65pt;border:solid windowtext 1.0pt;border-left:
+  none;mso-border-left-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt;height:24.4pt\">
+  <p class=\"MsoNormal\"><b><span style=\"font-size:9.0pt;font-family:&quot;MS Shell Dlg 2&quot;,sans-serif;
+  mso-fareast-font-family:&quot;Times New Roman&quot;\">Kurzbeschreibung</span></b><span style=\"font-size:12.0pt;font-family:&quot;MS Shell Dlg 2&quot;,sans-serif;mso-fareast-font-family:
+  &quot;Times New Roman&quot;\"><o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style=\"mso-yfti-irow:1;height:24.4pt\">
+  <td width=\"193\" style=\"width:144.8pt;border:solid windowtext 1.0pt;border-top:
+  none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt;height:24.4pt\">
+  <p class=\"MsoNormal\"><span style=\"font-size:9.0pt;font-family:&quot;MS Shell Dlg 2&quot;,sans-serif;
+  mso-fareast-font-family:&quot;Times New Roman&quot;\">Einphasen_Gleichstrommotor</span><span style=\"font-size:12.0pt;font-family:&quot;MS Shell Dlg 2&quot;,sans-serif;mso-fareast-font-family:
+  &quot;Times New Roman&quot;\"><o:p></o:p></span></p>
+  </td>
+  <td width=\"368\" style=\"width:275.65pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt;height:24.4pt\">
+  <p class=\"MsoNormal\"><span style=\"font-size:9.0pt;font-family:&quot;MS Shell Dlg 2&quot;,sans-serif;
+  mso-fareast-font-family:&quot;Times New Roman&quot;\">Modell eines realitätsnahen
+  einphasigen Gleichstrommotors</span><span style=\"font-size:12.0pt;font-family:
+  &quot;MS Shell Dlg 2&quot;,sans-serif;mso-fareast-font-family:&quot;Times New Roman&quot;\"><o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style=\"mso-yfti-irow:2;height:24.4pt\">
+  <td width=\"193\" style=\"width:144.8pt;border:solid windowtext 1.0pt;border-top:
+  none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt;height:24.4pt\">
+  <p class=\"MsoNormal\"><span style=\"font-size:9.0pt;font-family:&quot;MS Shell Dlg 2&quot;,sans-serif;
+  mso-fareast-font-family:&quot;Times New Roman&quot;\">Bremse<o:p></o:p></span></p>
+  </td>
+  <td width=\"368\" style=\"width:275.65pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt;height:24.4pt\">
+  <p class=\"MsoNormal\"><span style=\"font-size:9.0pt;mso-bidi-font-size:12.0pt;
+  font-family:&quot;MS Shell Dlg 2&quot;,sans-serif;mso-fareast-font-family:&quot;Times New Roman&quot;\">Sicherheitsbremse,
+  welche im stromlosen Zustand die verbundene Welle blockiert</span><span style=\"font-size:12.0pt;font-family:&quot;MS Shell Dlg 2&quot;,sans-serif;mso-fareast-font-family:
+  &quot;Times New Roman&quot;\"><o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style=\"mso-yfti-irow:3;mso-yfti-lastrow:yes;height:24.4pt\">
+  <td width=\"193\" style=\"width:144.8pt;border:solid windowtext 1.0pt;border-top:
+  none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt;height:24.4pt\">
+  <p class=\"MsoNormal\"><span style=\"font-size:9.0pt;font-family:&quot;MS Shell Dlg 2&quot;,sans-serif;
+  mso-fareast-font-family:&quot;Times New Roman&quot;\">Spannungsquelle<o:p></o:p></span></p>
+  </td>
+  <td width=\"368\" style=\"width:275.65pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt;height:24.4pt\">
+  <p class=\"MsoNormal\"><span style=\"font-size:9.0pt;font-family:&quot;MS Shell Dlg 2&quot;,sans-serif;
+  mso-fareast-font-family:&quot;Times New Roman&quot;\">Spannungsquelle mit 3
+  verschiedenen zeitbasierten Spannungsleveln<o:p></o:p></span></p>
+  </td>
+ </tr>
+</tbody></table>
+
+<!--EndFragment--></div><div><br></div><div>Weitere Informationen über die Modelle können in deren Dokumentationen einzeln nachgelesen werden.</div><div><br></div><div></div></div></body></html>"));
     
   end Antriebsstrang;
 
@@ -4192,7 +6623,7 @@ table.MsoTableGrid
       connect(flaschenzug_Angriffspunkt_oben1.F_s_Last, masse1.s_F_Connector) annotation(
         Line(points = {{80, -48}, {80, -48}, {80, -72}, {80, -72}}));
       annotation(
-        Documentation(info = "<html><head></head><body><!--StartFragment--><div>empfohlene Simulationszeit</div><div><br></div><div>Beispiele für Veränderungen</div><div><br></div><div>Hinweis auf visual clue des Motors, der Bremse und der Seilwinde in Form von \"LEGO-Prinzip\"</div><div><br></div><div>positive Drehrichtung =&gt; Seilwinde dreht sich so, dass das Seil eingezogen und die Masse angehoben wird.</div><div><br></div><div><br></div>Deckenrolle und falls vorhanden Massenrolle parametrieren (Rollenanzahl insgesammt)<div><br></div><div>Masse parametrieren</div><div><br></div><div><br></div><div>Motor parametrieren&nbsp;<span class=\"Apple-tab-span\" style=\"white-space: pre;\">	</span>(An/Aus -&gt; True/False)&nbsp;</div><div><span class=\"Apple-tab-span\" style=\"white-space: pre;\">				</span>(Vorwärts/Rückwärst -&gt; True/False)</div><div><br></div><div><span class=\"Apple-tab-span\" style=\"white-space: pre;\">				</span>Gescheindigkeit des Aufzugs</div><div><span class=\"Apple-tab-span\" style=\"white-space: pre;\">				</span></div><!--EndFragment--></body></html>"),
+        Documentation(info = "<html><head></head><body><!--StartFragment--><div><span style=\"font-size: 12px;\">Dieses Modell enthält ein aus mehreren Komponenten zusammengesetztes Simulationsmodell, welches das Gesamtsystem darstellt.</span><div style=\"font-size: 12px;\">Dem Namen entsprechend wird in diesem Modell der Flaschenzug mit Angriffspunkt des Seils an der obersten Rolle verwendet.</div></div><div style=\"font-size: 12px;\"><br></div><div style=\"font-size: 12px;\"><span style=\"font-size: medium;\">Beide Modelle sind bereits vorparametrisiert und können ohne Veränderung simuliert werden. Als Simulationsszeit wird bei dieser Einstellung 0s bis 15s empfohlen, die Anzahl der Schritte kann auf 500 belassen werden, 5000 Schritte werden jedoch empfohlen.</span></div><div style=\"font-size: 12px;\"><span style=\"font-size: medium;\"><br></span></div><div style=\"font-size: 12px;\"><span style=\"font-size: medium;\">Für das Verhalten des Systems besonders ausschlagebende Parameter sind die von der Spannungsquelle ausgegebene Spannung, sowie der Radius der Seilwinde, die Rollenzahl des Flaschenzuges und die Masse der Last. Der Motor sollte nicht ohne weiteres verändert werden, da er ein komplexes System darstellt, welches hohe Wechselwirkungen der einzelnen Parameter beinhaltet. Falls jedoch ein valider Parametersatz für denselben Motortyp vorliegt, kann dieser verwendet werden.</span></div><div style=\"font-size: 12px;\"><span style=\"font-size: medium;\"><br></span></div><div>Mehr Informationenen über die hier verwendeten Modelle können in deren Dokumentation gefunden werden.</div><div><br></div><!--EndFragment--></body></html>"),
         Icon(graphics = {Rectangle(fillColor = {255, 255, 255}, fillPattern = FillPattern.Solid, lineThickness = 3, extent = {{-100, 100}, {100, -100}}), Polygon(origin = {6, 2}, fillColor = {0, 170, 0}, fillPattern = FillPattern.Solid, lineThickness = 1, points = {{-70, 80}, {-70, -80}, {70, 0}, {70, 0}, {-70, 80}})}, coordinateSystem(initialScale = 0.1)));
     end Simulation_Flaschenzug_oben;
 
@@ -4223,13 +6654,15 @@ table.MsoTableGrid
     connect(spannungsquelle1.U_I_Connector, einphasen_Gleichstrommotor1.U_I_Connector) annotation(
         Line(points = {{-64, -80}, {-56, -80}, {-56, -88}}));
     annotation(
-        Icon(graphics = {Rectangle(fillColor = {255, 255, 255}, fillPattern = FillPattern.Solid, lineThickness = 3, extent = {{-100, 100}, {100, -100}}), Polygon(origin = {6, 2}, fillColor = {0, 170, 0}, fillPattern = FillPattern.Solid, lineThickness = 1, points = {{-70, 80}, {-70, -80}, {70, 0}, {70, 0}, {-70, 80}})}, coordinateSystem(initialScale = 0.1)));
+        Icon(graphics = {Rectangle(fillColor = {255, 255, 255}, fillPattern = FillPattern.Solid, lineThickness = 3, extent = {{-100, 100}, {100, -100}}), Polygon(origin = {6, 2}, fillColor = {0, 170, 0}, fillPattern = FillPattern.Solid, lineThickness = 1, points = {{-70, 80}, {-70, -80}, {70, 0}, {70, 0}, {-70, 80}})}, coordinateSystem(initialScale = 0.1)),
+        Documentation(info = "<html><head></head><body><div><span style=\"font-size: 12px;\">Dieses Modell enthält ein aus mehreren Komponenten zusammengesetztes Simulationsmodell, welches das Gesamtsystem darstellt.</span><div style=\"font-size: 12px;\">Dem Namen entsprechend wird in diesem Modell der Flaschenzug mit Angriffspunkt des Seils an der untersten Rolle verwendet.</div></div><div style=\"font-size: 12px;\"><br></div><div style=\"font-size: 12px;\"><span style=\"font-size: medium;\">Beide Modelle sind bereits vorparametrisiert und können ohne Veränderung simuliert werden. Als Simulationsszeit wird bei dieser Einstellung 0s bis 15s empfohlen, die Anzahl der Schritte kann auf 500 belassen werden, 5000 Schritte werden jedoch empfohlen.</span></div><div style=\"font-size: 12px;\"><span style=\"font-size: medium;\"><br></span></div><div style=\"font-size: 12px;\"><span style=\"font-size: medium;\">Für das Verhalten des Systems besonders ausschlagebende Parameter sind die von der Spannungsquelle ausgegebene Spannung, sowie der Radius der Seilwinde, die Rollenzahl des Flaschenzuges und die Masse der Last. Der Motor sollte nicht ohne weiteres verändert werden, da er ein komplexes System darstellt, welches hohe Wechselwirkungen der einzelnen Parameter beinhaltet. Falls jedoch ein valider Parametersatz für denselben Motortyp vorliegt, kann dieser verwendet werden.</span></div><div style=\"font-size: 12px;\"><span style=\"font-size: medium;\"><br></span></div><div>Mehr Informationenen über die hier verwendeten Modelle können in deren Dokumentation gefunden werden.</div><div><br></div></body></html>"));
         
     end Simulation_Flaschenzug_unten;
   annotation(
-      Icon(graphics = {Rectangle(fillColor = {255, 255, 255}, fillPattern = FillPattern.Solid, lineThickness = 3, extent = {{-100, 100}, {100, -100}}), Polygon(origin = {6, 2}, fillColor = {0, 170, 0}, fillPattern = FillPattern.Solid, lineThickness = 1, points = {{-70, 80}, {-70, -80}, {70, 0}, {70, 0}, {-70, 80}})}, coordinateSystem(initialScale = 0.1)));
+      Icon(graphics = {Rectangle(fillColor = {255, 255, 255}, fillPattern = FillPattern.Solid, lineThickness = 3, extent = {{-100, 100}, {100, -100}}), Polygon(origin = {6, 2}, fillColor = {0, 170, 0}, fillPattern = FillPattern.Solid, lineThickness = 1, points = {{-70, 80}, {-70, -80}, {70, 0}, {70, 0}, {-70, 80}})}, coordinateSystem(initialScale = 0.1)),
+      Documentation(info = "<html><head></head><body>Dieses Package enthält zwei zusammengesetzte Simulationsmodelle, welche das Gesamtsystem darstellen.<div>Dem Namen entsprechend wird in einem Modell der Flaschenzug mit Angriffspunkt des Seils an der obersten Rolle verwendet, im zweiten Modell mit Angriffspunkt an der untersten Rolle.</div><div>Mehr Informationen zu den Gesamtsystem-Modellen sind in deren Dokumentation gegeben.</div></body></html>"));
   end Beispiele;
   annotation(
     uses(Modelica(version = "3.2.3")),Icon(graphics = {Rectangle(origin = {2, 0}, fillColor = {255, 255, 255}, fillPattern = FillPattern.Solid, lineThickness = 2.25, extent = {{-100, 100}, {100, -100}}), Line(origin = {-46.8837, 7.70297}, points = {{-1, -63}, {1, 29}}, thickness = 3), Line(origin = {5.24783, -10.9934}, points = {{-1, -49}, {-1, 63}}, thickness = 3), Ellipse(origin = {29, 47}, lineThickness = 4, extent = {{-25, 25}, {27, -27}}, endAngle = 360), Ellipse(origin = {-23, -53}, lineThickness = 4, extent = {{-25, 25}, {27, -27}}, endAngle = 360), Line(origin = {56.0027, -14.7792}, points = {{-1, -29}, {-1, 63}}, thickness = 3)}, coordinateSystem(initialScale = 0.1)),
-  Documentation(info = "<html><head></head><body>Diese Bibliothek beinhaltet alle Modelle für die Simulation eines Flaschenzuges und dessen Peripherie.<div>Hierzu sind sowohl zwei Flaschenzüge mit unterschiedlicher Bauform gegeben, als auch Modelle für den Antriebsstrang des Flaschenzuges und benötigte mechanische Bauteile wie eine Masse oder eine Seilwinde.</div><div>Für die Implementierung der Modelle wurden eigens entwickelte bidirektionale Connectoren verwendet, welche in einem eigenen Package abgelegt wurden.</div><div>Zwei Beispiele für vollständige Flaschenzugsysteme sind im Package \"Beispiele\" enthalten.</div><div><br></div><div>Die Bibliothek besitzt folgende Struktur:</div><div><br></div><div><div>Flaschenzug_Bibliothek</div><div>├── Connectoren</div><div>│ &nbsp; ├── Winkel_Moment_Connector</div><div>│ &nbsp; ├── Spannung_Strom_Connector</div><div>│ &nbsp;&nbsp;└── Weg_Kraft_Connector</div><div><div>├── Mechanik</div></div><div>│ &nbsp;&nbsp;├──&nbsp;Flaschenzug_Angriffspunkt_oben</div><div>│ &nbsp;&nbsp;├──&nbsp;Flaschenzug_Angriffspunkt_unten</div><div>│ &nbsp; ├── Masse</div><div>│ &nbsp;&nbsp;└── Seilwinde</div><div>├── Antriebsstrang</div><div>│ &nbsp; ├── Einphasen_Gleichstrommotor</div><div>│ &nbsp; ├── Bremse</div><div>│ &nbsp;&nbsp;└── Spannungsquelle</div><div>├── Beispiele</div><div><div>│ &nbsp; ├── Simulation_Flaschenzug_oben</div><div>│ &nbsp;&nbsp;└── Simulation_Flaschenzug_unten</div></div></div><div><div><br></div><div>Beschreibungen der einzelnen Packages und Models können in deren Dokumentation nachgelesen werden.</div></div></body></html>"));
+  Documentation(info = "<html><head></head><body>Diese Bibliothek beinhaltet alle Modelle für die Simulation eines Flaschenzuges und dessen Peripherie.<div>Hierzu sind sowohl zwei Flaschenzüge mit unterschiedlicher Bauform gegeben, als auch Modelle für den Antriebsstrang des Flaschenzuges und benötigte mechanische Bauteile wie eine Masse oder eine Seilwinde.</div><div>Für die Implementierung der Modelle wurden eigens entwickelte bidirektionale Connectoren verwendet, welche in einem eigenen Package abgelegt wurden.</div><div>Zwei Beispiele für vollständige Flaschenzugsysteme sind im Package \"Beispiele\" enthalten.</div><div><br></div><div>Die Bibliothek besitzt folgende Struktur:</div><div><br></div><div><div>Flaschenzug_Bibliothek</div><div>├── Connectoren</div><div>│ &nbsp; ├── Winkel_Moment_Connector</div><div>│ &nbsp; ├── Spannung_Strom_Connector</div><div>│ &nbsp;&nbsp;└── Weg_Kraft_Connector</div><div><div>├── Mechanik</div></div><div>│ &nbsp;&nbsp;├──&nbsp;Flaschenzug_Angriffspunkt_oben</div><div>│ &nbsp;&nbsp;├──&nbsp;Flaschenzug_Angriffspunkt_unten</div><div>│ &nbsp; ├── Masse</div><div>│ &nbsp;&nbsp;└── Seilwinde</div><div>├── Antriebsstrang</div><div>│ &nbsp; ├── Einphasen_Gleichstrommotor</div><div>│ &nbsp; ├── Bremse</div><div>│ &nbsp;&nbsp;└── Spannungsquelle</div><div>├── Beispiele</div><div><div>│ &nbsp; ├── Simulation_Flaschenzug_oben</div><div>│ &nbsp;&nbsp;└── Simulation_Flaschenzug_unten</div></div></div><div><div><br></div><div>Jedes einzelne dieser Modelle und Packages ist mit einer eigenen Dokumentation ausgestattet, welche dessen Funktionsweise und alle für den Benutzer wichtigen Informationen beinhaltet.</div><div><br></div></div></body></html>"));
 end Flaschenzug_Bibliothek;
